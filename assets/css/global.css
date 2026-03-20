@@ -1,0 +1,24 @@
+/* ─── RESET & BASE ───────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #080c10;
+  --surface: #0e1420;
+  --surface2: #151c2a;
+  --border: rgba(255,255,255,0.08);
+  --accent: #A4F93F;
+  --accent-hover: #bffb6e;
+  --accent2: #ff3c5f;
+  --text: #f0f4ff;
+  --muted: #7a8aa0;
+  --nav-h: 72px;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  overflow-x: hidden;
+}
