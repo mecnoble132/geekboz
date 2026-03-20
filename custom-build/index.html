@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Build — GeekBoz</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=Oxanium:wght@600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="../assets/css/global.css">
+    <link rel="stylesheet" href="../assets/css/animations.css">
+    <link rel="stylesheet" href="../assets/css/components.css">
+    <link rel="stylesheet" href="custom.css">
+
+    <link rel="icon" href="../assets/images/geekbozfavicon.png">
+</head>
+
+<body>
+
+    <!-- ─── NAVBAR ──────────────────────────────────────────── -->
+    <nav class="navbar">
+        <a href="../index.html" class="nav-brand">
+            <div class="nav-logo"><img src="../assets/images/geekbozlogo.png" alt="GeekBoz logo"></div>
+            <span class="nav-name">Geek<span>Boz</span></span>
+        </a>
+
+        <ul class="nav-links">
+            <li><a href="../prebuilts/index.html">Prebuilts</a></li>
+            <li><a href="index.html" class="nav-active">Custom Build</a></li>
+            <li><a href="../about/index.html">About Us</a></li>
+            <li><a href="../index.html#contact">Contact</a></li>
+            <li class="more-wrapper">
+                <button class="more-btn" id="moreBtn">
+                    More
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                        <path d="M2 4L6 8L10 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg>
+                </button>
+                <ul class="dropdown" id="dropdown">
+                    <li><a href="../service/index.html">PC Service</a></li>
+                    <li><a href="../about/index.html#stores">Our Stores</a></li>
+                    <li><a href="../help/index.html">Help &amp; FAQ</a></li>
+                    <li><a href="../reviews/index.html">Reviews</a></li>
+                </ul>
+            </li>
+        </ul>
+
+        <div class="nav-right">
+            <button class="cart-btn" aria-label="Cart">
+                <i data-lucide="shopping-cart"></i>
+                <span class="cart-badge">0</span>
+            </button>
+            <button class="cta-btn" onclick="location.href='index.html'">Build Custom PC</button>
+            <button class="hamburger" id="hamburger" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile menu -->
+    <nav class="mobile-menu" id="mobileMenu">
+        <span class="mobile-label">Main</span>
+        <a href="../prebuilts/index.html">Prebuilts</a>
+        <a href="index.html" class="active">Custom Build</a>
+        <a href="../about/index.html">About Us</a>
+        <a href="../index.html#contact">Contact</a>
+        <span class="mobile-label">More</span>
+        <a href="../service/index.html">PC Service</a>
+        <a href="../about/index.html#stores">Our Stores</a>
+        <a href="../help/index.html">Help &amp; FAQ</a>
+        <a href="../reviews/index.html">Reviews</a>
+        <a href="index.html" class="mobile-cta">Build Custom PC</a>
+    </nav>
+
+    <!-- ─── CUSTOM BUILD FORM ──────────────────────────────── -->
+    <main class="custom-build-page">
+        <div class="cb-grid-overlay"></div>
+        <div class="cb-bg-blur"></div>
+        
+        <div class="cb-form-container">
+            <div class="cb-form-header">
+                <h1 class="cb-form-title">Build Your <span>Dream PC.</span></h1>
+                <p class="cb-form-subtitle">Tell us what you need, and we'll handle the rest.</p>
+            </div>
+
+            <div class="cb-split-layout" data-reveal="fade-up">
+                <div class="cb-form-side">
+                    <form id="customBuildForm">
+                        <div class="form-group">
+                            <label class="form-label" for="userName">Full Name</label>
+                            <input type="text" id="userName" class="form-input" placeholder="Enter your name" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Target Budget (Select or Type)</label>
+                            <div class="budget-chips">
+                                <div class="budget-chip" data-value="30000">₹30K</div>
+                                <div class="budget-chip" data-value="50000">₹50K</div>
+                                <div class="budget-chip" data-value="75000">₹75K</div>
+                                <div class="budget-chip" data-value="100000">₹1L</div>
+                                <div class="budget-chip" data-value="150000">₹1.5L</div>
+                                <div class="budget-chip" data-value="200000">₹2L+</div>
+                            </div>
+                            <div class="budget-input-wrapper">
+                                <span class="budget-prefix">₹</span>
+                                <input type="text" id="userBudget" class="form-input budget-field" placeholder="e.g. 50,000" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Primary Use Cases (Select Multiple)</label>
+                            <div class="usecase-grid">
+                                <label class="usecase-option">
+                                    <input type="checkbox" name="usecase" value="Gaming">
+                                    <i data-lucide="gamepad-2"></i>
+                                    <span>Gaming</span>
+                                </label>
+                                <label class="usecase-option">
+                                    <input type="checkbox" name="usecase" value="Streaming">
+                                    <i data-lucide="monitor"></i>
+                                    <span>Streaming</span>
+                                </label>
+                                <label class="usecase-option">
+                                    <input type="checkbox" name="usecase" value="VR Gaming">
+                                    <i data-lucide="layout"></i>
+                                    <span>VR Gaming</span>
+                                </label>
+                                <label class="usecase-option">
+                                    <input type="checkbox" name="usecase" value="Video Editing">
+                                    <i data-lucide="video"></i>
+                                    <span>4K Editing</span>
+                                </label>
+                                <label class="usecase-option">
+                                    <input type="checkbox" name="usecase" value="3D Modeling">
+                                    <i data-lucide="layers"></i>
+                                    <span>3D/VFX</span>
+                                </label>
+                                <label class="usecase-option">
+                                    <input type="checkbox" name="usecase" value="Music Production">
+                                    <i data-lucide="music"></i>
+                                    <span>Music Prod</span>
+                                </label>
+                                <label class="usecase-option">
+                                    <input type="checkbox" name="usecase" value="Architecture">
+                                    <i data-lucide="box"></i>
+                                    <span>Architecture</span>
+                                </label>
+                                <label class="usecase-option">
+                                    <input type="checkbox" name="usecase" value="Animation">
+                                    <i data-lucide="clapperboard"></i>
+                                    <span>Animation</span>
+                                </label>
+                                <label class="usecase-option">
+                                    <input type="checkbox" name="usecase" value="Programming">
+                                    <i data-lucide="code-2"></i>
+                                    <span>Coding</span>
+                                </label>
+                                <label class="usecase-option">
+                                    <input type="checkbox" name="usecase" value="Game Dev">
+                                    <i data-lucide="codepen"></i>
+                                    <span>Game Dev</span>
+                                </label>
+                                <label class="usecase-option">
+                                    <input type="checkbox" name="usecase" value="Office Work">
+                                    <i data-lucide="briefcase"></i>
+                                    <span>Office</span>
+                                </label>
+                                <label class="usecase-option">
+                                    <input type="checkbox" name="usecase" value="AI/ML">
+                                    <i data-lucide="cpu"></i>
+                                    <span>AI/ML</span>
+                                </label>
+                                <label class="usecase-option">
+                                    <input type="checkbox" name="usecase" value="Data Science">
+                                    <i data-lucide="database"></i>
+                                    <span>Data Science</span>
+                                </label>
+                                <label class="usecase-option">
+                                    <input type="checkbox" name="usecase" value="Trading">
+                                    <i data-lucide="line-chart"></i>
+                                    <span>Trading</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="userRequirements">Requirements / Notes</label>
+                            <textarea id="userRequirements" class="form-input" rows="2" placeholder="Specific parts or details..."></textarea>
+                        </div>
+
+                        <button type="submit" class="cb-submit-btn">
+                            Talk to an Expert
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                               <path d="M12.031 2c-5.511 0-9.989 4.478-9.989 9.989 0 1.762.46 3.418 1.261 4.86L2 22l5.305-1.391c1.401.764 3.012 1.205 4.726 1.205 5.511 0 9.989-4.478 9.989-9.989S17.542 2 12.031 2zm6.603 14.331c-.272.764-1.357 1.391-1.899 1.488-.475.085-1.088.136-1.745-.072-.416-.128-1.025-.333-2.181-.84-2.112-.904-3.511-3.111-3.645-3.29-.134-.179-1.096-1.458-1.096-2.784 0-1.326.699-1.982.946-2.251.247-.269.54-.336.72-.336s.36.002.518.01c.17.009.396-.064.62.463.224.527.764 1.864.831 2.001.067.137.112.296.022.475s-.134.335-.269.497c-.135.162-.283.336-.404.448-.135.123-.275.257-.118.527.157.269.7 1.154 1.503 1.868.966.862 1.78 1.129 2.033 1.25.253.121.398.101.545-.067l.382-.442c.15-.168.324-.224.512-.134.188.09 1.189.563 1.391.664s.336.168.384.257c.048.089.048.514-.224 1.278z"/>
+                            </svg>
+                        </button>
+                    </form>
+                </div>
+
+                <div class="cb-image-side">
+                    <div class="cb-image-glow"></div>
+                    <img src="../assets/images/custom_pc_showcase.png" alt="Premium Custom PC" class="cb-pc-image">
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- ─── FOOTER ───────────────────────────────────────── -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <!-- Series strip -->
+            <div class="footer-series">
+                <a href="../prebuilts/index.html?series=branded" class="footer-series-tag branded">GBZ Branded PC</a>
+                <a href="../prebuilts/index.html?series=workstation" class="footer-series-tag workstation">GBZ Workstation PC</a>
+                <a href="../prebuilts/index.html?series=creatorx" class="footer-series-tag creator">GBZ CreatorX PC</a>
+                <a href="../prebuilts/index.html?series=gaming" class="footer-series-tag gaming">GBZ Gaming PC</a>
+            </div>
+
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="../index.html" class="footer-logo">
+                        <img src="../assets/images/geekbozlogo.png" alt="GeekBoz logo">
+                        <span class="footer-logo-name">Geek<span>Boz</span></span>
+                    </a>
+                    <p class="footer-tagline">Custom-built PCs, professional service, and hand-picked hardware — all from Kerala's most trusted PC builders.</p>
+                    <div class="footer-social">
+                        <a href="https://www.instagram.com/geekboz/" class="footer-social-btn" aria-label="Instagram" target="_blank" rel="noopener">
+                            <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" /></svg>
+                        </a>
+                        <a href="https://www.youtube.com/@GeekBoZ" class="footer-social-btn" aria-label="YouTube" target="_blank" rel="noopener">
+                            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" /></svg>
+                        </a>
+                        <a href="https://www.facebook.com/GeekBoZ/" class="footer-social-btn" aria-label="Facebook" target="_blank" rel="noopener">
+                            <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" /></svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <div class="footer-col-title">Navigation</div>
+                    <ul class="footer-links">
+                        <li><a href="../prebuilts/index.html">Prebuilts</a></li>
+                        <li><a href="index.html">Custom Build</a></li>
+                        <li><a href="../about/index.html">About Us</a></li>
+                        <li><a href="../service/index.html">PC Service</a></li>
+                        <li><a href="../help/index.html">Help &amp; FAQ</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p class="footer-copy">© 2025 <span>GeekBoz</span> Pvt Ltd. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <script src="../assets/js/main.js"></script>
+    <script>
+        lucide.createIcons();
+
+        // Budget chip logic
+        const budgetInput = document.getElementById('userBudget');
+        const budgetChips = document.querySelectorAll('.budget-chip');
+
+        budgetChips.forEach(chip => {
+            chip.addEventListener('click', () => {
+                budgetChips.forEach(c => c.classList.remove('active'));
+                chip.classList.add('active');
+                budgetInput.value = parseInt(chip.dataset.value).toLocaleString('en-IN');
+            });
+        });
+
+        // Form Submission
+        document.getElementById('customBuildForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('userName').value.trim();
+            const bVal = document.getElementById('userBudget').value.replace(/,/g, '').replace('₹', '').trim();
+            const budget = isNaN(bVal) || bVal === '' ? bVal : `₹${parseInt(bVal).toLocaleString('en-IN')}`;
+            
+            const checkedBoxes = document.querySelectorAll('input[name="usecase"]:checked');
+            if (checkedBoxes.length === 0) {
+                alert('Please select at least one use case for your build.');
+                return;
+            }
+
+            const usecases = Array.from(checkedBoxes).map(cb => cb.value).join(', ');
+            const requirements = document.getElementById('userRequirements').value.trim();
+
+            const text = `*New Custom Build Inquiry* 🖥️\n\n` +
+                         `*Name:* ${name}\n` +
+                         `*Target Budget:* ${budget}\n` +
+                         `*Use Cases:* ${usecases}\n` +
+                         (requirements ? `*Additional Notes:* ${requirements}\n` : '') +
+                         `\nHi GeekBoz! I'd like to get a custom quote based on these requirements.`;
+            
+            window.open(`https://wa.me/919567776571?text=${encodeURIComponent(text)}`, '_blank');
+        });
+    </script>
+</body>
+
+</html>
