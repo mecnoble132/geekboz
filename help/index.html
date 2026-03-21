@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Help & FAQ — GeekBoz</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=Oxanium:wght@600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="../assets/css/global.css">
+    <link rel="stylesheet" href="../assets/css/animations.css">
+    <link rel="stylesheet" href="../assets/css/components.css">
+    <link rel="stylesheet" href="help.css">
+
+    <link rel="icon" href="../assets/images/geekbozfavicon.png">
+</head>
+
+<body>
+
+    <!-- ─── NAVBAR ──────────────────────────────────────────── -->
+    <nav class="navbar">
+        <a href="../index.html" class="nav-brand">
+            <div class="nav-logo"><img src="../assets/images/geekbozlogo.png" alt="GeekBoz logo"></div>
+            <span class="nav-name">Geek<span>Boz</span></span>
+        </a>
+
+        <ul class="nav-links">
+            <li><a href="../prebuilts/index.html">Prebuilts</a></li>
+            <li><a href="../custom-build/index.html">Custom Build</a></li>
+            <li><a href="../about/index.html">About Us</a></li>
+            <li><a href="../index.html#contact">Contact</a></li>
+            <li class="more-wrapper">
+                <button class="more-btn" id="moreBtn">
+                    More
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                        <path d="M2 4L6 8L10 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg>
+                </button>
+                <ul class="dropdown" id="dropdown">
+                    <li><a href="../service/index.html">PC Service</a></li>
+                    <li><a href="../index.html#contact">Our Stores</a></li>
+                    <li><a href="index.html" class="nav-active">Help &amp; FAQ</a></li>
+                    <li><a href="https://search.google.com/local/reviews?placeid=ChIJZXHsv726BTsRTXOTYqyzbxo" target="_blank" rel="noopener">Reviews</a></li>
+                </ul>
+            </li>
+        </ul>
+
+        <div class="nav-right">
+            <button class="cart-btn" aria-label="Cart">
+                <i data-lucide="shopping-cart"></i>
+                <span class="cart-badge">0</span>
+            </button>
+            <button class="cta-btn" onclick="location.href='../custom-build/index.html'">Build Custom PC</button>
+            <button class="hamburger" id="hamburger" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile menu -->
+    <nav class="mobile-menu" id="mobileMenu">
+        <span class="mobile-label">Main</span>
+        <a href="../prebuilts/index.html">Prebuilts</a>
+        <a href="../custom-build/index.html">Custom Build</a>
+        <a href="../about/index.html">About Us</a>
+        <a href="../index.html#contact">Contact</a>
+        <span class="mobile-label">More</span>
+        <a href="../service/index.html">PC Service</a>
+        <a href="../index.html#contact">Our Stores</a>
+        <a href="index.html" class="active">Help &amp; FAQ</a>
+        <a href="https://search.google.com/local/reviews?placeid=ChIJZXHsv726BTsRTXOTYqyzbxo" target="_blank" rel="noopener">Reviews</a>
+        <a href="../custom-build/index.html" class="mobile-cta">Build Custom PC</a>
+    </nav>
+
+    <!-- ─── PAGE HEADER ───────────────────────────────────── -->
+    <section class="page-header">
+        <div class="page-header-inner" data-reveal="fade-up">
+            <div class="page-breadcrumb">
+                <a href="../index.html">Home</a>
+                <i data-lucide="chevron-right"></i>
+                <span>Help & FAQ</span>
+            </div>
+            <h1 class="page-title">Frequently Asked <span>Questions</span></h1>
+            <p class="page-subtitle">All Your Doubts — Answered Clearly</p>
+        </div>
+    </section>
+
+    <!-- ─── FAQ SECTION ────────────────────────────────────── -->
+    <section class="faq-section">
+        <div class="faq-inner">
+            <div class="faq-accordion">
+
+                <!-- Q1 -->
+                <div class="faq-item" data-reveal="fade-up">
+                    <button class="faq-trigger">
+                        <span>Can I fully customise my system?</span>
+                        <i data-lucide="chevron-down"></i>
+                    </button>
+                    <div class="faq-content">
+                        <div class="faq-content-inner">
+                            <p>Yes, absolutely. We specialize in building systems tailored to your exact needs. During your live consultation, we help you design a rig that not only fits your current requirements but is also future-ready for upcoming workloads (based on your preferences).</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Q2 -->
+                <div class="faq-item" data-reveal="fade-up">
+                    <button class="faq-trigger">
+                        <span>Why choose GeekBoZ “Brand Store”?</span>
+                        <i data-lucide="chevron-down"></i>
+                    </button>
+                    <div class="faq-content">
+                        <div class="faq-content-inner">
+                            <p>A question we hear often—and here’s what sets us apart:</p>
+                            <ul class="faq-list">
+                                <li><strong>✔ 3-Day Satisfaction Warranty:</strong> We are among the very few sellers offering a 3-day satisfaction guarantee on most products (including GBZ Rigs). If you're not satisfied with the product’s quality, service, or performance, you can return it with valid justification.</li>
+                                <li><strong>✔ 30-Day Replacement Support:</strong> Get spot replacement within 30 days for any defective components in GBZ Certified Rigs (as per manufacturer warranty & stock availability).</li>
+                                <li><strong>✔ 0% Depreciation Upgrade Program:</strong> Upgrade any component within 30 days and receive 100% of its value back—no depreciation.</li>
+                                <li><strong>✔ Lifetime Service Assurance:</strong> Enjoy lifetime service support for all GBZ Certified Rigs.</li>
+                                <li><strong>✔ NVIDIA Certified System Builders:</strong> We are among the few professional system builders in India certified by NVIDIA.</li>
+                                <li><strong>✔ Exchange Program:</strong> Upgrade easily by exchanging your old PC, laptop, or gaming console at competitive market value.</li>
+                                <li><strong>✔ Community & Events:</strong> We go beyond selling—hosting in-store events, expos, meetups, influencer gatherings, and giveaways for our community.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Q3 -->
+                <div class="faq-item" data-reveal="fade-up">
+                    <button class="faq-trigger">
+                        <span>Do you offer EMI options?</span>
+                        <i data-lucide="chevron-down"></i>
+                    </button>
+                    <div class="faq-content">
+                        <div class="faq-content-inner">
+                            <p>We’d love to offer EMI options, but currently, we do not have a verified EMI partner. We are working on collaborating with a trusted provider and will introduce EMI facilities soon.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Q4 -->
+                <div class="faq-item" data-reveal="fade-up">
+                    <button class="faq-trigger">
+                        <span>How will my order be delivered?</span>
+                        <i data-lucide="chevron-down"></i>
+                    </button>
+                    <div class="faq-content">
+                        <div class="faq-content-inner">
+                            <p>We highly recommend visiting our Experience Zone for a hands-on feel before purchase.</p>
+                            <p>If you're unable to visit:</p>
+                            <ul class="faq-list">
+                                <li>We provide free home delivery for most products.</li>
+                                <li>Orders are shipped via DTDC, one of India’s leading courier services.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Q5 -->
+                <div class="faq-item" data-reveal="fade-up">
+                    <button class="faq-trigger">
+                        <span>What payment methods are available?</span>
+                        <i data-lucide="chevron-down"></i>
+                    </button>
+                    <div class="faq-content">
+                        <div class="faq-content-inner">
+                            <p>We currently support:</p>
+                            <ul class="faq-list">
+                                <li>Direct Bank Transfer</li>
+                                <li>UPI / Google Pay</li>
+                                <li>Razorpay (Payment Gateway)</li>
+                                <li>Paytm Wallet</li>
+                            </ul>
+                            <p class="status-warning">⚠️ Cash on Delivery (COD) is currently not available.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Q6 -->
+                <div class="faq-item" data-reveal="fade-up">
+                    <button class="faq-trigger">
+                        <span>How long does it take to build and deliver my custom PC?</span>
+                        <i data-lucide="chevron-down"></i>
+                    </button>
+                    <div class="faq-content">
+                        <div class="faq-content-inner">
+                            <p>Build time depends on the configuration and component availability. Typically, custom rigs are built and dispatched within a few days after order confirmation.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Q7 -->
+                <div class="faq-item" data-reveal="fade-up">
+                    <button class="faq-trigger">
+                        <span>Will my system be tested before delivery?</span>
+                        <i data-lucide="chevron-down"></i>
+                    </button>
+                    <div class="faq-content">
+                        <div class="faq-content-inner">
+                            <p>Yes. Every GBZ Certified Rig goes through proper testing and quality checks to ensure stability, performance, and reliability before delivery.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Q8 -->
+                <div class="faq-item" data-reveal="fade-up">
+                    <button class="faq-trigger">
+                        <span>Do I get warranty on individual components?</span>
+                        <i data-lucide="chevron-down"></i>
+                    </button>
+                    <div class="faq-content">
+                        <div class="faq-content-inner">
+                            <p>Yes. All components come with their respective manufacturer warranties, along with our support for replacements as mentioned above.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Q9 -->
+                <div class="faq-item" data-reveal="fade-up">
+                    <button class="faq-trigger">
+                        <span>Can I upgrade my PC in the future?</span>
+                        <i data-lucide="chevron-down"></i>
+                    </button>
+                    <div class="faq-content">
+                        <div class="faq-content-inner">
+                            <p>Absolutely. All our builds are designed with future upgradeability in mind, so you can easily enhance performance when needed.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Q10 -->
+                <div class="faq-item" data-reveal="fade-up">
+                    <button class="faq-trigger">
+                        <span>Do you provide after-sales support?</span>
+                        <i data-lucide="chevron-down"></i>
+                    </button>
+                    <div class="faq-content">
+                        <div class="faq-content-inner">
+                            <p>Yes. We provide lifetime service assurance for GBZ Certified Rigs, ensuring long-term support whenever you need it.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Q11 -->
+                <div class="faq-item" data-reveal="fade-up">
+                    <button class="faq-trigger">
+                        <span>Can I visit your store before purchasing?</span>
+                        <i data-lucide="chevron-down"></i>
+                    </button>
+                    <div class="faq-content">
+                        <div class="faq-content-inner">
+                            <p>Yes, and we highly recommend it. Our Experience Zone allows you to explore products, test setups, and make informed decisions before buying.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Still have questions? -->
+            <div class="faq-footer" data-reveal="fade-up">
+                <div class="faq-footer-card">
+                    <div class="faq-footer-icon"><i data-lucide="help-circle"></i></div>
+                    <div class="faq-footer-text">
+                        <h3>Still have questions?</h3>
+                        <p>If you couldn't find your answer here, our team is ready to help via phone, WhatsApp, or email.</p>
+                    </div>
+                    <a href="../index.html#contact" class="faq-footer-btn">
+                        Get In Touch
+                        <i data-lucide="arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ─── FOOTER ───────────────────────────────────────── -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <!-- Series strip -->
+            <div class="footer-series">
+                <a href="../prebuilts/index.html?series=branded" class="footer-series-tag branded">GBZ Branded PC</a>
+                <a href="../index.html#contact" class="footer-series-tag workstation">Our Stores</a>
+                <a href="../prebuilts/index.html?series=creatorx" class="footer-series-tag creator">GBZ CreatorX PC</a>
+                <a href="../prebuilts/index.html?series=gaming" class="footer-series-tag gaming">GBZ Gaming PC</a>
+            </div>
+
+            <div class="footer-grid">
+                <!-- Brand -->
+                <div class="footer-brand">
+                    <a href="../index.html" class="footer-logo">
+                        <img src="../assets/images/geekbozlogo.png" alt="GeekBoz logo">
+                        <span class="footer-logo-name">Geek<span>Boz</span></span>
+                    </a>
+                    <p class="footer-tagline">Custom-built PCs, professional service, and hand-picked hardware — all from Kerala's
+                        most trusted PC builders.</p>
+                    <div class="footer-social">
+                        <a href="https://www.instagram.com/geekboz" class="footer-social-btn" aria-label="Instagram" target="_blank" rel="noopener">
+                            <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" /></svg>
+                        </a>
+                        <a href="https://www.youtube.com/c/GeekBoZ" class="footer-social-btn" aria-label="YouTube" target="_blank" rel="noopener">
+                            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" /></svg>
+                        </a>
+                        <a href="https://www.facebook.com/GeekBoZ/" class="footer-social-btn" aria-label="Facebook" target="_blank" rel="noopener">
+                            <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" /></svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Navigation -->
+                <div class="footer-col">
+                    <div class="footer-col-title">Navigation</div>
+                    <ul class="footer-links">
+                        <li><a href="../prebuilts/index.html">Prebuilts</a></li>
+                        <li><a href="../custom-build/index.html">Custom Build</a></li>
+                        <li><a href="../about/index.html">About Us</a></li>
+                        <li><a href="../service/index.html">PC Service</a></li>
+                        <li><a href="../index.html#contact">Our Stores</a></li>
+                        <li><a href="index.html">Help &amp; FAQ</a></li>
+                        <li><a href="../reviews/index.html">Reviews</a></li>
+                    </ul>
+                </div>
+
+                <!-- Customer Service -->
+                <div class="footer-col">
+                    <div class="footer-col-title">Customer Service</div>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Help &amp; FAQs</a></li>
+                        <li><a href="index.html#tracking">Order Tracking</a></li>
+                    </ul>
+                </div>
+
+                <!-- About Us -->
+                <div class="footer-col">
+                    <div class="footer-col-title">About Us</div>
+                    <ul class="footer-links">
+                        <li><a href="../about/index.html#team">GBZ Team</a></li>
+                        <li><a href="../about/index.html#careers">Careers</a></li>
+                        <li><a href="../index.html#contact">Our Stores</a></li>
+                        <li><a href="https://search.google.com/local/reviews?placeid=ChIJZXHsv726BTsRTXOTYqyzbxo" target="_blank" rel="noopener">Testimonials</a></li>
+                    </ul>
+                </div>
+
+                <!-- More Information -->
+                <div class="footer-col">
+                    <div class="footer-col-title">More Information</div>
+                    <ul class="footer-links">
+                        <li><a href="../legal/terms.html">General Terms &amp; Conditions</a></li>
+                        <li><a href="../legal/warranty.html">Warranty Policy</a></li>
+                        <li><a href="../legal/privacy.html">Privacy Policy</a></li>
+                        <li><a href="../legal/refunds.html">Cancellation &amp; Refund</a></li>
+                        <li><a href="../legal/sales-terms.html">Sales Terms &amp; Conditions</a></li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Bottom bar -->
+        <div class="footer-bottom" style="max-width:1280px; margin:0 auto; padding-left:5vw; padding-right:5vw;">
+            <p class="footer-copy">© 2025 <span>GeekBoz</span> Pvt Ltd. All rights reserved.</p>
+            <nav class="footer-legal">
+                <a href="../legal/privacy.html">Privacy</a>
+                <a href="../legal/terms.html">Terms</a>
+                <a href="../legal/warranty.html">Warranty</a>
+                <a href="../legal/refunds.html">Refunds</a>
+            </nav>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <script src="../assets/js/main.js"></script>
+    <script>
+        lucide.createIcons();
+
+        // Accordion Logic
+        document.querySelectorAll('.faq-trigger').forEach(trigger => {
+            trigger.addEventListener('click', () => {
+                const item = trigger.parentElement;
+                const isOpen = item.classList.contains('open');
+                
+                // Close all others
+                document.querySelectorAll('.faq-item').forEach(i => {
+                    i.classList.remove('open');
+                    i.querySelector('.faq-content').style.maxHeight = null;
+                });
+
+                if (!isOpen) {
+                    item.classList.add('open');
+                    const content = item.querySelector('.faq-content');
+                    content.style.maxHeight = content.scrollHeight + "px";
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

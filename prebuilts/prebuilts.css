@@ -41,8 +41,10 @@
     transition: color 0.2s;
 }
 
-.pb-breadcrumb a:hover {
-    color: var(--accent);
+@media (hover: hover) {
+    .pb-breadcrumb a:hover {
+        color: var(--accent);
+    }
 }
 
 .pb-breadcrumb i,
@@ -94,9 +96,11 @@
     letter-spacing: 0.01em;
 }
 
-.pb-series-pill:hover {
-    border-color: rgba(164, 249, 63, 0.3);
-    color: var(--text);
+@media (hover: hover) {
+    .pb-series-pill:hover {
+        border-color: rgba(164, 249, 63, 0.3);
+        color: var(--text);
+    }
 }
 
 .pb-series-pill.active {
@@ -182,8 +186,10 @@
     transition: opacity 0.2s;
 }
 
-.pb-clear-btn:hover {
-    opacity: 0.7;
+@media (hover: hover) {
+    .pb-clear-btn:hover {
+        opacity: 0.7;
+    }
 }
 
 /* Filter groups */
@@ -261,8 +267,10 @@
     transition: color 0.2s;
 }
 
-.pb-checkbox:hover {
-    color: var(--text);
+@media (hover: hover) {
+    .pb-checkbox:hover {
+        color: var(--text);
+    }
 }
 
 .pb-checkbox input[type="checkbox"] {
@@ -417,8 +425,10 @@
     transition: transform 0.15s;
 }
 
-.pb-range-thumb::-webkit-slider-thumb:hover {
-    transform: scale(1.2);
+@media (hover: hover) {
+    .pb-range-thumb::-webkit-slider-thumb:hover {
+        transform: scale(1.2);
+    }
 }
 
 .pb-range-thumb::-moz-range-thumb {
@@ -457,8 +467,10 @@
     transition: color 0.2s;
 }
 
-.pb-radio:hover {
-    color: var(--text);
+@media (hover: hover) {
+    .pb-radio:hover {
+        color: var(--text);
+    }
 }
 
 .pb-radio input[type="radio"] {
@@ -595,9 +607,11 @@
     transition: color 0.2s, border-color 0.2s;
 }
 
-.pb-drawer-clear:hover {
-    color: var(--text);
-    border-color: var(--text);
+@media (hover: hover) {
+    .pb-drawer-clear:hover {
+        color: var(--text);
+        border-color: var(--text);
+    }
 }
 
 .pb-drawer-apply {
@@ -614,8 +628,10 @@
     transition: background 0.2s;
 }
 
-.pb-drawer-apply:hover {
-    background: var(--accent-hover);
+@media (hover: hover) {
+    .pb-drawer-apply:hover {
+        background: var(--accent-hover);
+    }
 }
 
 /* ─── TOOLBAR ─────────────────────────────────────────── */
@@ -688,8 +704,10 @@
     transition: opacity 0.15s;
 }
 
-.pb-tag-remove:hover {
-    opacity: 1;
+@media (hover: hover) {
+    .pb-tag-remove:hover {
+        opacity: 1;
+    }
 }
 
 .pb-tag-remove svg {
@@ -715,9 +733,11 @@
     transition: border-color 0.2s, background 0.2s;
 }
 
-.pb-filter-fab:hover {
-    border-color: rgba(164, 249, 63, 0.35);
-    background: var(--surface2);
+@media (hover: hover) {
+    .pb-filter-fab:hover {
+        border-color: rgba(164, 249, 63, 0.35);
+        background: var(--surface2);
+    }
 }
 
 .pb-filter-fab i,
@@ -806,10 +826,12 @@
     flex-direction: column;
 }
 
-.pb-card:hover {
-    border-color: rgba(164, 249, 63, 0.3);
-    transform: translateY(-4px);
-    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+@media (hover: hover) {
+    .pb-card:hover {
+        border-color: rgba(164, 249, 63, 0.3);
+        transform: translateY(-4px);
+        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+    }
 }
 
 .pb-card-img {
@@ -828,8 +850,10 @@
     transition: transform 0.4s ease;
 }
 
-.pb-card:hover .pb-card-img img {
-    transform: scale(1.04);
+@media (hover: hover) {
+    .pb-card:hover .pb-card-img img {
+        transform: scale(1.04);
+    }
 }
 
 .pb-series-tag {
@@ -964,14 +988,18 @@
     transition: transform 0.2s;
 }
 
-.pb-card-btn:hover svg {
-    transform: translateX(3px);
+@media (hover: hover) {
+    .pb-card-btn:hover svg {
+        transform: translateX(3px);
+    }
 }
 
-.pb-card-btn:hover {
-    background: var(--accent);
-    border-color: var(--accent);
-    color: #000;
+@media (hover: hover) {
+    .pb-card-btn:hover {
+        background: var(--accent);
+        border-color: var(--accent);
+        color: #000;
+    }
 }
 
 /* ─── EMPTY STATE ─────────────────────────────────────── */
@@ -1010,8 +1038,10 @@
     transition: background 0.2s;
 }
 
-.pb-empty-reset:hover {
-    background: var(--accent-hover);
+@media (hover: hover) {
+    .pb-empty-reset:hover {
+        background: var(--accent-hover);
+    }
 }
 
 /* Card entry animation */
