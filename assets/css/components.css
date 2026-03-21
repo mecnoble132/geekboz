@@ -1407,6 +1407,13 @@
   .pb-card-body {
     padding: 0.65rem 0.75rem 0.75rem;
   }
+
+  .pb-series-tag {
+    font-size: 0.48rem;
+    padding: 0.15rem 0.45rem;
+    top: 0.4rem;
+    left: 0.4rem;
+  }
 }
 
 /* ─── PREBUILTS SCROLLBAR ────────────────────────────── */
@@ -2302,7 +2309,7 @@
 /* Main grid */
 .footer-grid {
   display: grid;
-  grid-template-columns: 1.4fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1.4fr 1fr 1fr 1fr;
   gap: 2rem;
   margin-bottom: 3rem;
 }
@@ -2314,6 +2321,10 @@
   }
 
   .footer-brand {
+    grid-column: 1 / -1;
+  }
+  
+  .footer-col:last-child {
     grid-column: 1 / -1;
   }
 }
@@ -2573,8 +2584,6 @@
 
 .page-title span {
   color: var(--accent);
-  -webkit-text-stroke: 1.5px var(--accent);
-  -webkit-text-fill-color: transparent;
 }
 
 .page-subtitle {
