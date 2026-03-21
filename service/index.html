@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PC Service — GeekBoz</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=Oxanium:wght@600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="../assets/css/global.css">
+    <link rel="stylesheet" href="../assets/css/animations.css">
+    <link rel="stylesheet" href="../assets/css/components.css">
+    <link rel="stylesheet" href="service.css">
+
+    <link rel="icon" href="../assets/images/geekbozfavicon.png">
+</head>
+
+<body>
+
+    <!-- ─── NAVBAR ──────────────────────────────────────────── -->
+    <nav class="navbar">
+        <a href="../index.html" class="nav-brand">
+            <div class="nav-logo"><img src="../assets/images/geekbozlogo.png" alt="GeekBoz logo"></div>
+            <span class="nav-name">Geek<span>Boz</span></span>
+        </a>
+
+        <ul class="nav-links">
+            <li><a href="../prebuilts/index.html">Prebuilts</a></li>
+            <li><a href="../custom-build/index.html">Custom Build</a></li>
+            <li><a href="../about/index.html">About Us</a></li>
+            <li><a href="../index.html#contact">Contact</a></li>
+            <li class="more-wrapper">
+                <button class="more-btn" id="moreBtn">
+                    More
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                        <path d="M2 4L6 8L10 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </button>
+                <ul class="dropdown" id="dropdown">
+                    <li><a href="../cart/">My Cart</a></li>
+                    <li><a href="index.html" class="nav-active">PC Service</a></li>
+                    <li><a href="../index.html#contact">Our Stores</a></li>
+                    <li><a href="../help/index.html">Help &amp; FAQ</a></li>
+                    <li><a href="https://search.google.com/local/reviews?placeid=ChIJZXHsv726BTsRTXOTYqyzbxo" target="_blank" rel="noopener">Reviews</a></li>
+                </ul>
+            </li>
+        </ul>
+
+        <div class="nav-right">
+            <a href="../cart/" class="cart-btn" aria-label="Cart">
+                <i data-lucide="shopping-cart"></i>
+                <span class="cart-badge">0</span>
+            </a>
+            <button class="cta-btn" onclick="location.href='../custom-build/index.html'">Build Custom PC</button>
+            <button class="hamburger" id="hamburger" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile menu -->
+    <nav class="mobile-menu" id="mobileMenu">
+        <span class="mobile-label">Main</span>
+        <a href="../prebuilts/index.html">Prebuilts</a>
+        <a href="../custom-build/index.html">Custom Build</a>
+        <a href="../about/index.html">About Us</a>
+        <a href="../index.html#contact">Contact</a>
+        <span class="mobile-label">More</span>
+        <a href="../cart/">My Cart</a>
+        <a href="index.html" class="active">PC Service</a>
+        <a href="../index.html#contact">Our Stores</a>
+        <a href="../help/index.html">Help &amp; FAQ</a>
+        <a href="https://search.google.com/local/reviews?placeid=ChIJZXHsv726BTsRTXOTYqyzbxo" target="_blank" rel="noopener">Reviews</a>
+        <a href="../custom-build/index.html" class="mobile-cta">Build Custom PC</a>
+    </nav>
+
+    <!-- ─── PAGE HEADER ───────────────────────────────────── -->
+    <section class="page-header">
+        <div class="page-header-inner" data-reveal="fade-up">
+            <div class="page-breadcrumb">
+                <a href="../index.html">Home</a>
+                <i data-lucide="chevron-right"></i>
+                <span>PC Service</span>
+            </div>
+            <h1 class="page-title">Book a <span>PC Service</span></h1>
+            <p class="page-subtitle">Expert Maintenance & Repairs for GeekBoz Customers</p>
+        </div>
+    </section>
+
+    <!-- ─── SERVICE FORM SECTION ───────────────────────────── -->
+    <section class="service-section container" data-reveal="fade-up">
+        <div class="service-wrapper">
+
+            <div class="service-alert">
+                <div class="alert-icon"><i data-lucide="info"></i></div>
+                <div class="alert-content">
+                    <strong>Customer Exclusive</strong>
+                    <p>This service is strictly reserved for existing GeekBoz customers only.</p>
+                </div>
+            </div>
+
+            <form class="service-form" id="serviceForm" action="#" method="POST">
+                <div class="form-group">
+                    <label for="fullName">Full Name</label>
+                    <div class="input-wrapper">
+                        <div class="input-icon-box"><i data-lucide="user"></i></div>
+                        <input type="text" id="fullName" name="fullName" placeholder="Enter your registered name" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <div class="input-wrapper">
+                        <div class="input-icon-box"><i data-lucide="phone"></i></div>
+                        <input type="tel" id="phone" name="phone" placeholder="Enter your registered mobile number" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="location">Location</label>
+                    <div class="input-wrapper">
+                        <div class="input-icon-box"><i data-lucide="map-pin"></i></div>
+                        <input type="text" id="location" name="location" placeholder="City or Delivery PIN code" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="addOn">Have you taken the PC Service Add-on?</label>
+                    <div class="input-wrapper custom-select-wrapper" id="addonWrapper">
+                        <div class="input-icon-box"><i data-lucide="shield-check"></i></div>
+                        <div class="custom-select-trigger" tabindex="0" id="addonTrigger">
+                            <span class="selected-value">Select an option</span>
+                            <div class="chevron"></div>
+                        </div>
+                        <ul class="custom-options">
+                            <li data-value="yes">Yes, I purchased the Add-on</li>
+                            <li data-value="no">No, standard service only</li>
+                            <li data-value="unsure">I'm not sure</li>
+                        </ul>
+                        <input type="hidden" id="addOn" name="addOn" required>
+                    </div>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="submit" class="submit-btn">Request Service<i data-lucide="arrow-right"></i></button>
+                    <p class="form-footer-note">Our support team will contact you within 24 hours.</p>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- ─── FOOTER ───────────────────────────────────────── -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <div class="footer-series">
+                <a href="../prebuilts/index.html?series=branded" class="footer-series-tag branded">GBZ Branded PC</a>
+                <a href="../index.html#contact" class="footer-series-tag workstation">Our Stores</a>
+                <a href="../prebuilts/index.html?series=creatorx" class="footer-series-tag creator">GBZ CreatorX PC</a>
+                <a href="../prebuilts/index.html?series=gaming" class="footer-series-tag gaming">GBZ Gaming PC</a>
+            </div>
+
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="../index.html" class="footer-logo">
+                        <img src="../assets/images/geekbozlogo.png" alt="GeekBoz logo">
+                        <span class="footer-logo-name">Geek<span>Boz</span></span>
+                    </a>
+                    <p class="footer-tagline">Custom-built PCs, professional service, and hand-picked hardware — all from Kerala's
+                        most trusted PC builders.</p>
+                </div>
+
+                <div class="footer-col">
+                    <div class="footer-col-title">Navigation</div>
+                    <ul class="footer-links">
+                        <li><a href="../prebuilts/index.html">Prebuilts</a></li>
+                        <li><a href="../custom-build/index.html">Custom Build</a></li>
+                        <li><a href="../about/index.html">About Us</a></li>
+                        <li><a href="index.html">PC Service</a></li>
+                        <li><a href="../index.html#contact">Our Stores</a></li>
+                        <li><a href="../help/index.html">Help &amp; FAQ</a></li>
+                        <li><a href="../reviews/index.html">Reviews</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <div class="footer-col-title">About Us</div>
+                    <ul class="footer-links">
+                        <li><a href="../about/index.html#team">GBZ Team</a></li>
+                        <li><a href="../about/index.html#careers">Careers</a></li>
+                        <li><a href="../index.html#contact">Our Stores</a></li>
+                        <li><a href="https://search.google.com/local/reviews?placeid=ChIJZXHsv726BTsRTXOTYqyzbxo" target="_blank" rel="noopener">Testimonials</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <div class="footer-col-title">More Information</div>
+                    <ul class="footer-links">
+                        <li><a href="../legal/terms.html">General Terms &amp; Conditions</a></li>
+                        <li><a href="../legal/warranty.html">Warranty Policy</a></li>
+                        <li><a href="../legal/privacy.html">Privacy Policy</a></li>
+                        <li><a href="../legal/refunds.html">Cancellation &amp; Refund</a></li>
+                        <li><a href="../legal/sales-terms.html">Sales Terms &amp; Conditions</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom" style="max-width:1280px; margin:0 auto; padding-left:5vw; padding-right:5vw;">
+            <p class="footer-copy">© 2025 <span>GeekBoz</span> Pvt Ltd. All rights reserved.</p>
+            <nav class="footer-legal">
+                <a href="../legal/privacy.html">Privacy</a>
+                <a href="../legal/terms.html">Terms</a>
+                <a href="../legal/warranty.html">Warranty</a>
+                <a href="../legal/refunds.html">Refunds</a>
+            </nav>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <script src="../assets/js/main.js"></script>
+    <script>
+        lucide.createIcons();
+
+        // Custom Dropdown JS
+        const addonWrapper = document.getElementById('addonWrapper');
+        const trigger = document.getElementById('addonTrigger');
+        const options = document.querySelectorAll('.custom-options li');
+        const hiddenInput = document.getElementById('addOn');
+        const selectedValue = document.querySelector('.selected-value');
+
+        trigger.addEventListener('click', () => {
+            addonWrapper.classList.toggle('open');
+        });
+
+        options.forEach(option => {
+            option.addEventListener('click', function() {
+                // Remove selected class from all
+                options.forEach(opt => opt.classList.remove('selected'));
+                // Add selected class to clicked item
+                this.classList.add('selected');
+                
+                // Set text and value
+                selectedValue.textContent = this.textContent;
+                selectedValue.classList.add('has-value');
+                hiddenInput.value = this.getAttribute('data-value');
+                
+                // Close dropdown
+                addonWrapper.classList.remove('open');
+            });
+        });
+
+        // Close when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!addonWrapper.contains(e.target)) {
+                addonWrapper.classList.remove('open');
+            }
+        });
+
+        // WhatsApp Form Submission Logic
+        const serviceForm = document.getElementById('serviceForm');
+        
+        serviceForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Check if Add-on is selected
+            if(!hiddenInput.value) {
+                alert("Please select your PC Service Add-on status.");
+                addonWrapper.classList.add('open');
+                trigger.focus();
+                return;
+            }
+
+            const name = document.getElementById('fullName').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            const location = document.getElementById('location').value.trim();
+            const addOn = hiddenInput.value;
+            
+            // Format Add-on text
+            let addOnText = "I'm not sure";
+            if(addOn === "yes") addOnText = "Yes, I purchased the Add-on";
+            else if(addOn === "no") addOnText = "No, standard service only";
+            
+            // Build Message
+            let message = "Hello GeekBoz Team! 👋\nI would like to request a PC Service. Here are my details:\n\n";
+            message += `*Name:* ${name}\n`;
+            message += `*Phone:* ${phone}\n`;
+            message += `*Location:* ${location}\n`;
+            message += `*PC Service Add-on:* ${addOnText}\n\n`;
+            message += "Please let me know the next steps.";
+            
+            // Encode for URL
+            const encodedMessage = encodeURIComponent(message);
+            const waNumber = "917994296603";
+            const waURL = `https://wa.me/${waNumber}?text=${encodedMessage}`;
+            
+            // Trigger redirect
+            window.open(waURL, '_blank');
+        });
+    </script>
+</body>
+</html>

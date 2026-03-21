@@ -1,0 +1,257 @@
+.service-section {
+    padding: 2rem 5vw 6rem 5vw;
+    display: flex;
+    justify-content: center;
+}
+
+.service-wrapper {
+    max-width: 600px;
+    width: 100%;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 3rem;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+}
+
+.service-alert {
+    display: flex;
+    align-items: flex-start;
+    background: rgba(164, 249, 63, 0.05);
+    border: 1px solid rgba(164, 249, 63, 0.2);
+    border-radius: 8px;
+    padding: 1rem 1.25rem;
+    margin-bottom: 2.5rem;
+    gap: 1rem;
+}
+
+.alert-icon i {
+    width: 20px;
+    height: 20px;
+    color: var(--accent);
+    margin-top: 2px;
+}
+
+.alert-content strong {
+    display: block;
+    color: var(--accent);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 0.25rem;
+}
+
+.alert-content p {
+    color: var(--text);
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin: 0;
+}
+
+.service-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.75rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.form-group label {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--muted);
+}
+
+.input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    height: 56px;
+    transition: all 0.3s ease;
+}
+
+.input-icon-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 3.5rem;
+    height: 100%;
+    background: transparent;
+    border-right: 1px solid var(--border);
+    border-radius: 8px 0 0 8px;
+}
+
+.input-icon-box svg {
+    width: 20px;
+    height: 20px;
+    color: var(--accent);
+    transition: color 0.3s ease;
+}
+
+.input-wrapper input {
+    flex: 1;
+    width: 100%;
+    background: transparent;
+    border: none;
+    padding: 0 1.25rem;
+    color: var(--text);
+    font-family: inherit;
+    font-size: 0.95rem;
+    outline: none;
+}
+
+.input-wrapper:focus-within {
+    border-color: var(--accent);
+    background: var(--surface);
+    box-shadow: 0 0 0 3px rgba(164, 249, 63, 0.1);
+}
+
+.input-wrapper:focus-within .input-icon-box svg {
+    color: var(--accent);
+}
+
+/* Custom Select Dropdown Branding */
+.custom-select-wrapper {
+    overflow: visible;
+}
+
+.custom-select-trigger {
+    flex: 1;
+    padding: 0 1.25rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    font-size: 0.95rem;
+    user-select: none;
+    height: 100%;
+}
+
+.selected-value {
+    color: var(--muted);
+}
+.selected-value.has-value {
+    color: var(--text);
+}
+
+.chevron {
+    width: 10px;
+    height: 10px;
+    border-right: 2px solid var(--muted);
+    border-bottom: 2px solid var(--muted);
+    transform: translateY(-2px) rotate(45deg);
+    transition: all 0.3s ease;
+}
+
+.custom-select-wrapper.open .chevron {
+    transform: translateY(2px) rotate(-135deg);
+    color: var(--accent);
+    border-color: var(--accent);
+}
+
+.custom-options {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    width: 100%;
+    background: var(--surface2);
+    border: 1px solid var(--accent);
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+    z-index: 100;
+    list-style: none;
+    padding: 0.5rem;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+}
+
+.custom-select-wrapper.open .custom-options {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.custom-options li {
+    padding: 0.75rem 1rem;
+    border-radius: 6px;
+    color: var(--muted);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 0.95rem;
+}
+
+.custom-options li:hover,
+.custom-options li.selected {
+    background: rgba(164, 249, 63, 0.1);
+    color: var(--accent);
+}
+
+.form-actions {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.submit-btn {
+    width: 100%;
+    background: var(--accent);
+    color: #000;
+    border: none;
+    border-radius: 8px;
+    padding: 1rem 2rem;
+    font-family: 'Oxanium', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.submit-btn i {
+    width: 18px;
+    height: 18px;
+    transition: transform 0.3s ease;
+}
+
+.submit-btn:hover {
+    background: var(--accent-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(164, 249, 63, 0.2);
+}
+
+.submit-btn:hover i {
+    transform: translateX(4px);
+}
+
+.form-footer-note {
+    font-size: 0.85rem;
+    color: var(--muted);
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    .service-wrapper {
+        padding: 2rem 1.5rem;
+        border: none;
+        background: transparent;
+        box-shadow: none;
+    }
+    
+    .service-section {
+        padding: 0 5vw 4rem 5vw;
+    }
+}
