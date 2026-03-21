@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cancellation & Refund — GeekBoz</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=Oxanium:wght@600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="../assets/css/global.css">
+    <link rel="stylesheet" href="../assets/css/animations.css">
+    <link rel="stylesheet" href="../assets/css/components.css">
+
+    <link rel="icon" href="../assets/images/geekbozfavicon.png">
+
+    <style>
+        .legal-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 4rem 5vw;
+            color: var(--muted);
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+
+        .legal-content h2,
+        .legal-content h3 {
+            color: var(--text);
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            font-family: var(--font-heading);
+            font-weight: 600;
+        }
+
+        .legal-content h2 {
+            font-size: 2rem;
+        }
+
+        .legal-content p {
+            margin-bottom: 1.5rem;
+        }
+
+        .legal-content ul,
+        .legal-content ol {
+            margin-bottom: 1.5rem;
+            padding-left: 1.5rem;
+        }
+
+        .legal-content li {
+            margin-bottom: 0.5rem;
+            list-style-position: inside;
+        }
+
+        .legal-placeholder {
+            min-height: 40vh;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ─── NAVBAR ──────────────────────────────────────────── -->
+    <nav class="navbar">
+        <a href="../index.html" class="nav-brand">
+            <div class="nav-logo"><img src="../assets/images/geekbozlogo.png" alt="GeekBoz logo"></div>
+            <span class="nav-name">Geek<span>Boz</span></span>
+        </a>
+
+        <ul class="nav-links">
+            <li><a href="../prebuilts/index.html">Prebuilts</a></li>
+            <li><a href="../custom-build/index.html">Custom Build</a></li>
+            <li><a href="../about/index.html">About Us</a></li>
+            <li><a href="../index.html#contact">Contact</a></li>
+            <li class="more-wrapper">
+                <button class="more-btn" id="moreBtn">
+                    More
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                        <path d="M2 4L6 8L10 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg>
+                </button>
+                <ul class="dropdown" id="dropdown">
+                    <li><a href="../cart/">My Cart</a></li>
+                    <li><a href="../service/index.html">PC Service</a></li>
+                    <li><a href="../index.html#contact">Our Stores</a></li>
+                    <li><a href="../help/index.html">Help &amp; FAQ</a></li>
+                    <li><a href="https://search.google.com/local/reviews?placeid=ChIJZXHsv726BTsRTXOTYqyzbxo" target="_blank" rel="noopener">Reviews</a></li>
+                </ul>
+            </li>
+        </ul>
+
+        <div class="nav-right">
+            <a href="../cart/" class="cart-btn" aria-label="Cart">
+                <i data-lucide="shopping-cart"></i>
+                <span class="cart-badge">0</span>
+            </a>
+            <button class="cta-btn" onclick="location.href='../custom-build/index.html'">Build Custom PC</button>
+            <button class="hamburger" id="hamburger" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile menu -->
+    <nav class="mobile-menu" id="mobileMenu">
+        <span class="mobile-label">Main</span>
+        <a href="../prebuilts/index.html">Prebuilts</a>
+        <a href="../custom-build/index.html">Custom Build</a>
+        <a href="../about/index.html">About Us</a>
+        <a href="../index.html#contact">Contact</a>
+        <span class="mobile-label">More</span>
+        <a href="../cart/">My Cart</a>
+        <a href="../service/index.html">PC Service</a>
+        <a href="../index.html#contact">Our Stores</a>
+        <a href="../help/index.html">Help &amp; FAQ</a>
+        <a href="https://search.google.com/local/reviews?placeid=ChIJZXHsv726BTsRTXOTYqyzbxo" target="_blank" rel="noopener">Reviews</a>
+        <a href="../custom-build/index.html" class="mobile-cta">Build Custom PC</a>
+    </nav>
+
+    <!-- ─── PAGE HEADER ───────────────────────────────────── -->
+    <section class="page-header">
+        <div class="page-header-inner" data-reveal="fade-up">
+            <div class="page-breadcrumb">
+                <a href="../index.html">Home</a>
+                <i data-lucide="chevron-right"></i>
+                <span>Legal</span>
+                <i data-lucide="chevron-right"></i>
+                <span>Cancellation & Refund</span>
+            </div>
+            <h1 class="page-title">Cancellation <span>& <span>Refund</span></h1>
+            <p class="page-subtitle">Policies regarding your purchases and returns.</p>
+        </div>
+    </section>
+
+    <!-- ─── LEGAL CONTENT ────────────────────────────────────── -->
+    <section class="legal-content">
+        <div class="legal-text" data-reveal="fade-up">
+            <h3>Overview</h3>
+            <p>Our refund and returns policy lasts 4-5 days. If 5 days have passed since your purchase, we can’t offer you a full refund or exchange.</p>
+            <p>To be eligible for a return, your item must be unused and in the same condition that you received it. It must also be in the original packaging.</p>
+            <p>Several types of goods are exempt from being returned. Perishable goods such as food, flowers, newspapers or magazines cannot be returned. We also do not accept products that are intimate or sanitary goods, hazardous materials, or flammable liquids or gases.</p>
+            
+            <p><strong>Additional non-returnable items:</strong></p>
+            <ul>
+                <li>Gift cards</li>
+                <li>Downloadable software products</li>
+                <li>Gaming Chairs / Mouse Pads</li>
+            </ul>
+            <p>To complete your return, we require a receipt or proof of purchase.</p>
+            <p>Please do not send your purchase back to the manufacturer.</p>
+            
+            <p><strong>There are certain situations where only partial refunds are granted:</strong></p>
+            <ul>
+                <li>Book with obvious signs of use</li>
+                <li>Any item not in its original condition, is damaged or missing parts for reasons not due to our error.</li>
+                <li>Any item that is returned more than 10 days after delivery</li>
+            </ul>
+
+            <h3>Refunds</h3>
+            <p>Once your return is received and inspected, we will send you an email or call to notify you that we have received your returned item. We will also notify you of the approval or rejection of your refund via a call.</p>
+            <p>If you are approved, then your refund will be processed, and a credit will automatically be applied to your bank account or original method of payment, within 10-15 business days.</p>
+
+            <p><strong>Late or Missing Refunds</strong></p>
+            <p>If you haven’t received a refund yet, first check your bank account again.</p>
+            <p>Then contact your credit card company, it may take some time before your refund is officially posted.</p>
+            <p>Next contact your bank. There is often some processing time before a refund is posted.</p>
+            <p>If you’ve done all of this and you still have not received your refund yet, please contact us at <a href="mailto:billing.geekboz@gmail.com" style="color:var(--accent);">billing.geekboz@gmail.com</a> or call us on <a href="tel:+919567776571" style="color:var(--accent);">9567776571</a>.</p>
+
+            <p><strong>Sale Items</strong></p>
+            <p>Only regular priced items may be refunded. Sale items cannot be refunded.</p>
+
+            <h3>Exchanges</h3>
+            <p>We only replace items if they are defective or damaged. If you need to exchange it for the same item, send us an email at <a href="mailto:billing.geekboz@gmail.com" style="color:var(--accent);">billing.geekboz@gmail.com</a> and send your item to:</p>
+            <address style="margin-bottom: 1.5rem; font-style: normal; color: var(--text);">
+                <strong>GeekBoz PVT LTD, HQ</strong><br>
+                Basement, Opposite Steel World<br>
+                Karakkamandapam, Nemom P.O<br>
+                Trivandrum, PIN: 695020
+            </address>
+
+            <h3>Gifts</h3>
+            <p>If the item was marked as a gift when purchased and shipped directly to you, you’ll receive a gift credit for the value of your return. Once the returned item is received, a gift certificate will be mailed to you.</p>
+            <p>If the item wasn’t marked as a gift when purchased, or the gift giver had the order shipped to themselves to give to you later, we will send a refund to the gift giver and they will find out about your return.</p>
+
+            <h3>Shipping Returns</h3>
+            <p>To return your product, you should mail your product to:</p>
+            <address style="margin-bottom: 1.5rem; font-style: normal; color: var(--text);">
+                <strong>GeekBoz PVT LTD, HQ</strong><br>
+                Basement, Opposite Steel World<br>
+                Karakkamandapam, Nemom P.O<br>
+                Trivandrum, PIN: 695020
+            </address>
+            <p>You will be responsible for paying for your own shipping costs for returning your item. Shipping costs are non-refundable. If you receive a refund, the cost of return shipping will be deducted from your refund.</p>
+            <p>Depending on where you live, the time it may take for your exchanged product to reach you may vary.</p>
+            <p>If you are returning more expensive items, you may consider using a trackable shipping service or purchasing shipping insurance. We don’t guarantee that we will receive your returned item.</p>
+
+            <h3>Need Help?</h3>
+            <p>Contact us at <a href="mailto:billing.geekboz@gmail.com" style="color:var(--accent);">billing.geekboz@gmail.com</a> or call us on <a href="tel:+919567776571" style="color:var(--accent);">9567776571</a> for questions related to refunds and returns.</p>
+        </div>
+    </section>
+
+    <!-- ─── FOOTER ───────────────────────────────────────── -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <div class="footer-series">
+                <a href="../prebuilts/index.html?series=branded" class="footer-series-tag branded">GBZ Branded PC</a>
+                <a href="../index.html#contact" class="footer-series-tag workstation">Our Stores</a>
+                <a href="../prebuilts/index.html?series=creatorx" class="footer-series-tag creator">GBZ CreatorX PC</a>
+                <a href="../prebuilts/index.html?series=gaming" class="footer-series-tag gaming">GBZ Gaming PC</a>
+            </div>
+
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="../index.html" class="footer-logo">
+                        <img src="../assets/images/geekbozlogo.png" alt="GeekBoz logo">
+                        <span class="footer-logo-name">Geek<span>Boz</span></span>
+                    </a>
+                    <p class="footer-tagline">Custom-built PCs, professional service, and hand-picked hardware — all from Kerala's
+                        most trusted PC builders.</p>
+                </div>
+
+                <div class="footer-col">
+                    <div class="footer-col-title">Navigation</div>
+                    <ul class="footer-links">
+                        <li><a href="../prebuilts/index.html">Prebuilts</a></li>
+                        <li><a href="../custom-build/index.html">Custom Build</a></li>
+                        <li><a href="../about/index.html">About Us</a></li>
+                        <li><a href="../service/index.html">PC Service</a></li>
+                        <li><a href="../index.html#contact">Our Stores</a></li>
+                        <li><a href="../help/index.html">Help &amp; FAQ</a></li>
+                        <li><a href="../reviews/index.html">Reviews</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <div class="footer-col-title">About Us</div>
+                    <ul class="footer-links">
+                        <li><a href="../about/index.html#team">GBZ Team</a></li>
+                        <li><a href="../about/index.html#careers">Careers</a></li>
+                        <li><a href="../index.html#contact">Our Stores</a></li>
+                        <li><a href="https://search.google.com/local/reviews?placeid=ChIJZXHsv726BTsRTXOTYqyzbxo" target="_blank" rel="noopener">Testimonials</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <div class="footer-col-title">More Information</div>
+                    <ul class="footer-links">
+                        <li><a href="terms.html">General Terms &amp; Conditions</a></li>
+                        <li><a href="warranty.html">Warranty Policy</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="refunds.html">Cancellation &amp; Refund</a></li>
+                        <li><a href="sales-terms.html">Sales Terms &amp; Conditions</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom" style="max-width:1280px; margin:0 auto; padding-left:5vw; padding-right:5vw;">
+            <p class="footer-copy">© 2025 <span>GeekBoz</span> Pvt Ltd. All rights reserved.</p>
+            <nav class="footer-legal">
+                <a href="privacy.html">Privacy</a>
+                <a href="terms.html">Terms</a>
+                <a href="warranty.html">Warranty</a>
+                <a href="refunds.html">Refunds</a>
+            </nav>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <script src="../assets/js/main.js"></script>
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
