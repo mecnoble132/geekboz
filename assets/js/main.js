@@ -402,44 +402,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 #globalCartWrap.open .cart-overlay { opacity: 1; pointer-events: auto; }
                 #globalCartWrap.open .cart-panel { transform: translateX(0); }
 
-                /* ── Cart Button in Nav ── */
-                .cart-btn {
-                    position: relative;
-                    display: inline-flex;
-                    align-items: center;
-                    justify-content: center;
-                    border-radius: 50%;
-                    padding: 6px;
-                    transition: background 0.2s;
-                    text-decoration: none;
-                    color: inherit;
-                }
-                .cart-btn:hover { background: rgba(255,255,255,0.07); }
-
-                /* ── Cart Badge ── */
-                .cart-badge {
-                    display: none;
-                    position: absolute;
-                    top: -1px;
-                    right: -1px;
-                    background: #e63946;
-                    color: #fff;
-                    font-size: 10px;
-                    font-weight: 700;
-                    font-family: 'DM Sans', sans-serif;
-                    min-width: 17px;
-                    height: 17px;
-                    padding: 0 3px;
-                    border-radius: 8px;
-                    border: 2px solid var(--surface);
-                    align-items: center;
-                    justify-content: center;
-                    line-height: 1;
-                    z-index: 11;
-                    pointer-events: none;
-                    box-sizing: border-box;
-                }
-
                 /* ── Mini Cart Items in side panel ── */
                 .mini-cart-item {
                     background: var(--surface2);
