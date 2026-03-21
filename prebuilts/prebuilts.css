@@ -1063,14 +1063,7 @@
     }
 }
 
-/* ─── PAGE HEADER ACTIVE NAV LINK ─────────────────────── */
-.nav-active {
-    color: var(--accent) !important;
-}
 
-.nav-active::after {
-    transform: scaleX(1) !important;
-}
 
 /* ─── RESPONSIVE ─────────────────────────────────────── */
 @media (max-width: 1100px) {

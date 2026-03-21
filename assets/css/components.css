@@ -105,6 +105,14 @@
   }
 }
 
+.nav-active {
+  color: var(--accent) !important;
+}
+
+.nav-active::after {
+  transform: scaleX(1) !important;
+}
+
 .more-btn svg {
   transition: transform 0.2s;
 }
@@ -333,6 +341,10 @@
   .mobile-menu a:hover {
     color: var(--text);
   }
+}
+
+.mobile-menu a.active {
+  color: var(--accent) !important;
 }
 
 .mobile-menu .mobile-label {
