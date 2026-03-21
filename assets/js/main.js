@@ -58,12 +58,17 @@ if (track && paginationEl && progressBar) {
   const INTERVAL = 5000;
   let current = 0;
   let autoTimer = null;
+  let isTransitioning = false;
 
+  // Dots
   slides.forEach((_, i) => {
     const dot = document.createElement('button');
     dot.className = 'page-dot' + (i === 0 ? ' active' : '');
     dot.setAttribute('aria-label', 'Slide ' + (i + 1));
-    dot.addEventListener('click', () => goTo(i, true));
+    dot.addEventListener('click', () => {
+      if (current === i) return;
+      goTo(i);
+    });
     paginationEl.appendChild(dot);
   });
 
@@ -73,42 +78,59 @@ if (track && paginationEl && progressBar) {
     });
   }
 
-  function goTo(index, resetTimer = true) {
-    current = (index + TOTAL) % TOTAL;
-    track.style.transform = 'translateX(-' + (current * 100) + '%)';
-    updateDots();
-    if (resetTimer) {
-      clearInterval(autoTimer);
-      startProgress();
-      autoTimer = setInterval(advance, INTERVAL);
-    }
-  }
-
-  function advance() { goTo(current + 1, false); startProgress(); }
-
   function startProgress() {
     progressBar.style.transition = 'none';
     progressBar.style.width = '0%';
-    void progressBar.offsetWidth;
+    void progressBar.offsetWidth; // force reflow
     progressBar.style.transition = 'width ' + INTERVAL + 'ms linear';
     progressBar.style.width = '100%';
   }
 
+  function resetAutoPlay() {
+    stopAutoPlay();
+    startProgress();
+    autoTimer = setTimeout(advance, INTERVAL);
+  }
+
+  function stopAutoPlay() {
+    if (autoTimer) {
+      clearTimeout(autoTimer);
+      autoTimer = null;
+    }
+    // Stop progress bar exactly where it is
+    progressBar.style.transition = 'none';
+  }
+
+  function advance() {
+    goTo(current + 1);
+  }
+
+  function goTo(index) {
+    if (isTransitioning) return;
+    isTransitioning = true;
+
+    current = (index + TOTAL) % TOTAL;
+    track.style.transform = 'translate3d(-' + (current * 100) + '%, 0, 0)';
+    updateDots();
+    resetAutoPlay();
+
+    // prevent rapid clicking glitches by matching CSS track transition (0.65s)
+    setTimeout(() => { isTransitioning = false; }, 650);
+  }
+
+  // Arrows
   const prevBtn = document.getElementById('prevBtn');
   const nextBtn = document.getElementById('nextBtn');
   if (prevBtn) prevBtn.addEventListener('click', () => goTo(current - 1));
   if (nextBtn) nextBtn.addEventListener('click', () => goTo(current + 1));
 
+  // Pause on hover
   const carouselSection = document.getElementById('carousel');
   if (carouselSection) {
-    carouselSection.addEventListener('mouseenter', () => {
-      clearInterval(autoTimer);
-      progressBar.style.transition = 'none';
-    });
-    carouselSection.addEventListener('mouseleave', () => {
-      startProgress();
-      autoTimer = setInterval(advance, INTERVAL);
-    });
+    carouselSection.addEventListener('mouseenter', stopAutoPlay);
+    carouselSection.addEventListener('mouseleave', resetAutoPlay);
+
+    // Gestures
     let touchX = null;
     carouselSection.addEventListener('touchstart', e => { touchX = e.touches[0].clientX; }, { passive: true });
     carouselSection.addEventListener('touchend', e => {
@@ -119,8 +141,8 @@ if (track && paginationEl && progressBar) {
     });
   }
 
-  startProgress();
-  autoTimer = setInterval(advance, INTERVAL);
+  // Init
+  resetAutoPlay();
 }
 
 // ── Prebuilts drag to scroll ───────────────────────────
