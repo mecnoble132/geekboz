@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product — GeekBoz</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=Oxanium:wght@600;700;800&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="../assets/css/global.css">
+    <link rel="stylesheet" href="../assets/css/animations.css">
+    <link rel="stylesheet" href="../assets/css/components.css">
+    <link rel="stylesheet" href="product.css">
+
+    <link rel="icon" href="../assets/images/geekbozfavicon.png">
+</head>
+
+<body>
+
+    <!-- ─── NAVBAR ──────────────────────────────────────────── -->
+    <nav class="navbar">
+        <a href="../index.html" class="nav-brand">
+            <div class="nav-logo"><img src="../assets/images/geekbozlogo.png" alt="GeekBoz logo"></div>
+            <span class="nav-name">Geek<span>Boz</span></span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="index.html" class="nav-active">Prebuilts</a></li>
+            <li><a href="../custom-build/index.html">Custom Build</a></li>
+            <li><a href="../about/index.html">About Us</a></li>
+            <li><a href="../index.html#contact">Contact</a></li>
+            <li class="more-wrapper">
+                <button class="more-btn" id="moreBtn">
+                    More
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                        <path d="M2 4L6 8L10 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg>
+                </button>
+                <ul class="dropdown" id="dropdown">
+                    <li><a href="../cart/">My Cart</a></li>
+                    <li><a href="../service/index.html">PC Service</a></li>
+                    <li><a href="../index.html#contact">Our Stores</a></li>
+                    <li><a href="../help/index.html">Help &amp; FAQ</a></li>
+                    <li><a href="https://search.google.com/local/reviews?placeid=ChIJZXHsv726BTsRTXOTYqyzbxo" target="_blank" rel="noopener">Reviews</a></li>
+                </ul>
+            </li>
+        </ul>
+        <div class="nav-right">
+            <a href="../cart/" class="cart-btn" aria-label="Cart">
+                <i data-lucide="shopping-cart"></i>
+                <span class="cart-badge">0</span>
+            </a>
+            <button class="cta-btn" onclick="location.href='../custom-build/index.html'">Build Custom PC</button>
+            <button class="hamburger" id="hamburger" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile menu -->
+    <nav class="mobile-menu" id="mobileMenu">
+        <span class="mobile-label">Main</span>
+        <a href="index.html">Prebuilts</a>
+        <a href="../custom-build/index.html">Custom Build</a>
+        <a href="../about/index.html">About Us</a>
+        <a href="../index.html#contact">Contact</a>
+        <span class="mobile-label">More</span>
+        <a href="../cart/">My Cart</a>
+        <a href="../service/index.html">PC Service</a>
+        <a href="../index.html#contact">Our Stores</a>
+        <a href="../help/index.html">Help &amp; FAQ</a>
+        <a href="https://search.google.com/local/reviews?placeid=ChIJZXHsv726BTsRTXOTYqyzbxo" target="_blank" rel="noopener">Reviews</a>
+        <a href="../custom-build/index.html" class="mobile-cta">Build Custom PC</a>
+    </nav>
+
+
+    <!-- ─── PRODUCT LAYOUT ──────────────────────────────────────── -->
+    <main class="product-page">
+        <div id="loadingState" class="prod-loading">Loading product details...</div>
+        <div id="errorState" class="prod-error" style="display:none;">Product not found.<br><br><a href="index.html">Back to all builds</a></div>
+        
+        <div id="productContent" class="prod-content" style="display:none;" data-reveal="fade-up">
+
+            <!-- Breadcrumb -->
+            <div class="prod-breadcrumb">
+                <a href="../index.html">Home</a>
+                <i data-lucide="chevron-right"></i>
+                <a href="index.html">Prebuilts</a>
+                <i data-lucide="chevron-right"></i>
+                <span id="bcName">Product Name</span>
+            </div>
+
+            <!-- 1. Hero Section -->
+            <div class="prod-hero-grid">
+                <!-- Left: Gallery -->
+                <div class="prod-gallery">
+                    <div class="prod-main-img-box">
+                        <img id="prodMainImg" src="" alt="Main Image">
+                    </div>
+                    <div class="prod-thumbnails" id="prodThumbnails">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+
+                <!-- Right: Details & CTA -->
+                <div class="prod-hero-details">
+                    <span id="prodTag" class="prod-series-tag"></span>
+                    <span id="prodBadge" class="prod-badge" style="display:none;"></span>
+                    
+                    <h1 id="prodName" class="prod-title">Product Name</h1>
+                    <p id="prodTagline" class="prod-tagline">Tagline placeholder</p>
+                    <div id="prodPrice" class="prod-price">₹0</div>
+
+                    <!-- Featured Service Addon -->
+                    <div class="prod-addons" style="border-color: rgba(164, 249, 63, 0.4); background: linear-gradient(135deg, rgba(8,12,16,1) 0%, rgba(164, 249, 63, 0.05) 100%); margin-bottom: 1rem;">
+                        <h3 class="addons-title" style="color: var(--accent); display: flex; align-items: center; gap: 0.4rem; font-size: 0.95rem;">
+                            <i data-lucide="shield"></i> GeekBoz Elite Protection
+                        </h3>
+                        <label class="addon-label" style="border-bottom: none; padding-bottom: 0;">
+                            <div class="addon-left">
+                                <input type="checkbox" class="addon-checkbox" value="4999">
+                                <span class="addon-name" style="color: var(--text); font-weight: 600; font-size: 0.95rem;">10-Year Service Plan</span>
+                            </div>
+                            <span class="addon-price">+₹4,999</span>
+                        </label>
+                        <p style="font-size: 0.75rem; color: rgba(255,255,255,0.6); margin-top: 0.6rem; line-height: 1.4; font-family: 'DM Sans', sans-serif; padding-left: 1.6rem;">
+                            Includes priority tech support, annual deep cleaning, and zero-cost labor for all upgrades, maintenance, and diagnostics for a full decade.
+                        </p>
+                    </div>
+
+                    <!-- Add-ons Section -->
+                    <div class="prod-addons">
+                        <h3 class="addons-title">Additional Accessories</h3>
+                        <label class="addon-label">
+                            <div class="addon-left">
+                                <input type="checkbox" class="addon-checkbox" value="2500">
+                                <span class="addon-name">Extended 2-Year Part Warranty</span>
+                            </div>
+                            <span class="addon-price">+₹2,500</span>
+                        </label>
+                        <label class="addon-label">
+                            <div class="addon-left">
+                                <input type="checkbox" class="addon-checkbox" value="1500">
+                                <span class="addon-name">GeekBoz Gaming Mouse</span>
+                            </div>
+                            <span class="addon-price">+₹1,500</span>
+                        </label>
+                        <label class="addon-label">
+                            <div class="addon-left">
+                                <input type="checkbox" class="addon-checkbox" value="3000">
+                                <span class="addon-name">Premium Headset</span>
+                            </div>
+                            <span class="addon-price">+₹3,000</span>
+                        </label>
+
+                        <!-- Dynamically appear when addons are selected -->
+                        <div id="priceSummary" style="display: none; justify-content: space-between; align-items: flex-end; margin-top: 1rem; padding-top: 1rem; border-top: 1px dashed rgba(255,255,255,0.1);">
+                            <span style="font-family: 'DM Sans', sans-serif; font-size: 0.85rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em;">Final Total:</span>
+                            <span id="totalPriceDisplay" style="font-family: 'Oxanium', sans-serif; font-size: 1.5rem; font-weight: 800; color: var(--accent); line-height: 1;">₹0</span>
+                        </div>
+                    </div>
+
+                    <!-- CTA -->
+                    <div class="prod-cta-group">
+                        <button class="prod-btn-primary" id="addCartBtn">
+                            <i data-lucide="shopping-cart"></i> Add to Cart
+                        </button>
+                        <button class="prod-btn-secondary" id="contactBtn">
+                            <i data-lucide="send"></i> Send to Expert
+                        </button>
+                    </div>
+                    
+                    <!-- Trust / Assurance -->
+                    <div class="prod-trust">
+                        <div class="trust-item"><i data-lucide="shield-check"></i> 3-Year Warranty</div>
+                        <div class="trust-item"><i data-lucide="truck"></i> Free Shipping</div>
+                        <div class="trust-item"><i data-lucide="lock"></i> Secure Payment</div>
+                        <div class="trust-item"><i data-lucide="refresh-cw"></i> 7-Day Returns</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. Specifications -->
+            <section class="prod-section specs-section">
+                <h2 class="section-title">Technical Specifications</h2>
+                <table class="prod-table" id="specsTable">
+                    <!-- Populated by JS -->
+                </table>
+                <button class="specs-expand-btn" id="expandSpecsBtn">Show All Specs <i data-lucide="chevron-down"></i></button>
+            </section>
+
+            <!-- 3. Key Highlights -->
+            <section class="prod-section highlights-section">
+                <div class="highlights-grid" id="highlightsGrid">
+                    <!-- Populated by JS -->
+                </div>
+            </section>
+
+            <!-- 4. FPS / Performance Section -->
+            <section class="prod-section performance-section">
+                <h2 class="section-title">Gaming Performance</h2>
+                <table class="prod-table fps-table">
+                    <thead>
+                        <tr>
+                            <th align="left">Game</th>
+                            <th align="left">Settings</th>
+                            <th align="right">Avg FPS</th>
+                        </tr>
+                    </thead>
+                    <tbody id="fpsTableBody">
+                        <!-- Populated by JS -->
+                    </tbody>
+                </table>
+            </section>
+            
+            <!-- 7. Related Products -->
+            <section class="prod-section related-section">
+                <h2 class="section-title">You Might Also Like</h2>
+                <div class="related-grid" id="relatedGrid">
+                    <!-- Populated by JS as standard .pb-card -->
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- ─── FOOTER ───────────────────────────────────────── -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <!-- Series strip -->
+            <div class="footer-series">
+                <a href="index.html?series=branded" class="footer-series-tag branded">GBZ Branded PC</a>
+                <a href="../index.html#contact" class="footer-series-tag workstation">Our Stores</a>
+                <a href="index.html?series=creatorx" class="footer-series-tag creator">GBZ CreatorX PC</a>
+                <a href="index.html?series=gaming" class="footer-series-tag gaming">GBZ Gaming PC</a>
+            </div>
+
+            <div class="footer-grid">
+                <!-- Brand -->
+                <div class="footer-brand">
+                    <a href="../index.html" class="footer-logo">
+                        <img src="../assets/images/geekbozlogo.png" alt="GeekBoz logo">
+                        <span class="footer-logo-name">Geek<span>Boz</span></span>
+                    </a>
+                    <p class="footer-tagline">Custom-built PCs, professional service, and hand-picked hardware — all from Kerala's
+                        most trusted PC builders.</p>
+                    <div class="footer-social">
+                        <a href="https://www.instagram.com/geekboz" class="footer-social-btn" aria-label="Instagram" target="_blank" rel="noopener">
+                            <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" /></svg>
+                        </a>
+                        <a href="https://www.youtube.com/c/GeekBoZ" class="footer-social-btn" aria-label="YouTube" target="_blank" rel="noopener">
+                            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" /></svg>
+                        </a>
+                        <a href="https://www.facebook.com/GeekBoZ/" class="footer-social-btn" aria-label="Facebook" target="_blank" rel="noopener">
+                            <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" /></svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Navigation -->
+                <div class="footer-col">
+                    <div class="footer-col-title">Navigation</div>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Prebuilts</a></li>
+                        <li><a href="../custom-build/index.html">Custom Build</a></li>
+                        <li><a href="../about/index.html">About Us</a></li>
+                        <li><a href="../service/index.html">PC Service</a></li>
+                        <li><a href="../index.html#contact">Our Stores</a></li>
+                        <li><a href="../help/index.html">Help &amp; FAQ</a></li>
+                        <li><a href="https://search.google.com/local/reviews?placeid=ChIJZXHsv726BTsRTXOTYqyzbxo" target="_blank" rel="noopener">Reviews</a></li>
+                    </ul>
+                </div>
+
+                <!-- About Us -->
+                <div class="footer-col">
+                    <div class="footer-col-title">About Us</div>
+                    <ul class="footer-links">
+                        <li><a href="../about/index.html#team">GBZ Team</a></li>
+                        <li><a href="../about/index.html#careers">Careers</a></li>
+                        <li><a href="../index.html#contact">Our Stores</a></li>
+                        <li><a href="https://search.google.com/local/reviews?placeid=ChIJZXHsv726BTsRTXOTYqyzbxo" target="_blank" rel="noopener">Testimonials</a></li>
+                    </ul>
+                </div>
+
+                <!-- More Information -->
+                <div class="footer-col">
+                    <div class="footer-col-title">More Information</div>
+                    <ul class="footer-links">
+                        <li><a href="../legal/terms.html">General Terms &amp; Conditions</a></li>
+                        <li><a href="../legal/warranty.html">Warranty Policy</a></li>
+                        <li><a href="../legal/privacy.html">Privacy Policy</a></li>
+                        <li><a href="../legal/refunds.html">Cancellation &amp; Refund</a></li>
+                        <li><a href="../legal/sales-terms.html">Sales Terms &amp; Conditions</a></li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Bottom bar -->
+        <div class="footer-bottom" style="max-width:1280px; margin:0 auto; padding-left:5vw; padding-right:5vw;">
+            <p class="footer-copy">© 2025 <span>GeekBoz</span> Pvt Ltd. All rights reserved.</p>
+            <nav class="footer-legal">
+                <a href="../legal/privacy.html">Privacy</a>
+                <a href="../legal/terms.html">Terms</a>
+                <a href="../legal/warranty.html">Warranty</a>
+                <a href="../legal/refunds.html">Refunds</a>
+            </nav>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <script src="../assets/js/main.js"></script>
+    <script src="product.js"></script>
+</body>
+
+</html>
+
