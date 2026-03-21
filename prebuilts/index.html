@@ -274,13 +274,18 @@
                         <span class="pb-fab-badge" id="fabBadge" style="display:none">0</span>
                     </button>
                     <!-- Desktop sort (quick) -->
-                    <div class="pb-sort-select-wrap">
-                        <i data-lucide="arrow-up-down"></i>
-                        <select id="sortSelect" class="pb-sort-select">
-                            <option value="default">Default</option>
-                            <option value="price-asc">Price: Low → High</option>
-                            <option value="price-desc">Price: High → Low</option>
-                        </select>
+                    <div class="custom-select-wrapper" id="sortWrapper" style="height: 48px;">
+                        <input type="hidden" id="sortSelect" value="default">
+                        <div class="custom-select-icon"><i data-lucide="arrow-up-down"></i></div>
+                        <div class="custom-select-trigger" tabindex="0" id="sortTrigger">
+                            <span class="selected-value has-value">Default</span>
+                            <div class="chevron"></div>
+                        </div>
+                        <ul class="custom-options" id="sortOptions">
+                            <li data-value="default" class="selected">Default</li>
+                            <li data-value="price-asc">Price: Low → High</li>
+                            <li data-value="price-desc">Price: High → Low</li>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -388,7 +393,43 @@
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
     <script src="../assets/js/main.js"></script>
     <script src="prebuilts.js"></script>
-    <script>lucide.createIcons();</script>
+    <script>
+        lucide.createIcons();
+
+        // Custom Sort Dropdown JS
+        const sortWrapper = document.getElementById('sortWrapper');
+        const sortTrigger = document.getElementById('sortTrigger');
+        const sortOptions = document.querySelectorAll('#sortWrapper .custom-options li');
+        const sortHiddenInput = document.getElementById('sortSelect');
+        const sortSelectedValue = sortWrapper.querySelector('.selected-value');
+
+        if (sortWrapper && sortTrigger) {
+            sortTrigger.addEventListener('click', () => {
+                sortWrapper.classList.toggle('open');
+            });
+
+            sortOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    sortOptions.forEach(opt => opt.classList.remove('selected'));
+                    this.classList.add('selected');
+                    
+                    sortSelectedValue.textContent = this.textContent;
+                    sortHiddenInput.value = this.getAttribute('data-value');
+                    
+                    // Trigger change event manually so prebuilts.js catches it
+                    sortHiddenInput.dispatchEvent(new Event('change'));
+                    
+                    sortWrapper.classList.remove('open');
+                });
+            });
+
+            document.addEventListener('click', function(e) {
+                if (!sortWrapper.contains(e.target)) {
+                    sortWrapper.classList.remove('open');
+                }
+            });
+        }
+    </script>
 </body>
 
 </html>

@@ -1143,3 +1143,108 @@
         gap: 0.5rem;
     }
 }
+
+/* ─── CUSTOM SELECT DROPDOWN ─────────────────────────────────────── */
+.custom-select-wrapper {
+    position: relative;
+    overflow: visible;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    height: 48px;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    width: auto;
+    min-width: 220px;
+}
+
+.custom-select-wrapper:focus-within {
+    border-color: var(--accent);
+}
+
+.custom-select-icon {
+    width: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-right: 1px solid var(--border);
+    height: 100%;
+}
+
+.custom-select-icon svg {
+    width: 18px;
+    height: 18px;
+    color: var(--accent);
+}
+
+.custom-select-trigger {
+    flex: 1;
+    padding: 0 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    font-size: 0.95rem;
+    user-select: none;
+    height: 100%;
+}
+
+.custom-select-trigger .selected-value {
+    color: var(--text);
+}
+
+.chevron {
+    width: 8px;
+    height: 8px;
+    border-right: 2px solid var(--muted);
+    border-bottom: 2px solid var(--muted);
+    transform: translateY(-2px) rotate(45deg);
+    transition: all 0.3s ease;
+    margin-left: 10px;
+}
+
+.custom-select-wrapper.open .chevron {
+    transform: translateY(2px) rotate(-135deg);
+    color: var(--accent);
+    border-color: var(--accent);
+}
+
+.custom-options {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    width: 100%;
+    background: var(--surface2);
+    border: 1px solid var(--accent);
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+    z-index: 1000;
+    list-style: none;
+    padding: 0.5rem;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+}
+
+.custom-select-wrapper.open .custom-options {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.custom-options li {
+    padding: 0.75rem 1rem;
+    border-radius: 6px;
+    color: var(--muted);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 0.9rem;
+}
+
+.custom-options li:hover,
+.custom-options li.selected {
+    background: rgba(164, 249, 63, 0.1);
+    color: var(--accent);
+}
