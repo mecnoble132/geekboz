@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sales Terms & Conditions — GeekBoz</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=Oxanium:wght@600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="../assets/css/global.css">
+    <link rel="stylesheet" href="../assets/css/animations.css">
+    <link rel="stylesheet" href="../assets/css/components.css">
+
+    <link rel="icon" href="../assets/images/geekbozfavicon.png">
+
+    <style>
+        .legal-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 4rem 5vw;
+            color: var(--muted);
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+
+        .legal-content h2,
+        .legal-content h3 {
+            color: var(--text);
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            font-family: var(--font-heading);
+            font-weight: 600;
+        }
+
+        .legal-content h2 {
+            font-size: 2rem;
+        }
+
+        .legal-content p {
+            margin-bottom: 1.5rem;
+        }
+
+        .legal-content ul,
+        .legal-content ol {
+            margin-bottom: 1.5rem;
+            padding-left: 1.5rem;
+        }
+
+        .legal-content li {
+            margin-bottom: 0.5rem;
+            list-style-position: inside;
+        }
+
+        .legal-placeholder {
+            min-height: 40vh;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ─── NAVBAR ──────────────────────────────────────────── -->
+    <nav class="navbar">
+        <a href="../index.html" class="nav-brand">
+            <div class="nav-logo"><img src="../assets/images/geekbozlogo.png" alt="GeekBoz logo"></div>
+            <span class="nav-name">Geek<span>Boz</span></span>
+        </a>
+
+        <ul class="nav-links">
+            <li><a href="../prebuilts/index.html">Prebuilts</a></li>
+            <li><a href="../custom-build/index.html">Custom Build</a></li>
+            <li><a href="../about/index.html">About Us</a></li>
+            <li><a href="../index.html#contact">Contact</a></li>
+            <li class="more-wrapper">
+                <button class="more-btn" id="moreBtn">
+                    More
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                        <path d="M2 4L6 8L10 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg>
+                </button>
+                <ul class="dropdown" id="dropdown">
+                    <li><a href="../cart/">My Cart</a></li>
+                    <li><a href="../service/index.html">PC Service</a></li>
+                    <li><a href="../index.html#contact">Our Stores</a></li>
+                    <li><a href="../help/index.html">Help &amp; FAQ</a></li>
+                    <li><a href="https://search.google.com/local/reviews?placeid=ChIJZXHsv726BTsRTXOTYqyzbxo" target="_blank" rel="noopener">Reviews</a></li>
+                </ul>
+            </li>
+        </ul>
+
+        <div class="nav-right">
+            <a href="../cart/" class="cart-btn" aria-label="Cart">
+                <i data-lucide="shopping-cart"></i>
+                <span class="cart-badge">0</span>
+            </a>
+            <button class="cta-btn" onclick="location.href='../custom-build/index.html'">Build Custom PC</button>
+            <button class="hamburger" id="hamburger" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile menu -->
+    <nav class="mobile-menu" id="mobileMenu">
+        <span class="mobile-label">Main</span>
+        <a href="../prebuilts/index.html">Prebuilts</a>
+        <a href="../custom-build/index.html">Custom Build</a>
+        <a href="../about/index.html">About Us</a>
+        <a href="../index.html#contact">Contact</a>
+        <span class="mobile-label">More</span>
+        <a href="../cart/">My Cart</a>
+        <a href="../service/index.html">PC Service</a>
+        <a href="../index.html#contact">Our Stores</a>
+        <a href="../help/index.html">Help &amp; FAQ</a>
+        <a href="https://search.google.com/local/reviews?placeid=ChIJZXHsv726BTsRTXOTYqyzbxo" target="_blank" rel="noopener">Reviews</a>
+        <a href="../custom-build/index.html" class="mobile-cta">Build Custom PC</a>
+    </nav>
+
+    <!-- ─── PAGE HEADER ───────────────────────────────────── -->
+    <section class="page-header">
+        <div class="page-header-inner" data-reveal="fade-up">
+            <div class="page-breadcrumb">
+                <a href="../index.html">Home</a>
+                <i data-lucide="chevron-right"></i>
+                <span>Legal</span>
+                <i data-lucide="chevron-right"></i>
+                <span>Sales Terms & Conditions</span>
+            </div>
+            <h1 class="page-title">Sales <span>Terms <span>& <span>Conditions</span></h1>
+            <p class="page-subtitle">The agreement governing your purchase from GeekBoz.</p>
+        </div>
+    </section>
+
+    <!-- ─── LEGAL CONTENT ────────────────────────────────────── -->
+    <section class="legal-content">
+        <div class="legal-text" data-reveal="fade-up">
+            <h3>General Scope</h3>
+            <p>It is hereby informed that "geekboz.com" or its parent concern "GeekBoZ, The Tech Store" is a marketing and distribution company and is not a manufacturer.</p>
+            <p>Materials sold are spares and components of computers and do not form the complete system in full. Above goods are only in the form of components / sub-assemblies and not a “New PC” unless it is specified as a “GBZ Certified Rig”.</p>
+            <p>No Customer can waive responsibility on grounds of ignorance of terms & conditions.</p>
+            
+            <h3>Invoices & Certificates</h3>
+            <p>I/We hereby certify that my/our registration certificate under the TNGST Act 1959 is in force on the date on which the sale of the goods specified in this Bill / Cash Memo / Invoice has been affected by me / us in the regular course of my/our business.</p>
+            <p>We provide a proper GST invoice against all the products which we sell; we do not sell a product without a GST invoice. If you need your company’s GST No. on the invoice then kindly mention the same in the comment box which you can find while ordering, also you will need to provide the 3 pages of the GST certificate of your company for a GST invoice.</p>
+
+            <h3>Purchase & Delivery</h3>
+            <p>Goods once sold will not be taken back or exchanged. Once an invoice is made, it cannot be modified or cancelled for any reasons thereof.</p>
+            <p>The item is tested for physical damage at the point of sale and the company is not liable for the physical damage of the item anymore. It is also the duty of the buyer to immediately check at the counter the physical condition of the purchased goods. All goods are consigned at buyer’s risk and the company is not responsible for any loss, damage or pilferage in transit.</p>
+            <p>Our responsibility ceases the moment goods leave our warehouse.</p>
+            
+            <h3>Cancellations & Refunds</h3>
+            <p>If the order is cancelled by the buyer then both-side shipping charges (if the product is already shipped) and the 2% payment gateway charges (if applicable) will be deducted from the order amount. If the buyer opts for a refund then it will be initiated once we receive the product in the same condition as we have shipped.</p>
+            <p>For gaming chairs only replacement is applicable, no refunds will be permitted for gaming chairs.</p>
+
+            <h3>Warranty & Damage Constraints</h3>
+            <p>Any products purchased from us for any special usage in an abnormal environment i.e. other than normal usage should be informed to us at the time of purchase otherwise the warranty is void and null.</p>
+            <p>For “Dead on Arrival” products, the buyer needs to make sure that all the parts and accessories of the product are present in the box which comes with it, failure will result in non-acceptance as a DOA case and will be treated as RMA.</p>
+            <p>Physical damage / mishandling of products / tampering of warranty stickers – do not cover warranty. All products sold by us require a technically qualified PC Hardware engineer for installation.</p>
+
+            <h3>Jurisdiction</h3>
+            <p>The court at KERALA shall have exclusive jurisdiction for deciding any disputes arising out of this sale contract.</p>
+        </div>
+    </section>
+
+    <!-- ─── FOOTER ───────────────────────────────────────── -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <div class="footer-series">
+                <a href="../prebuilts/index.html?series=branded" class="footer-series-tag branded">GBZ Branded PC</a>
+                <a href="../index.html#contact" class="footer-series-tag workstation">Our Stores</a>
+                <a href="../prebuilts/index.html?series=creatorx" class="footer-series-tag creator">GBZ CreatorX PC</a>
+                <a href="../prebuilts/index.html?series=gaming" class="footer-series-tag gaming">GBZ Gaming PC</a>
+            </div>
+
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="../index.html" class="footer-logo">
+                        <img src="../assets/images/geekbozlogo.png" alt="GeekBoz logo">
+                        <span class="footer-logo-name">Geek<span>Boz</span></span>
+                    </a>
+                    <p class="footer-tagline">Custom-built PCs, professional service, and hand-picked hardware — all from Kerala's
+                        most trusted PC builders.</p>
+                </div>
+
+                <div class="footer-col">
+                    <div class="footer-col-title">Navigation</div>
+                    <ul class="footer-links">
+                        <li><a href="../prebuilts/index.html">Prebuilts</a></li>
+                        <li><a href="../custom-build/index.html">Custom Build</a></li>
+                        <li><a href="../about/index.html">About Us</a></li>
+                        <li><a href="../service/index.html">PC Service</a></li>
+                        <li><a href="../index.html#contact">Our Stores</a></li>
+                        <li><a href="../help/index.html">Help &amp; FAQ</a></li>
+                        <li><a href="../reviews/index.html">Reviews</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <div class="footer-col-title">About Us</div>
+                    <ul class="footer-links">
+                        <li><a href="../about/index.html#team">GBZ Team</a></li>
+                        <li><a href="../about/index.html#careers">Careers</a></li>
+                        <li><a href="../index.html#contact">Our Stores</a></li>
+                        <li><a href="https://search.google.com/local/reviews?placeid=ChIJZXHsv726BTsRTXOTYqyzbxo" target="_blank" rel="noopener">Testimonials</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <div class="footer-col-title">More Information</div>
+                    <ul class="footer-links">
+                        <li><a href="terms.html">General Terms &amp; Conditions</a></li>
+                        <li><a href="warranty.html">Warranty Policy</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="refunds.html">Cancellation &amp; Refund</a></li>
+                        <li><a href="sales-terms.html">Sales Terms &amp; Conditions</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom" style="max-width:1280px; margin:0 auto; padding-left:5vw; padding-right:5vw;">
+            <p class="footer-copy">© 2025 <span>GeekBoz</span> Pvt Ltd. All rights reserved.</p>
+            <nav class="footer-legal">
+                <a href="privacy.html">Privacy</a>
+                <a href="terms.html">Terms</a>
+                <a href="warranty.html">Warranty</a>
+                <a href="refunds.html">Refunds</a>
+            </nav>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <script src="../assets/js/main.js"></script>
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>

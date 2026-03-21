@@ -1,611 +1,265 @@
 [
     {
-        "id": "gbz-phantom-x",
-        "name": "GBZ Phantom X",
+        "id": "gbz-x1-air",
+        "name": "GBZ X1 AiR",
         "series": "gaming",
         "tag": "Gaming",
-        "price": 189999,
+        "price": 45399,
         "image": "../assets/images/prebuiltph3.webp",
-        "badge": "Best Seller",
-        "cpu": "Intel Core i9-14900K",
-        "gpu": "NVIDIA RTX 4090 24GB",
-        "ram": "32GB DDR5 6000MHz",
-        "storage": "2TB NVMe SSD",
-        "description": "Our flagship gaming rig built for enthusiasts who refuse to compromise on frames.",
+        "badge": "Entry",
+        "cpu": "Intel Core i3 / AMD Ryzen 5",
+        "gpu": "NVIDIA GTX 1650 / AMD RX 6500 XT",
+        "ram": "16GB DDR4 3200MHz",
+        "storage": "500GB NVMe M.2 SSD",
+        "description": "An excellent entry into PC gaming that balances cost and performance effectively.",
         "display": "N/A (Desktop)",
-        "cooling": "360mm AIO Liquid Cooler",
-        "weight": "Approx 14.5 kg",
+        "cooling": "Standard Air Cooler",
+        "weight": "Approx 10 kg",
         "fps": [
-            {
-                "game": "Cyberpunk 2077",
-                "fps": 144,
-                "settings": "Ultra + RT"
-            },
-            {
-                "game": "Valorant",
-                "fps": 600,
-                "settings": "Competitive"
-            },
-            {
-                "game": "Call of Duty",
-                "fps": 220,
-                "settings": "Extreme"
-            }
+            { "game": "Valorant", "fps": 200, "settings": "Competitive" },
+            { "game": "CS:GO", "fps": 250, "settings": "High" }
         ],
         "highlights": [
-            {
-                "icon": "rocket",
-                "title": "High Performance",
-                "desc": "Built for intensive workloads & gaming."
-            },
-            {
-                "icon": "snowflake",
-                "title": "Efficient Cooling",
-                "desc": "Maintains optimal temps under load."
-            },
-            {
-                "icon": "gamepad-2",
-                "title": "Optimized for Gaming",
-                "desc": "Zero bottlenecks, maximum frames."
-            },
-            {
-                "icon": "zap",
-                "title": "Fast Load Times",
-                "desc": "Equipped with Gen4 NVMe storage."
-            }
+            { "icon": "zap", "title": "Great Value", "desc": "Solid 1080p gaming performance." },
+            { "icon": "snowflake", "title": "Quiet Cooling", "desc": "Stays cool under regular load." },
+            { "icon": "cpu", "title": "Upgradable", "desc": "Ready for future upgrades." },
+            { "icon": "gamepad-2", "title": "Game Ready", "desc": "Perfect for esports." }
         ],
         "details": {
-            "performance": "This system is engineered to handle massive workloads without breaking a sweat. It ensures maximum frame rates and seamless multitasking whether you're gaming in 4K or rendering complex 3D scenes.",
-            "design": "Encased in a premium airflow-optimized chassis. We use high-grade materials and customizable RGB lighting to make sure your setup looks as good as it performs.",
-            "cooling": "Thermals are kept strictly under control with aggressive intake fans and a top-mounted liquid cooler. This prevents thermal throttling even during extended marathon sessions.",
-            "features": "Includes Wi-Fi 6E, Bluetooth 5.3, massive Gen4 NVMe storage, and plenty of high-speed USB ports to connect all your peripherals and VR headsets seamlessly."
+            "performance": "Entry level performance for everyday gaming at 1080p.",
+            "design": "Compact ATX chassis with essential lighting.",
+            "cooling": "Reliable air cooling for sustained usage.",
+            "features": "Wired connectivity with upgrade paths for future components."
         },
         "gallery": [
-            "../assets/images/prebuiltph3.webp",
             "../assets/images/prebuiltph3.webp",
             "../assets/images/prebuiltph3.webp",
             "../assets/images/prebuiltph3.webp"
         ]
     },
     {
-        "id": "gbz-phantom-x-pro",
-        "name": "GBZ Phantom X Pro",
+        "id": "gbz-m3",
+        "name": "GBZ M3",
         "series": "gaming",
         "tag": "Gaming",
-        "price": 239999,
-        "image": "../assets/images/prebuiltph3.webp",
-        "badge": "New",
-        "cpu": "AMD Ryzen 9 9950X",
-        "gpu": "NVIDIA RTX 5090 32GB",
-        "ram": "64GB DDR5 6400MHz",
-        "storage": "4TB NVMe SSD",
-        "description": "The absolute pinnacle. RTX 5090 meets the latest Ryzen 9 in a zero-compromise build.",
-        "display": "N/A (Desktop)",
-        "cooling": "360mm AIO Liquid Cooler",
-        "weight": "Approx 14.5 kg",
-        "fps": [
-            {
-                "game": "Cyberpunk 2077",
-                "fps": 144,
-                "settings": "Ultra + RT"
-            },
-            {
-                "game": "Valorant",
-                "fps": 600,
-                "settings": "Competitive"
-            },
-            {
-                "game": "Call of Duty",
-                "fps": 220,
-                "settings": "Extreme"
-            }
-        ],
-        "highlights": [
-            {
-                "icon": "rocket",
-                "title": "High Performance",
-                "desc": "Built for intensive workloads & gaming."
-            },
-            {
-                "icon": "snowflake",
-                "title": "Efficient Cooling",
-                "desc": "Maintains optimal temps under load."
-            },
-            {
-                "icon": "gamepad-2",
-                "title": "Optimized for Gaming",
-                "desc": "Zero bottlenecks, maximum frames."
-            },
-            {
-                "icon": "zap",
-                "title": "Fast Load Times",
-                "desc": "Equipped with Gen4 NVMe storage."
-            }
-        ],
-        "details": {
-            "performance": "This system is engineered to handle massive workloads without breaking a sweat. It ensures maximum frame rates and seamless multitasking whether you're gaming in 4K or rendering complex 3D scenes.",
-            "design": "Encased in a premium airflow-optimized chassis. We use high-grade materials and customizable RGB lighting to make sure your setup looks as good as it performs.",
-            "cooling": "Thermals are kept strictly under control with aggressive intake fans and a top-mounted liquid cooler. This prevents thermal throttling even during extended marathon sessions.",
-            "features": "Includes Wi-Fi 6E, Bluetooth 5.3, massive Gen4 NVMe storage, and plenty of high-speed USB ports to connect all your peripherals and VR headsets seamlessly."
-        },
-        "gallery": [
-            "../assets/images/prebuiltph3.webp",
-            "../assets/images/prebuiltph3.webp",
-            "../assets/images/prebuiltph3.webp",
-            "../assets/images/prebuiltph3.webp"
-        ]
-    },
-    {
-        "id": "gbz-vortex-s",
-        "name": "GBZ Vortex S",
-        "series": "gaming",
-        "tag": "Gaming",
-        "price": 129999,
-        "image": "../assets/images/prebuiltph3.webp",
-        "badge": null,
-        "cpu": "AMD Ryzen 7 9700X",
-        "gpu": "NVIDIA RTX 4080 Super 16GB",
-        "ram": "32GB DDR5 5600MHz",
-        "storage": "1TB NVMe SSD",
-        "description": "Triple-digit framerates in every title. Built to dominate without breaking the bank.",
-        "display": "N/A (Desktop)",
-        "cooling": "240mm AIO / Air Cooler",
-        "weight": "Approx 14.5 kg",
-        "fps": [
-            {
-                "game": "Cyberpunk 2077",
-                "fps": 95,
-                "settings": "Ultra + RT"
-            },
-            {
-                "game": "Valorant",
-                "fps": 400,
-                "settings": "Competitive"
-            },
-            {
-                "game": "Call of Duty",
-                "fps": 140,
-                "settings": "Extreme"
-            }
-        ],
-        "highlights": [
-            {
-                "icon": "rocket",
-                "title": "High Performance",
-                "desc": "Built for intensive workloads & gaming."
-            },
-            {
-                "icon": "snowflake",
-                "title": "Efficient Cooling",
-                "desc": "Maintains optimal temps under load."
-            },
-            {
-                "icon": "gamepad-2",
-                "title": "Optimized for Gaming",
-                "desc": "Zero bottlenecks, maximum frames."
-            },
-            {
-                "icon": "zap",
-                "title": "Fast Load Times",
-                "desc": "Equipped with Gen4 NVMe storage."
-            }
-        ],
-        "details": {
-            "performance": "This system is engineered to handle massive workloads without breaking a sweat. It ensures maximum frame rates and seamless multitasking whether you're gaming in 4K or rendering complex 3D scenes.",
-            "design": "Encased in a premium airflow-optimized chassis. We use high-grade materials and customizable RGB lighting to make sure your setup looks as good as it performs.",
-            "cooling": "Thermals are kept strictly under control with aggressive intake fans and a top-mounted liquid cooler. This prevents thermal throttling even during extended marathon sessions.",
-            "features": "Includes Wi-Fi 6E, Bluetooth 5.3, massive Gen4 NVMe storage, and plenty of high-speed USB ports to connect all your peripherals and VR headsets seamlessly."
-        },
-        "gallery": [
-            "../assets/images/prebuiltph3.webp",
-            "../assets/images/prebuiltph3.webp",
-            "../assets/images/prebuiltph3.webp",
-            "../assets/images/prebuiltph3.webp"
-        ]
-    },
-    {
-        "id": "gbz-vortex-e",
-        "name": "GBZ Vortex E",
-        "series": "gaming",
-        "tag": "Gaming",
-        "price": 84999,
+        "price": 72499,
         "image": "../assets/images/prebuiltph3.webp",
         "badge": "Value Pick",
-        "cpu": "AMD Ryzen 5 7600X",
-        "gpu": "NVIDIA RTX 4070 12GB",
+        "cpu": "Intel Core i5 / AMD Ryzen 5",
+        "gpu": "NVIDIA RTX 4060 / AMD RX 7600",
         "ram": "16GB DDR5 5200MHz",
-        "storage": "1TB NVMe SSD",
-        "description": "The smart entry into PC gaming. Punches way above its weight class.",
+        "storage": "1TB NVMe M.2 SSD",
+        "description": "High performance mid-tier gaming powerhouse that delivers excellent framerates.",
         "display": "N/A (Desktop)",
-        "cooling": "240mm AIO / Air Cooler",
-        "weight": "Approx 14.5 kg",
+        "cooling": "120mm AIO / Tower Air Cooler",
+        "weight": "Approx 12 kg",
         "fps": [
-            {
-                "game": "Cyberpunk 2077",
-                "fps": 60,
-                "settings": "Ultra + RT"
-            },
-            {
-                "game": "Valorant",
-                "fps": 400,
-                "settings": "Competitive"
-            },
-            {
-                "game": "Call of Duty",
-                "fps": 140,
-                "settings": "Extreme"
-            }
+            { "game": "Cyberpunk 2077", "fps": 70, "settings": "High 1080p" },
+            { "game": "Call of Duty", "fps": 120, "settings": "High 1440p" }
         ],
         "highlights": [
-            {
-                "icon": "rocket",
-                "title": "High Performance",
-                "desc": "Built for intensive workloads & gaming."
-            },
-            {
-                "icon": "snowflake",
-                "title": "Efficient Cooling",
-                "desc": "Maintains optimal temps under load."
-            },
-            {
-                "icon": "gamepad-2",
-                "title": "Optimized for Gaming",
-                "desc": "Zero bottlenecks, maximum frames."
-            },
-            {
-                "icon": "zap",
-                "title": "Fast Load Times",
-                "desc": "Equipped with Gen4 NVMe storage."
-            }
+            { "icon": "rocket", "title": "Fast Performance", "desc": "Handles 1440p gaming effortlessly." },
+            { "icon": "snowflake", "title": "Advanced Thermals", "desc": "Tower cooler for better temps." },
+            { "icon": "zap", "title": "Rapid Storage", "desc": "1TB Gen4 NVMe speeds." },
+            { "icon": "gamepad-2", "title": "Modern Gaming", "desc": "Built for current-gen titles." }
         ],
         "details": {
-            "performance": "This system is engineered to handle massive workloads without breaking a sweat. It ensures maximum frame rates and seamless multitasking whether you're gaming in 4K or rendering complex 3D scenes.",
-            "design": "Encased in a premium airflow-optimized chassis. We use high-grade materials and customizable RGB lighting to make sure your setup looks as good as it performs.",
-            "cooling": "Thermals are kept strictly under control with aggressive intake fans and a top-mounted liquid cooler. This prevents thermal throttling even during extended marathon sessions.",
-            "features": "Includes Wi-Fi 6E, Bluetooth 5.3, massive Gen4 NVMe storage, and plenty of high-speed USB ports to connect all your peripherals and VR headsets seamlessly."
+            "performance": "Solid 1440p performance in modern titles without breaking the bank.",
+            "design": "Clean aesthetic with moderate RGB configurations.",
+            "cooling": "Advanced thermals to keep components cool under heavy usage.",
+            "features": "High-fidelity audio jacks and improved VRM cooling."
         },
         "gallery": [
-            "../assets/images/prebuiltph3.webp",
             "../assets/images/prebuiltph3.webp",
             "../assets/images/prebuiltph3.webp",
             "../assets/images/prebuiltph3.webp"
         ]
     },
     {
-        "id": "gbz-nova-pro",
-        "name": "GBZ Nova Pro",
-        "series": "creatorx",
-        "tag": "CreatorX",
-        "price": 174999,
+        "id": "gbz-m5",
+        "name": "GBZ M5",
+        "series": "gaming",
+        "tag": "Gaming",
+        "price": 98599,
         "image": "../assets/images/prebuiltph3.webp",
-        "badge": null,
-        "cpu": "Intel Core i9-14900K",
-        "gpu": "NVIDIA RTX 4080 16GB",
-        "ram": "64GB DDR5 5600MHz",
-        "storage": "2TB NVMe SSD + 4TB HDD",
-        "description": "Built for video editors and motion designers who need smooth playback and fast renders.",
-        "display": "N/A (Desktop)",
-        "cooling": "360mm AIO Liquid Cooler",
-        "weight": "Approx 14.5 kg",
-        "fps": [
-            {
-                "game": "Cyberpunk 2077",
-                "fps": 95,
-                "settings": "Ultra + RT"
-            },
-            {
-                "game": "Valorant",
-                "fps": 400,
-                "settings": "Competitive"
-            },
-            {
-                "game": "Call of Duty",
-                "fps": 140,
-                "settings": "Extreme"
-            }
-        ],
-        "highlights": [
-            {
-                "icon": "rocket",
-                "title": "High Performance",
-                "desc": "Built for intensive workloads & gaming."
-            },
-            {
-                "icon": "snowflake",
-                "title": "Efficient Cooling",
-                "desc": "Maintains optimal temps under load."
-            },
-            {
-                "icon": "gamepad-2",
-                "title": "Optimized for Gaming",
-                "desc": "Zero bottlenecks, maximum frames."
-            },
-            {
-                "icon": "zap",
-                "title": "Fast Load Times",
-                "desc": "Equipped with Gen4 NVMe storage."
-            }
-        ],
-        "details": {
-            "performance": "This system is engineered to handle massive workloads without breaking a sweat. It ensures maximum frame rates and seamless multitasking whether you're gaming in 4K or rendering complex 3D scenes.",
-            "design": "Encased in a premium airflow-optimized chassis. We use high-grade materials and customizable RGB lighting to make sure your setup looks as good as it performs.",
-            "cooling": "Thermals are kept strictly under control with aggressive intake fans and a top-mounted liquid cooler. This prevents thermal throttling even during extended marathon sessions.",
-            "features": "Includes Wi-Fi 6E, Bluetooth 5.3, massive Gen4 NVMe storage, and plenty of high-speed USB ports to connect all your peripherals and VR headsets seamlessly."
-        },
-        "gallery": [
-            "../assets/images/prebuiltph3.webp",
-            "../assets/images/prebuiltph3.webp",
-            "../assets/images/prebuiltph3.webp",
-            "../assets/images/prebuiltph3.webp"
-        ]
-    },
-    {
-        "id": "gbz-nova-compact",
-        "name": "GBZ Nova Compact",
-        "series": "creatorx",
-        "tag": "CreatorX",
-        "price": 114999,
-        "image": "../assets/images/prebuiltph3.webp",
-        "badge": "Compact",
-        "cpu": "AMD Ryzen 7 9700X",
-        "gpu": "AMD RX 9070 XT 16GB",
+        "badge": "Best Seller",
+        "cpu": "Intel Core i7 / AMD Ryzen 7",
+        "gpu": "NVIDIA RTX 4070 / AMD RX 7800 XT",
         "ram": "32GB DDR5 6000MHz",
-        "storage": "2TB NVMe SSD",
-        "description": "Mighty ITX form factor for creators who need power in tight spaces.",
+        "storage": "1TB Gen4 NVMe M.2 SSD",
+        "description": "A high-end rig designed purely for pushing maximum frames in your favorite games.",
         "display": "N/A (Desktop)",
-        "cooling": "240mm AIO / Air Cooler",
-        "weight": "Approx 14.5 kg",
+        "cooling": "240mm AIO Liquid Cooler",
+        "weight": "Approx 13 kg",
         "fps": [
-            {
-                "game": "Cyberpunk 2077",
-                "fps": 95,
-                "settings": "Ultra + RT"
-            },
-            {
-                "game": "Valorant",
-                "fps": 400,
-                "settings": "Competitive"
-            },
-            {
-                "game": "Call of Duty",
-                "fps": 140,
-                "settings": "Extreme"
-            }
+            { "game": "Cyberpunk 2077", "fps": 90, "settings": "Ultra 1440p" },
+            { "game": "Valorant", "fps": 400, "settings": "Competitive" }
         ],
         "highlights": [
-            {
-                "icon": "rocket",
-                "title": "High Performance",
-                "desc": "Built for intensive workloads & gaming."
-            },
-            {
-                "icon": "snowflake",
-                "title": "Efficient Cooling",
-                "desc": "Maintains optimal temps under load."
-            },
-            {
-                "icon": "gamepad-2",
-                "title": "Optimized for Gaming",
-                "desc": "Zero bottlenecks, maximum frames."
-            },
-            {
-                "icon": "zap",
-                "title": "Fast Load Times",
-                "desc": "Equipped with Gen4 NVMe storage."
-            }
+            { "icon": "rocket", "title": "Top Tier", "desc": "Premium graphics and processor sync." },
+            { "icon": "snowflake", "title": "Liquid Cooled", "desc": "240mm AIO for silent operation." },
+            { "icon": "cpu", "title": "Multitasking", "desc": "32GB RAM for streaming while playing." },
+            { "icon": "gamepad-2", "title": "4K Capable", "desc": "Push pixels in high resolution." }
         ],
         "details": {
-            "performance": "This system is engineered to handle massive workloads without breaking a sweat. It ensures maximum frame rates and seamless multitasking whether you're gaming in 4K or rendering complex 3D scenes.",
-            "design": "Encased in a premium airflow-optimized chassis. We use high-grade materials and customizable RGB lighting to make sure your setup looks as good as it performs.",
-            "cooling": "Thermals are kept strictly under control with aggressive intake fans and a top-mounted liquid cooler. This prevents thermal throttling even during extended marathon sessions.",
-            "features": "Includes Wi-Fi 6E, Bluetooth 5.3, massive Gen4 NVMe storage, and plenty of high-speed USB ports to connect all your peripherals and VR headsets seamlessly."
+            "performance": "Enthusiast-level framerates even on the newest demanding releases.",
+            "design": "Tempered glass panels showcasing premium internal components.",
+            "cooling": "Dual-fan AIO setups for near-silent operation under pressure.",
+            "features": "Wi-Fi 6 readiness and vast USB I/O selection."
         },
         "gallery": [
-            "../assets/images/prebuiltph3.webp",
             "../assets/images/prebuiltph3.webp",
             "../assets/images/prebuiltph3.webp",
             "../assets/images/prebuiltph3.webp"
         ]
     },
     {
-        "id": "gbz-eclipse-c",
-        "name": "GBZ Eclipse C",
+        "id": "gbz-z1",
+        "name": "GBZ Z1",
         "series": "creatorx",
         "tag": "CreatorX",
-        "price": 219999,
+        "price": 107999,
         "image": "../assets/images/prebuiltph3.webp",
         "badge": null,
-        "cpu": "AMD Ryzen 9 9950X",
-        "gpu": "NVIDIA RTX 4090 24GB",
-        "ram": "128GB DDR5 5600MHz",
-        "storage": "4TB NVMe SSD",
-        "description": "3D rendering, VFX, and simulation at speeds that change your entire workflow.",
+        "cpu": "Intel Core i7 / AMD Ryzen 9",
+        "gpu": "NVIDIA RTX 4070 Super",
+        "ram": "32GB DDR5 6000MHz",
+        "storage": "2TB Gen4 NVMe M.2 SSD",
+        "description": "Built for creative professionals tackling demanding photo and video projects.",
         "display": "N/A (Desktop)",
-        "cooling": "360mm AIO Liquid Cooler",
-        "weight": "Approx 14.5 kg",
+        "cooling": "280mm AIO Liquid Cooler",
+        "weight": "Approx 13 kg",
         "fps": [
-            {
-                "game": "Cyberpunk 2077",
-                "fps": 144,
-                "settings": "Ultra + RT"
-            },
-            {
-                "game": "Valorant",
-                "fps": 600,
-                "settings": "Competitive"
-            },
-            {
-                "game": "Call of Duty",
-                "fps": 220,
-                "settings": "Extreme"
-            }
+            { "game": "Blender Render", "fps": 120, "settings": "Samples/min" },
+            { "game": "Premiere Pro", "fps": 60, "settings": "4K Playback" }
         ],
         "highlights": [
-            {
-                "icon": "rocket",
-                "title": "High Performance",
-                "desc": "Built for intensive workloads & gaming."
-            },
-            {
-                "icon": "snowflake",
-                "title": "Efficient Cooling",
-                "desc": "Maintains optimal temps under load."
-            },
-            {
-                "icon": "gamepad-2",
-                "title": "Optimized for Gaming",
-                "desc": "Zero bottlenecks, maximum frames."
-            },
-            {
-                "icon": "zap",
-                "title": "Fast Load Times",
-                "desc": "Equipped with Gen4 NVMe storage."
-            }
+            { "icon": "cpu", "title": "Productivity", "desc": "Fast rendering and real-time playback." },
+            { "icon": "zap", "title": "Massive Storage", "desc": "2TB NVMe for scratch disks." },
+            { "icon": "snowflake", "title": "Reliable Cooling", "desc": "280mm liquid cooling." },
+            { "icon": "monitor", "title": "Multi-Monitor", "desc": "Support for up to 4 displays." }
         ],
         "details": {
-            "performance": "This system is engineered to handle massive workloads without breaking a sweat. It ensures maximum frame rates and seamless multitasking whether you're gaming in 4K or rendering complex 3D scenes.",
-            "design": "Encased in a premium airflow-optimized chassis. We use high-grade materials and customizable RGB lighting to make sure your setup looks as good as it performs.",
-            "cooling": "Thermals are kept strictly under control with aggressive intake fans and a top-mounted liquid cooler. This prevents thermal throttling even during extended marathon sessions.",
-            "features": "Includes Wi-Fi 6E, Bluetooth 5.3, massive Gen4 NVMe storage, and plenty of high-speed USB ports to connect all your peripherals and VR headsets seamlessly."
+            "performance": "Designed with a strong multi-core capability to handle creative software suites.",
+            "design": "Professional chassis prioritizing function and minimalism.",
+            "cooling": "Optimized airflow focused on hard drive and CPU temperatures.",
+            "features": "Excellent connectivity for creative peripherals and external drives."
         },
         "gallery": [
-            "../assets/images/prebuiltph3.webp",
             "../assets/images/prebuiltph3.webp",
             "../assets/images/prebuiltph3.webp",
             "../assets/images/prebuiltph3.webp"
         ]
     },
     {
-        "id": "gbz-titan-w1",
-        "name": "GBZ Titan W1",
-        "series": "workstation",
-        "tag": "Workstation AI",
-        "price": 349999,
+        "id": "gbz-z3",
+        "name": "GBZ Z3",
+        "series": "creatorx",
+        "tag": "CreatorX",
+        "price": 143969,
         "image": "../assets/images/prebuiltph3.webp",
         "badge": "Pro",
-        "cpu": "AMD Threadripper 7970X",
-        "gpu": "NVIDIA RTX 6000 Ada 48GB",
-        "ram": "128GB ECC DDR5",
-        "storage": "8TB NVMe RAID",
-        "description": "Enterprise-grade AI training and simulation. The machine that professionals demand.",
+        "cpu": "Intel Core i9 / AMD Ryzen 9",
+        "gpu": "NVIDIA RTX 4080",
+        "ram": "64GB DDR5 6000MHz",
+        "storage": "2TB NVMe SSD + 2TB HDD",
+        "description": "Serious rendering capabilities for 3D modeling, high-res editing, and simulation.",
         "display": "N/A (Desktop)",
         "cooling": "360mm AIO Liquid Cooler",
-        "weight": "Approx 14.5 kg",
+        "weight": "Approx 14 kg",
         "fps": [
-            {
-                "game": "Cyberpunk 2077",
-                "fps": 144,
-                "settings": "Ultra + RT"
-            },
-            {
-                "game": "Valorant",
-                "fps": 600,
-                "settings": "Competitive"
-            },
-            {
-                "game": "Call of Duty",
-                "fps": 220,
-                "settings": "Extreme"
-            }
+            { "game": "Unreal Engine", "fps": 140, "settings": "Viewport FPS" },
+            { "game": "After Effects", "fps": 60, "settings": "Real-time preview" }
         ],
         "highlights": [
-            {
-                "icon": "rocket",
-                "title": "High Performance",
-                "desc": "Built for intensive workloads & gaming."
-            },
-            {
-                "icon": "snowflake",
-                "title": "Efficient Cooling",
-                "desc": "Maintains optimal temps under load."
-            },
-            {
-                "icon": "gamepad-2",
-                "title": "Optimized for Gaming",
-                "desc": "Zero bottlenecks, maximum frames."
-            },
-            {
-                "icon": "zap",
-                "title": "Fast Load Times",
-                "desc": "Equipped with Gen4 NVMe storage."
-            }
+            { "icon": "zap", "title": "Lightning Fast", "desc": "Unmatched speed in compile times." },
+            { "icon": "cpu", "title": "Massive Memory", "desc": "64GB RAM for huge timelines." },
+            { "icon": "snowflake", "title": "360mm AIO", "desc": "Keeps the flagship CPU icy cool." },
+            { "icon": "rocket", "title": "Dual Storage", "desc": "SSD speed paired with HDD bulk." }
         ],
         "details": {
-            "performance": "This system is engineered to handle massive workloads without breaking a sweat. It ensures maximum frame rates and seamless multitasking whether you're gaming in 4K or rendering complex 3D scenes.",
-            "design": "Encased in a premium airflow-optimized chassis. We use high-grade materials and customizable RGB lighting to make sure your setup looks as good as it performs.",
-            "cooling": "Thermals are kept strictly under control with aggressive intake fans and a top-mounted liquid cooler. This prevents thermal throttling even during extended marathon sessions.",
-            "features": "Includes Wi-Fi 6E, Bluetooth 5.3, massive Gen4 NVMe storage, and plenty of high-speed USB ports to connect all your peripherals and VR headsets seamlessly."
+            "performance": "Provides top-of-the-line performance required for commercial level rendering.",
+            "design": "Stunning aesthetics with comprehensive cable management.",
+            "cooling": "Massive radiator setup to quickly exhaust heavy workload heat.",
+            "features": "Expansion slots aplenty and cutting-edge networking hardware."
         },
         "gallery": [
-            "../assets/images/prebuiltph3.webp",
             "../assets/images/prebuiltph3.webp",
             "../assets/images/prebuiltph3.webp",
             "../assets/images/prebuiltph3.webp"
         ]
     },
     {
-        "id": "gbz-titan-w2",
-        "name": "GBZ Titan W2",
-        "series": "workstation",
-        "tag": "Workstation AI",
-        "price": 449999,
+        "id": "gbz-z5",
+        "name": "GBZ Z5",
+        "series": "creatorx",
+        "tag": "CreatorX",
+        "price": 148999,
         "image": "../assets/images/prebuiltph3.webp",
-        "badge": "Flagship",
-        "cpu": "AMD Threadripper Pro 7985WX",
-        "gpu": "Dual NVIDIA RTX 6000 Ada",
-        "ram": "256GB ECC DDR5",
-        "storage": "16TB NVMe RAID",
-        "description": "Dual-GPU powerhouse. When a single GPU simply isn't enough.",
+        "badge": "Studio",
+        "cpu": "Intel Core i9-14900K / AMD Ryzen 9 7950X",
+        "gpu": "NVIDIA RTX 4080 Super",
+        "ram": "64GB DDR5 6400MHz",
+        "storage": "4TB NVMe SSD",
+        "description": "High-tier creator machine perfectly tuned for motion designers and seasoned editors.",
         "display": "N/A (Desktop)",
         "cooling": "360mm AIO Liquid Cooler",
         "weight": "Approx 14.5 kg",
         "fps": [
-            {
-                "game": "Cyberpunk 2077",
-                "fps": 144,
-                "settings": "Ultra + RT"
-            },
-            {
-                "game": "Valorant",
-                "fps": 600,
-                "settings": "Competitive"
-            },
-            {
-                "game": "Call of Duty",
-                "fps": 220,
-                "settings": "Extreme"
-            }
+            { "game": "DaVinci Resolve", "fps": 60, "settings": "8K Playback" },
+            { "game": "AutoCAD", "fps": 160, "settings": "Viewport" }
         ],
         "highlights": [
-            {
-                "icon": "rocket",
-                "title": "High Performance",
-                "desc": "Built for intensive workloads & gaming."
-            },
-            {
-                "icon": "snowflake",
-                "title": "Efficient Cooling",
-                "desc": "Maintains optimal temps under load."
-            },
-            {
-                "icon": "gamepad-2",
-                "title": "Optimized for Gaming",
-                "desc": "Zero bottlenecks, maximum frames."
-            },
-            {
-                "icon": "zap",
-                "title": "Fast Load Times",
-                "desc": "Equipped with Gen4 NVMe storage."
-            }
+            { "icon": "cpu", "title": "Heavy-duty", "desc": "Multi-VFX processing made simple." },
+            { "icon": "zap", "title": "Ultra Space", "desc": "4TB of ultra-fast Gen4 storage." },
+            { "icon": "snowflake", "title": "Acoustic Dampening", "desc": "Silent operation chassis." },
+            { "icon": "monitor", "title": "AI Ready", "desc": "Tensor cores for AI upscaling." }
         ],
         "details": {
-            "performance": "This system is engineered to handle massive workloads without breaking a sweat. It ensures maximum frame rates and seamless multitasking whether you're gaming in 4K or rendering complex 3D scenes.",
-            "design": "Encased in a premium airflow-optimized chassis. We use high-grade materials and customizable RGB lighting to make sure your setup looks as good as it performs.",
-            "cooling": "Thermals are kept strictly under control with aggressive intake fans and a top-mounted liquid cooler. This prevents thermal throttling even during extended marathon sessions.",
-            "features": "Includes Wi-Fi 6E, Bluetooth 5.3, massive Gen4 NVMe storage, and plenty of high-speed USB ports to connect all your peripherals and VR headsets seamlessly."
+            "performance": "Extreme multi-threading capabilities handling multiple 4K/8K playbacks.",
+            "design": "Sleek and professional tower format with acoustic dampening.",
+            "cooling": "Top to bottom active cooling ensuring stability through hours of export.",
+            "features": "Premium components designed for immense longevity."
         },
         "gallery": [
             "../assets/images/prebuiltph3.webp",
+            "../assets/images/prebuiltph3.webp",
+            "../assets/images/prebuiltph3.webp"
+        ]
+    },
+    {
+        "id": "gbz-z7",
+        "name": "GBZ Z7",
+        "series": "workstation",
+        "tag": "Workstation AI",
+        "price": 199999,
+        "image": "../assets/images/prebuiltph3.webp",
+        "badge": "Flagship",
+        "cpu": "AMD Ryzen 9 9950X / Intel Core Ultra 9",
+        "gpu": "NVIDIA RTX 4090 24GB",
+        "ram": "128GB DDR5 6000MHz",
+        "storage": "8TB NVMe SSD",
+        "description": "Absolute flagship workstation geared towards AI, complex scientific simulations, and top-tier VFX.",
+        "display": "N/A (Desktop)",
+        "cooling": "Custom Loop / 420mm AIO",
+        "weight": "Approx 16 kg",
+        "fps": [
+            { "game": "AI Training", "fps": 1000, "settings": "Images/sec" },
+            { "game": "V-Ray", "fps": 300, "settings": "Render speed" }
+        ],
+        "highlights": [
+            { "icon": "rocket", "title": "No Compromises", "desc": "The ultimate specification for AI." },
+            { "icon": "cpu", "title": "Massive RAM", "desc": "128GB memory for huge datasets." },
+            { "icon": "zap", "title": "Unrivaled GPU", "desc": "24GB VRAM for deep learning." },
+            { "icon": "snowflake", "title": "Maximum Airflow", "desc": "Maintains clocks indefinitely." }
+        ],
+        "details": {
+            "performance": "Mind-bending performance for machine learning datasets and dense scene renders.",
+            "design": "A massive engineering feat wrapped in a professional-grade chassis.",
+            "cooling": "Customized cooling solutions designed for completely unrestrained thermal envelopes.",
+            "features": "Limitless connectivity, professional GPU support, and vast storage expandability."
+        },
+        "gallery": [
             "../assets/images/prebuiltph3.webp",
             "../assets/images/prebuiltph3.webp",
             "../assets/images/prebuiltph3.webp"
