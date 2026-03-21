@@ -80,6 +80,8 @@
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem;
+    justify-content: center;
+    margin-top: 2rem;
 }
 
 .pb-series-pill {
@@ -1132,6 +1134,13 @@
 
     .pb-card-body {
         padding: 0.7rem 0.8rem 0.8rem;
+    }
+
+    .pb-series-tag {
+        font-size: 0.48rem;
+        padding: 0.15rem 0.45rem;
+        top: 0.4rem;
+        left: 0.4rem;
     }
 }
 
