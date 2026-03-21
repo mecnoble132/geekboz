@@ -1,7 +1,7 @@
 /* ─── CUSTOM BUILD FORM ─────────────────────────────────── */
 .custom-build-page {
   min-height: 100vh;
-  padding: calc(var(--nav-h) + 3rem) 0 4rem;
+  padding: 2rem 0 4rem;
   background: var(--bg);
   position: relative;
   overflow: hidden;
@@ -13,32 +13,6 @@
   padding: 0 5vw;
   position: relative;
   z-index: 2;
-}
-
-.cb-form-header {
-  text-align: center;
-  margin-bottom: 3.5rem;
-}
-
-.cb-form-title {
-  font-family: 'Oxanium', sans-serif;
-  font-size: clamp(2.5rem, 5vw, 4rem);
-  text-transform: uppercase;
-  color: var(--text);
-  line-height: 1.1;
-  margin-bottom: 0.75rem;
-}
-
-.cb-form-title span {
-  color: var(--accent);
-  display: block;
-}
-
-.cb-form-subtitle {
-  color: var(--muted);
-  font-size: 1.1rem;
-  max-width: 600px;
-  margin: 0 auto;
 }
 
 .cb-split-layout {
@@ -198,9 +172,11 @@ textarea.form-input {
   width: 0;
 }
 
-.usecase-option:hover {
-  border-color: rgba(164, 249, 63, 0.4);
-  background: rgba(164, 249, 63, 0.02);
+@media (hover: hover) {
+  .usecase-option:hover {
+    border-color: rgba(164, 249, 63, 0.4);
+    background: rgba(164, 249, 63, 0.02);
+  }
 }
 
 .usecase-option:has(input:checked) {
@@ -241,9 +217,11 @@ textarea.form-input {
   transition: all 0.2s;
 }
 
-.budget-chip:hover {
-  border-color: var(--accent);
-  color: var(--accent);
+@media (hover: hover) {
+  .budget-chip:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
 }
 
 .budget-chip.active {
@@ -290,9 +268,11 @@ textarea.form-input {
   margin-top: 1rem;
 }
 
-.cb-submit-btn:hover {
-  background: var(--accent-hover);
-  transform: translateY(-2px);
+@media (hover: hover) {
+  .cb-submit-btn:hover {
+    background: var(--accent-hover);
+    transform: translateY(-2px);
+  }
 }
 
 .cb-submit-btn i,
