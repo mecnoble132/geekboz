@@ -8,7 +8,9 @@
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=Oxanium:wght@600;700;800&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=Oxanium:wght@600;700;800&display=swap"
+        rel="stylesheet">
 
     <!-- Styles -->
     <link rel="stylesheet" href="../assets/css/global.css">
@@ -37,7 +39,8 @@
                 <button class="more-btn" id="moreBtn">
                     More
                     <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                        <path d="M2 4L6 8L10 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M2 4L6 8L10 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+                            stroke-linejoin="round" />
                     </svg>
                 </button>
                 <ul class="dropdown" id="dropdown">
@@ -45,7 +48,8 @@
                     <li><a href="index.html" class="nav-active">PC Service</a></li>
                     <li><a href="../index.html#contact">Our Stores</a></li>
                     <li><a href="../help/index.html">Help &amp; FAQ</a></li>
-                    <li><a href="https://search.google.com/local/reviews?placeid=ChIJZXHsv726BTsRTXOTYqyzbxo" target="_blank" rel="noopener">Reviews</a></li>
+                    <li><a href="https://search.google.com/local/reviews?placeid=ChIJZXHsv726BTsRTXOTYqyzbxo"
+                            target="_blank" rel="noopener">Reviews</a></li>
                 </ul>
             </li>
         </ul>
@@ -74,7 +78,8 @@
         <a href="index.html" class="active">PC Service</a>
         <a href="../index.html#contact">Our Stores</a>
         <a href="../help/index.html">Help &amp; FAQ</a>
-        <a href="https://search.google.com/local/reviews?placeid=ChIJZXHsv726BTsRTXOTYqyzbxo" target="_blank" rel="noopener">Reviews</a>
+        <a href="https://search.google.com/local/reviews?placeid=ChIJZXHsv726BTsRTXOTYqyzbxo" target="_blank"
+            rel="noopener">Reviews</a>
         <a href="../custom-build/index.html" class="mobile-cta">Build Custom PC</a>
     </nav>
 
@@ -108,7 +113,8 @@
                     <label for="fullName">Full Name</label>
                     <div class="input-wrapper">
                         <div class="input-icon-box"><i data-lucide="user"></i></div>
-                        <input type="text" id="fullName" name="fullName" placeholder="Enter your registered name" required>
+                        <input type="text" id="fullName" name="fullName" placeholder="Enter your registered name"
+                            required>
                     </div>
                 </div>
 
@@ -116,7 +122,8 @@
                     <label for="phone">Phone Number</label>
                     <div class="input-wrapper">
                         <div class="input-icon-box"><i data-lucide="phone"></i></div>
-                        <input type="tel" id="phone" name="phone" placeholder="Enter your registered mobile number" required>
+                        <input type="tel" id="phone" name="phone" placeholder="Enter your registered mobile number"
+                            required>
                     </div>
                 </div>
 
@@ -124,7 +131,8 @@
                     <label for="location">Location</label>
                     <div class="input-wrapper">
                         <div class="input-icon-box"><i data-lucide="map-pin"></i></div>
-                        <input type="text" id="location" name="location" placeholder="City or Delivery PIN code" required>
+                        <input type="text" id="location" name="location" placeholder="City or Delivery PIN code"
+                            required>
                     </div>
                 </div>
 
@@ -144,7 +152,7 @@
                         <input type="hidden" id="addOn" name="addOn" required>
                     </div>
                 </div>
-                
+
                 <div class="form-actions">
                     <button type="submit" class="submit-btn">Request Service<i data-lucide="arrow-right"></i></button>
                     <p class="form-footer-note">Our support team will contact you within 24 hours.</p>
@@ -169,7 +177,8 @@
                         <img src="../assets/images/geekbozlogo.png" alt="GeekBoz logo">
                         <span class="footer-logo-name">Geek<span>Boz</span></span>
                     </a>
-                    <p class="footer-tagline">Custom-built PCs, professional service, and hand-picked hardware — all from Kerala's
+                    <p class="footer-tagline">Custom-built PCs, professional service, and hand-picked hardware — all
+                        from Kerala's
                         most trusted PC builders.</p>
                 </div>
 
@@ -190,9 +199,10 @@
                     <div class="footer-col-title">About Us</div>
                     <ul class="footer-links">
                         <li><a href="../about/index.html#team">GBZ Team</a></li>
-                        <li><a href="../about/index.html#careers">Careers</a></li>
+                        <li><a href="../careers/index.html">Careers</a></li>
                         <li><a href="../index.html#contact">Our Stores</a></li>
-                        <li><a href="https://search.google.com/local/reviews?placeid=ChIJZXHsv726BTsRTXOTYqyzbxo" target="_blank" rel="noopener">Testimonials</a></li>
+                        <li><a href="https://search.google.com/local/reviews?placeid=ChIJZXHsv726BTsRTXOTYqyzbxo"
+                                target="_blank" rel="noopener">Testimonials</a></li>
                     </ul>
                 </div>
 
@@ -237,24 +247,24 @@
         });
 
         options.forEach(option => {
-            option.addEventListener('click', function() {
+            option.addEventListener('click', function () {
                 // Remove selected class from all
                 options.forEach(opt => opt.classList.remove('selected'));
                 // Add selected class to clicked item
                 this.classList.add('selected');
-                
+
                 // Set text and value
                 selectedValue.textContent = this.textContent;
                 selectedValue.classList.add('has-value');
                 hiddenInput.value = this.getAttribute('data-value');
-                
+
                 // Close dropdown
                 addonWrapper.classList.remove('open');
             });
         });
 
         // Close when clicking outside
-        document.addEventListener('click', function(e) {
+        document.addEventListener('click', function (e) {
             if (!addonWrapper.contains(e.target)) {
                 addonWrapper.classList.remove('open');
             }
@@ -262,12 +272,12 @@
 
         // WhatsApp Form Submission Logic
         const serviceForm = document.getElementById('serviceForm');
-        
-        serviceForm.addEventListener('submit', function(e) {
+
+        serviceForm.addEventListener('submit', function (e) {
             e.preventDefault();
-            
+
             // Check if Add-on is selected
-            if(!hiddenInput.value) {
+            if (!hiddenInput.value) {
                 alert("Please select your PC Service Add-on status.");
                 addonWrapper.classList.add('open');
                 trigger.focus();
@@ -278,12 +288,12 @@
             const phone = document.getElementById('phone').value.trim();
             const location = document.getElementById('location').value.trim();
             const addOn = hiddenInput.value;
-            
+
             // Format Add-on text
             let addOnText = "I'm not sure";
-            if(addOn === "yes") addOnText = "Yes, I purchased the Add-on";
-            else if(addOn === "no") addOnText = "No, standard service only";
-            
+            if (addOn === "yes") addOnText = "Yes, I purchased the Add-on";
+            else if (addOn === "no") addOnText = "No, standard service only";
+
             // Build Message
             let message = "Hello GeekBoz Team! 👋\nI would like to request a PC Service. Here are my details:\n\n";
             message += `*Name:* ${name}\n`;
@@ -291,15 +301,16 @@
             message += `*Location:* ${location}\n`;
             message += `*PC Service Add-on:* ${addOnText}\n\n`;
             message += "Please let me know the next steps.";
-            
+
             // Encode for URL
             const encodedMessage = encodeURIComponent(message);
             const waNumber = "917994296603";
             const waURL = `https://wa.me/${waNumber}?text=${encodedMessage}`;
-            
+
             // Trigger redirect
             window.open(waURL, '_blank');
         });
     </script>
 </body>
+
 </html>

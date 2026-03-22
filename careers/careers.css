@@ -1,0 +1,517 @@
+/* ─── CAREERS PAGE STYLES ────────────────────────────── */
+
+/* ── Layout ── */
+.careers-form-section {
+    padding: 2rem 5vw 6rem;
+    display: flex;
+    justify-content: center;
+    background: var(--bg);
+}
+
+.careers-form-inner {
+    max-width: 1200px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 580px;
+    gap: 5rem;
+    align-items: start;
+}
+
+/* ── Info panel (left) ── */
+.careers-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+}
+
+.careers-eyebrow-line {
+    display: block;
+    width: 32px;
+    height: 2px;
+    background: var(--accent);
+    border-radius: 2px;
+}
+
+.careers-info-title {
+    font-family: 'Oxanium', sans-serif;
+    font-size: 3rem;
+    font-weight: 800;
+    color: var(--text);
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+}
+
+.careers-info-title span {
+    color: var(--accent);
+}
+
+.careers-info-body {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: rgba(240, 244, 255, 0.75);
+    margin-bottom: 2.5rem;
+}
+
+.careers-perks {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.careers-perk {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+}
+
+.careers-perk-icon {
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    border-radius: 10px;
+    background: rgba(164, 249, 63, 0.1);
+    border: 1px solid rgba(164, 249, 63, 0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent);
+}
+
+.careers-perk-icon i {
+    width: 18px;
+    height: 18px;
+}
+
+.careers-perk-title {
+    font-family: 'Oxanium', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 0.2rem;
+}
+
+.careers-perk-desc {
+    font-size: 0.875rem;
+    color: var(--muted);
+    line-height: 1.5;
+}
+
+/* ── Form Card (right) ── */
+.careers-form-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 3rem;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+    position: sticky;
+    top: 100px;
+}
+
+.careers-form-header {
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.careers-form-title {
+    font-family: 'Oxanium', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: var(--text);
+    margin-bottom: 0.35rem;
+}
+
+.careers-form-subtitle {
+    font-size: 0.9rem;
+    color: var(--muted);
+}
+
+/* ── Form — identical to service.css ── */
+.careers-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.75rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.form-group label {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--muted);
+}
+
+.input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    height: 56px;
+    transition: all 0.3s ease;
+}
+
+.input-icon-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 3.5rem;
+    height: 100%;
+    background: transparent;
+    border-right: 1px solid var(--border);
+    border-radius: 8px 0 0 8px;
+    flex-shrink: 0;
+}
+
+.input-icon-box svg,
+.input-icon-box i {
+    width: 20px;
+    height: 20px;
+    color: var(--accent);
+    transition: color 0.3s ease;
+}
+
+.input-wrapper input {
+    flex: 1;
+    width: 100%;
+    background: transparent;
+    border: none;
+    padding: 0 1.25rem;
+    color: var(--text);
+    font-family: inherit;
+    font-size: 0.95rem;
+    outline: none;
+}
+
+.input-wrapper input.date-input {
+    color-scheme: dark;
+}
+
+.input-wrapper:focus-within {
+    border-color: var(--accent);
+    background: var(--surface);
+    box-shadow: 0 0 0 3px rgba(164, 249, 63, 0.1);
+}
+
+.input-wrapper:focus-within .input-icon-box svg,
+.input-wrapper:focus-within .input-icon-box i {
+    color: var(--accent);
+}
+
+/* Error states */
+.input-wrapper.input-error {
+    border-color: rgba(255, 80, 80, 0.6);
+    box-shadow: 0 0 0 3px rgba(255, 80, 80, 0.08);
+}
+
+.custom-select-wrapper.select-error {
+    border-color: rgba(255, 80, 80, 0.6) !important;
+    box-shadow: 0 0 0 3px rgba(255, 80, 80, 0.08) !important;
+}
+
+/* ── Branded Custom Dropdown — mirrors service.css ── */
+.custom-select-wrapper {
+    overflow: visible;
+    height: 56px;
+}
+
+.custom-select-trigger {
+    flex: 1;
+    padding: 0 1.25rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    font-size: 0.95rem;
+    user-select: none;
+    height: 100%;
+}
+
+.selected-value {
+    color: var(--muted);
+}
+
+.selected-value.has-value {
+    color: var(--text);
+}
+
+.chevron {
+    width: 10px;
+    height: 10px;
+    border-right: 2px solid var(--muted);
+    border-bottom: 2px solid var(--muted);
+    transform: translateY(-2px) rotate(45deg);
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+}
+
+.custom-select-wrapper.open .chevron {
+    transform: translateY(2px) rotate(-135deg);
+    border-color: var(--accent);
+}
+
+.custom-options {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    width: 100%;
+    background: var(--surface2);
+    border: 1px solid var(--accent);
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+    z-index: 200;
+    list-style: none;
+    padding: 0.5rem;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    max-height: 280px;
+    overflow-y: auto;
+}
+
+.custom-select-wrapper.open .custom-options {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* Scrollbar for long list */
+.custom-options::-webkit-scrollbar { width: 4px; }
+.custom-options::-webkit-scrollbar-track { background: transparent; }
+.custom-options::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+
+/* Group label headings */
+.custom-options .options-group-label {
+    padding: 0.5rem 1rem 0.25rem;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--accent);
+    cursor: default;
+    border-top: 1px solid rgba(164, 249, 63, 0.15);
+    margin-top: 0.25rem;
+}
+
+.custom-options .options-group-label:first-child {
+    border-top: none;
+    margin-top: 0;
+}
+
+/* Selectable options */
+.custom-options li:not(.options-group-label) {
+    padding: 0.75rem 1rem;
+    border-radius: 6px;
+    color: var(--muted);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 0.95rem;
+}
+
+.custom-options li:not(.options-group-label):hover,
+.custom-options li:not(.options-group-label).selected {
+    background: rgba(164, 249, 63, 0.1);
+    color: var(--accent);
+}
+
+/* ── DOB triple-dropdown row ── */
+.dob-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0.6rem;
+}
+
+/* Hide the icon box on Month and Year (only Day shows the calendar icon) */
+.dob-icon-hidden {
+    display: none !important;
+}
+
+/* Month and Year wrappers have no icon gap so the trigger fills the full width */
+#dobMonthWrapper .custom-select-trigger,
+#dobYearWrapper  .custom-select-trigger {
+    padding-left: 1rem;
+}
+
+/* Submit button — matches service.css submit-btn ── */
+.form-actions {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.submit-btn {
+    width: 100%;
+    background: var(--accent);
+    color: #000;
+    border: none;
+    border-radius: 8px;
+    padding: 1rem 2rem;
+    font-family: 'Oxanium', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.submit-btn i {
+    width: 18px;
+    height: 18px;
+    transition: transform 0.3s ease;
+}
+
+.submit-btn:hover:not(:disabled) {
+    background: var(--accent-hover, #c5f54a);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(164, 249, 63, 0.2);
+}
+
+.submit-btn:hover:not(:disabled) i {
+    transform: translateX(4px);
+}
+
+.submit-btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.btn-text,
+.btn-loading {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+}
+
+.spin-icon { animation: spin 0.8s linear infinite; }
+
+.form-footer-note {
+    font-size: 0.85rem;
+    color: var(--muted);
+    text-align: center;
+}
+
+/* ── Success state ── */
+.careers-success {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 2rem 1rem;
+    gap: 1rem;
+}
+
+.careers-success-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: rgba(164, 249, 63, 0.1);
+    border: 1px solid rgba(164, 249, 63, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+}
+
+.careers-success-icon i {
+    width: 30px;
+    height: 30px;
+}
+
+.careers-success h3 {
+    font-family: 'Oxanium', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--text);
+}
+
+.careers-success p {
+    font-size: 0.95rem;
+    color: var(--muted);
+    max-width: 340px;
+    line-height: 1.65;
+}
+
+.careers-back-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0.75rem;
+    background: transparent;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: all 0.2s;
+}
+
+.careers-back-btn:hover {
+    background: var(--accent);
+    color: #000;
+}
+
+.careers-back-btn i {
+    width: 16px;
+    height: 16px;
+}
+
+/* ── Footer active link ── */
+.footer-link-active {
+    color: var(--accent) !important;
+}
+
+/* ── Responsive ── */
+@media (max-width: 1100px) {
+    .careers-form-inner {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+
+    .careers-form-card {
+        position: static;
+    }
+
+    .careers-info-title {
+        font-size: 2.25rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .careers-form-card {
+        padding: 2rem 1.5rem;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .careers-form-section {
+        padding: 0 5vw 4rem;
+    }
+
+    .careers-info-title {
+        font-size: 1.9rem;
+    }
+}
