@@ -198,7 +198,7 @@ if (pbWrapper) {
 // ── Prebuilt Teaser (Loading from JSON) ───────────────
 const teaserTrack = document.getElementById('pbTeaserTrack');
 if (teaserTrack) {
-  fetch('./prebuilts/products.json')
+  fetch('./prebuilts/product/s.json')
     .then(r => r.json())
     .then(data => {
       teaserTrack.innerHTML = '';
@@ -233,7 +233,7 @@ if (teaserTrack) {
             </div>
             <div class="pb-card-footer">
               <div class="pb-price">₹${p.price.toLocaleString('en-IN')}</div>
-              <a href="prebuilts/product.html?id=${p.id}" class="pb-card-btn">
+              <a href="prebuilts/product/?id=${p.id}" class="pb-card-btn">
                 View Build
                 <svg width="12" height="12" viewBox="0 0 16 16" fill="none">
                   <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
@@ -299,7 +299,7 @@ function updateCartUI() {
             const itemDiv = document.createElement('div');
             itemDiv.className = 'mini-cart-item';
             
-            const pLink = item.id ? (window.location.pathname.includes('/cart/') || window.location.pathname.includes('/prebuilts/') || window.location.pathname.includes('/custom-build/') || window.location.pathname.includes('/about/') || window.location.pathname.includes('/help/') || window.location.pathname.includes('/service/') ? `../prebuilts/product.html?id=${item.id}` : `prebuilts/product.html?id=${item.id}`) : '#';
+            const pLink = item.id ? (window.location.pathname.includes('/cart/') || window.location.pathname.includes('/prebuilts/') || window.location.pathname.includes('/custom-build/') || window.location.pathname.includes('/about/') || window.location.pathname.includes('/help/') || window.location.pathname.includes('/service/') ? `../prebuilts/product/?id=${item.id}` : `prebuilts/product/?id=${item.id}`) : '#';
 
             let addonsHtml = '';
             if(item.addons && item.addons.length) {
@@ -433,3 +433,6 @@ document.addEventListener('DOMContentLoaded', () => {
     
     updateCartUI();
 });
+
+
+

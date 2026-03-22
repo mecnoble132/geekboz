@@ -48,3 +48,6 @@ export async function getProductById(productId) {
 }
 
 export { db };
+
+
+

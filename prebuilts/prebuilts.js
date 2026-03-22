@@ -157,7 +157,7 @@ function renderCards(products) {
         </div>
         <div class="pb-card-footer">
           <div class="pb-price">${formatPrice(p.price)}</div>
-          <a href="product.html?id=${p.id}" class="pb-card-btn">
+          <a href="product?id=${p.id}" class="pb-card-btn">
             View Build
             <svg width="12" height="12" viewBox="0 0 16 16" fill="none">
               <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2"
@@ -598,3 +598,6 @@ fetch('./products.json')
         console.error('Failed to load products.json:', err);
         resultCount.textContent = 'Failed to load products.';
     });
+
+
+

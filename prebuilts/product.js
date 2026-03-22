@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     try {
-        const response = await fetch('products.json');
+        const response = await fetch('../products.json');
         const products = await response.json();
         const product = products.find(p => p.id === productId);
 
@@ -177,7 +177,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         related.forEach(r => {
             const a = document.createElement('a');
-            a.href = `product.html?id=${r.id}`;
+            a.href = `product?id=${r.id}`;
             a.style.textDecoration = 'none';
             a.style.display = 'block';
             a.innerHTML = `
@@ -244,3 +244,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         errorState.style.display = 'block';
     }
 });
+
+
+
+
