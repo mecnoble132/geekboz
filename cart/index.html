@@ -2,241 +2,437 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Your Cart — GeekBoz</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Cart — GeekBoz</title>
 
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600;700&family=Oxanium:wght@600;700;800&display=swap" rel="stylesheet">
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600;700&family=Oxanium:wght@600;700;800&display=swap"
+        rel="stylesheet">
 
-  <!-- Styles -->
-  <link rel="stylesheet" href="../assets/css/global.css">
-  <link rel="stylesheet" href="../assets/css/animations.css">
-  <link rel="stylesheet" href="../assets/css/components.css">
+    <!-- Styles -->
+    <link rel="stylesheet" href="../assets/css/global.css">
+    <link rel="stylesheet" href="../assets/css/animations.css">
+    <link rel="stylesheet" href="../assets/css/components.css">
 
-  <link rel="icon" href="../assets/images/geekbozfavicon.png">
-  
-  <style>
-      /* ── Grid Background (matches custom-build style) ── */
-      body {
-          background-image:
-              linear-gradient(rgba(164, 249, 63, 0.03) 1px, transparent 1px),
-              linear-gradient(90deg, rgba(164, 249, 63, 0.03) 1px, transparent 1px);
-          background-size: 50px 50px;
-      }
+    <link rel="icon" href="../assets/images/geekbozfavicon.png">
 
-      /* Page header: same as all other pages — no override needed */
-      .page-header {
-          background: radial-gradient(circle at 50% -20%, rgba(164, 249, 63, 0.08), transparent 70%), var(--bg);
-          border-bottom: 1px solid rgba(164, 249, 63, 0.03);
-      }
-      .page-wrap { max-width: 1280px; margin: 0 auto; padding: 3rem 5vw 4rem; display: flex; flex-direction: column; gap: 2rem; min-height: 80vh; }
+    <style>
+        /* ── Grid Background (matches custom-build style) ── */
+        body {
+            background-image:
+                linear-gradient(rgba(164, 249, 63, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(164, 249, 63, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
 
-      .cart-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 3rem; align-items: start; }
-      
-      /* ── Cart List ── */
-      .cart-full-list { display: flex; flex-direction: column; gap: 1rem; }
-      .cart-row {
-          display: flex;
-          align-items: flex-start;
-          gap: 1.5rem;
-          padding: 1.5rem;
-          background: var(--surface2);
-          border: 1px solid var(--border);
-          border-radius: 12px;
-          transition: border-color 0.25s, transform 0.25s;
-      }
-      .cart-row:hover {
-          border-color: rgba(164, 249, 63, 0.3);
-          transform: translateX(4px);
-      }
+        /* Page header: same as all other pages — no override needed */
+        .page-header {
+            background: radial-gradient(circle at 50% -20%, rgba(164, 249, 63, 0.08), transparent 70%), var(--bg);
+            border-bottom: 1px solid rgba(164, 249, 63, 0.03);
+        }
 
-      /* Image */
-      .cart-row-img-wrap { flex-shrink: 0; }
-      .cart-row-img {
-          width: 130px;
-          height: 130px;
-          object-fit: cover;
-          border-radius: 10px;
-          border: 1px solid var(--border);
-          display: block;
-          transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
-      }
-      .cart-row-img:hover { transform: scale(1.04); }
-      .cart-row-img-placeholder {
-          width: 130px;
-          height: 130px;
-          background: var(--surface2);
-          border-radius: 10px;
-          border: 1px dashed var(--border);
-      }
+        .page-wrap {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 3rem 5vw 4rem;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            min-height: 80vh;
+        }
 
-      /* Info */
-      .cart-row-info { flex: 1; display: flex; flex-direction: column; gap: 0.4rem; }
-      .cart-row-title-link {
-          font-family: 'DM Sans', sans-serif;
-          font-size: 1.2rem;
-          font-weight: 700;
-          color: var(--text);
-          text-decoration: none;
-          cursor: pointer;
-          display: block;
-          line-height: 1.3;
-          transition: color 0.15s;
-      }
-      .cart-row-title-link:hover { color: var(--accent); }
-      .cart-row-title { font-family: 'DM Sans', sans-serif; font-size: 1.2rem; font-weight: 700; color: var(--text); }
-      .cart-row-base { font-size: 0.85rem; color: var(--muted); }
-      .cart-addons {
-          display: flex;
-          flex-direction: column;
-          gap: 0.2rem;
-          padding: 0.5rem 0.75rem;
-          background: rgba(255,255,255,0.03);
-          border-left: 2px solid var(--accent);
-          border-radius: 0 6px 6px 0;
-          margin-top: 0.25rem;
-      }
-      .cart-addons span { font-size: 0.82rem; color: var(--muted); }
-      .cart-row-remove {
-          background: none; border: none;
-          color: #e63946;
-          font-size: 0.82rem;
-          font-weight: 600;
-          cursor: pointer;
-          display: inline-flex;
-          align-items: center;
-          gap: 0.3rem;
-          padding: 0;
-          margin-top: 0.5rem;
-          opacity: 0.75;
-          transition: opacity 0.15s;
-      }
-      .cart-row-remove:hover { opacity: 1; text-decoration: underline; }
+        .cart-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
 
-      /* Price column */
-      .cart-row-right { display: flex; flex-direction: column; align-items: flex-end; justify-content: flex-start; gap: 0.5rem; flex-shrink: 0; }
-      .cart-row-price { font-family: 'Oxanium', sans-serif; font-size: 1.5rem; font-weight: 800; color: var(--text); white-space: nowrap; }
+        /* ── Cart List ── */
+        .cart-full-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
 
-      /* ── Summary Box ── */
-      .cart-summary { background: linear-gradient(135deg, var(--surface) 0%, rgba(164, 249, 63, 0.05) 100%); border: 1px solid rgba(164, 249, 63, 0.3); border-radius: 12px; padding: 2rem; position: sticky; top: 100px; }
-      .cart-summary h3 { font-family: 'Oxanium', sans-serif; font-size: 1.5rem; margin-bottom: 1.5rem; color: var(--text); border-bottom: 1px solid var(--border); padding-bottom: 1rem; }
-      .cart-sum-row { display: flex; justify-content: space-between; margin-bottom: 1rem; font-family: 'DM Sans', sans-serif; color: var(--text); }
-      .cart-sum-row span:first-child { color: var(--muted); }
-      .cart-grand { border-top: 1px dashed var(--border); margin-top: 1.5rem; padding-top: 1.5rem; display: flex; justify-content: space-between; font-weight: 700; font-family: 'Oxanium', sans-serif; font-size: 1.75rem; color: var(--accent); }
-      .cart-grand span:first-child { color: var(--text); font-family: 'DM Sans', sans-serif; font-size: 1.2rem; align-self: center; font-weight: 500;}
-      .btn-checkout { background: var(--accent); color: #000; width: 100%; padding: 1.25rem; border-radius: 8px; font-weight: 700; font-size: 1.1rem; border: none; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 0.75rem; margin-top: 2rem; transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 4px 15px rgba(164, 249, 63, 0.2); }
-      .btn-checkout:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(164, 249, 63, 0.4); }
-      
-      .empty-state { text-align: center; padding: 5rem 1rem; background: var(--surface); border: 1px dashed var(--muted); border-radius: 12px; }
-      .empty-state i { width: 48px; height: 48px; color: var(--muted); margin-bottom: 1rem; opacity: 0.5; }
-      .empty-state h3 { font-family: 'Oxanium', sans-serif; font-size: 1.5rem; margin-bottom: 0.5rem; }
-      .empty-state a { display: inline-block; margin-top: 1.5rem; background: var(--surface2); border: 1px solid var(--border); color: var(--text); padding: 0.75rem 1.5rem; border-radius: 6px; text-decoration: none; font-weight: 600; transition: box-shadow 0.2s; }
-      .empty-state a:hover { box-shadow: 0 0 15px rgba(255,255,255,0.1); }
+        .cart-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.5rem;
+            padding: 1.5rem;
+            background: var(--surface2);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            transition: border-color 0.25s, transform 0.25s;
+        }
 
-      @media(max-width: 900px) {
-          .cart-grid { grid-template-columns: 1fr; gap: 2rem; }
-          .cart-summary { position: static; }
-          .cart-row-img, .cart-row-img-placeholder { width: 100px; height: 100px; }
-      }
-      @media(max-width: 600px) {
-          .cart-row { flex-wrap: wrap; }
-          .cart-row-right { flex-direction: row; align-items: center; width: 100%; justify-content: space-between; }
-      }
-  </style>
+        .cart-row:hover {
+            border-color: rgba(164, 249, 63, 0.3);
+            transform: translateX(4px);
+        }
+
+        /* Image */
+        .cart-row-img-wrap {
+            flex-shrink: 0;
+        }
+
+        .cart-row-img {
+            width: 130px;
+            height: 130px;
+            object-fit: cover;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            display: block;
+            transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        .cart-row-img:hover {
+            transform: scale(1.04);
+        }
+
+        .cart-row-img-placeholder {
+            width: 130px;
+            height: 130px;
+            background: var(--surface2);
+            border-radius: 10px;
+            border: 1px dashed var(--border);
+        }
+
+        /* Info */
+        .cart-row-info {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+
+        .cart-row-title-link {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text);
+            text-decoration: none;
+            cursor: pointer;
+            display: block;
+            line-height: 1.3;
+            transition: color 0.15s;
+        }
+
+        .cart-row-title-link:hover {
+            color: var(--accent);
+        }
+
+        .cart-row-title {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .cart-row-base {
+            font-size: 0.85rem;
+            color: var(--muted);
+        }
+
+        .cart-addons {
+            display: flex;
+            flex-direction: column;
+            gap: 0.2rem;
+            padding: 0.5rem 0.75rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-left: 2px solid var(--accent);
+            border-radius: 0 6px 6px 0;
+            margin-top: 0.25rem;
+        }
+
+        .cart-addons span {
+            font-size: 0.82rem;
+            color: var(--muted);
+        }
+
+        .cart-row-remove {
+            background: none;
+            border: none;
+            color: #e63946;
+            font-size: 0.82rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            padding: 0;
+            margin-top: 0.5rem;
+            opacity: 0.75;
+            transition: opacity 0.15s;
+        }
+
+        .cart-row-remove:hover {
+            opacity: 1;
+            text-decoration: underline;
+        }
+
+        /* Price column */
+        .cart-row-right {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            justify-content: flex-start;
+            gap: 0.5rem;
+            flex-shrink: 0;
+        }
+
+        .cart-row-price {
+            font-family: 'Oxanium', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--text);
+            white-space: nowrap;
+        }
+
+        /* ── Summary Box ── */
+        .cart-summary {
+            background: linear-gradient(135deg, var(--surface) 0%, rgba(164, 249, 63, 0.05) 100%);
+            border: 1px solid rgba(164, 249, 63, 0.3);
+            border-radius: 12px;
+            padding: 2rem;
+            position: sticky;
+            top: 100px;
+        }
+
+        .cart-summary h3 {
+            font-family: 'Oxanium', sans-serif;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--text);
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 1rem;
+        }
+
+        .cart-sum-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            font-family: 'DM Sans', sans-serif;
+            color: var(--text);
+        }
+
+        .cart-sum-row span:first-child {
+            color: var(--muted);
+        }
+
+        .cart-grand {
+            border-top: 1px dashed var(--border);
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            font-weight: 700;
+            font-family: 'Oxanium', sans-serif;
+            font-size: 1.75rem;
+            color: var(--accent);
+        }
+
+        .cart-grand span:first-child {
+            color: var(--text);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 1.2rem;
+            align-self: center;
+            font-weight: 500;
+        }
+
+        .btn-checkout {
+            background: var(--accent);
+            color: #000;
+            width: 100%;
+            padding: 1.25rem;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.75rem;
+            margin-top: 2rem;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 15px rgba(164, 249, 63, 0.2);
+        }
+
+        .btn-checkout:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(164, 249, 63, 0.4);
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 5rem 1rem;
+            background: var(--surface);
+            border: 1px dashed var(--muted);
+            border-radius: 12px;
+        }
+
+        .empty-state i {
+            width: 48px;
+            height: 48px;
+            color: var(--muted);
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+
+        .empty-state h3 {
+            font-family: 'Oxanium', sans-serif;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .empty-state a {
+            display: inline-block;
+            margin-top: 1.5rem;
+            background: var(--surface2);
+            border: 1px solid var(--border);
+            color: var(--text);
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: box-shadow 0.2s;
+        }
+
+        .empty-state a:hover {
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+        }
+
+        @media(max-width: 900px) {
+            .cart-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .cart-summary {
+                position: static;
+            }
+
+            .cart-row-img,
+            .cart-row-img-placeholder {
+                width: 100px;
+                height: 100px;
+            }
+        }
+
+        @media(max-width: 600px) {
+            .cart-row {
+                flex-wrap: wrap;
+            }
+
+            .cart-row-right {
+                flex-direction: row;
+                align-items: center;
+                width: 100%;
+                justify-content: space-between;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-  <!-- ─── NAVBAR ──────────────────────────────────────────── -->
-  <nav class="navbar">
-    <a href="../index.html" class="nav-brand">
-      <div class="nav-logo"><img src="../assets/images/geekbozlogo.png" alt="GeekBoz logo"></div>
-      <span class="nav-name">Geek<span>Boz</span></span>
-    </a>
+    <!-- ─── NAVBAR ──────────────────────────────────────────── -->
+    <nav class="navbar">
+        <a href="../index.html" class="nav-brand">
+            <div class="nav-logo"><img src="../assets/images/geekbozlogo.png" alt="GeekBoz logo"></div>
+            <span class="nav-name">Geek<span>Boz</span></span>
+        </a>
 
-    <ul class="nav-links">
-      <li><a href="../prebuilts/">Prebuilts</a></li>
-      <li><a href="../custom-build/">Custom Build</a></li>
-      <li><a href="../about/index.html">About Us</a></li>
-      <li><a href="../index.html#contact">Contact</a></li>
-      <li class="more-wrapper">
-        <button class="more-btn" id="moreBtn">
-          More
-          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 4L6 8L10 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" /></svg>
-        </button>
-        <ul class="dropdown" id="dropdown">
-          <li><a href="./" class="nav-active">My Cart</a></li>
-          <li><a href="../service/index.html">PC Service</a></li>
-          <li><a href="../index.html#contact">Our Stores</a></li>
-          <li><a href="../help/index.html">Help &amp; FAQ</a></li>
-          <li><a href="https://search.google.com/local/reviews?placeid=ChIJZXHsv726BTsRTXOTYqyzbxo" target="_blank" rel="noopener">Reviews</a></li>
+        <ul class="nav-links">
+            <li><a href="../prebuilts/">Prebuilts</a></li>
+            <li><a href="../custom-build/">Custom Build</a></li>
+            <li><a href="../about/index.html">About Us</a></li>
+            <li><a href="../index.html#contact">Contact</a></li>
+            <li class="more-wrapper">
+                <button class="more-btn" id="moreBtn">
+                    More
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                        <path d="M2 4L6 8L10 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg>
+                </button>
+                <ul class="dropdown" id="dropdown">
+                    <li><a href="./" class="nav-active">My Cart</a></li>
+                    <li><a href="../service/index.html">PC Service</a></li>
+                    <li><a href="../index.html#contact">Our Stores</a></li>
+                    <li><a href="../help/index.html">Help &amp; FAQ</a></li>
+                    <li><a href="https://search.google.com/local/reviews?placeid=ChIJZXHsv726BTsRTXOTYqyzbxo"
+                            target="_blank" rel="noopener">Reviews</a></li>
+                </ul>
+            </li>
         </ul>
-      </li>
-    </ul>
 
-    <div class="nav-right">
-      <a href="./" class="cart-btn" aria-label="Cart">
-        <i data-lucide="shopping-cart"></i>
-        <span class="cart-badge">0</span>
-      </a>
-      <button class="cta-btn" onclick="location.href='../custom-build/index.html'">Build Custom PC</button>
-      <button class="hamburger" id="hamburger" aria-label="Menu">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
-  </nav>
+        <div class="nav-right">
+            <a href="./" class="cart-btn" aria-label="Cart">
+                <i data-lucide="shopping-cart"></i>
+                <span class="cart-badge">0</span>
+            </a>
+            <button class="cta-btn" onclick="location.href='../custom-build/index.html'">Build Custom PC</button>
+            <button class="hamburger" id="hamburger" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
 
-  <!-- Mobile menu -->
-  <nav class="mobile-menu" id="mobileMenu">
-    <span class="mobile-label">Main</span>
-    <a href="../prebuilts/index.html">Prebuilts</a>
-    <a href="../custom-build/index.html">Custom Build</a>
-    <a href="../about/index.html">About Us</a>
-    <a href="../index.html#contact">Contact</a>
-    <span class="mobile-label">More</span>
-    <a href="./" class="active">My Cart</a>
-    <a href="../service/index.html">PC Service</a>
-    <a href="../index.html#contact">Our Stores</a>
-    <a href="../help/index.html">Help &amp; FAQ</a>
-    <a href="https://search.google.com/local/reviews?placeid=ChIJZXHsv726BTsRTXOTYqyzbxo" target="_blank" rel="noopener">Reviews</a>
-    <a href="../custom-build/index.html" class="mobile-cta">Build Custom PC</a>
-  </nav>
+    <!-- Mobile menu -->
+    <nav class="mobile-menu" id="mobileMenu">
+        <span class="mobile-label">Main</span>
+        <a href="../prebuilts/index.html">Prebuilts</a>
+        <a href="../custom-build/index.html">Custom Build</a>
+        <a href="../about/index.html">About Us</a>
+        <a href="../index.html#contact">Contact</a>
+        <span class="mobile-label">More</span>
+        <a href="./" class="active">My Cart</a>
+        <a href="../service/index.html">PC Service</a>
+        <a href="../index.html#contact">Our Stores</a>
+        <a href="../help/index.html">Help &amp; FAQ</a>
+        <a href="https://search.google.com/local/reviews?placeid=ChIJZXHsv726BTsRTXOTYqyzbxo" target="_blank"
+            rel="noopener">Reviews</a>
+        <a href="../custom-build/index.html" class="mobile-cta">Build Custom PC</a>
+    </nav>
 
-  <!-- ─── PAGE HEADER ────────────────────────────────────── -->
-  <section class="page-header">
-    <div class="page-header-inner" data-reveal="fade-up">
-      <div class="page-breadcrumb">
-        <a href="../index.html">Home</a>
-        <i data-lucide="chevron-right"></i>
-        <span>My Cart</span>
-      </div>
-      <h1 class="page-title">Review Your <span>Order</span></h1>
-      <p class="page-subtitle">Confirm your selected builds and add-ons before checking out via WhatsApp.</p>
-    </div>
-  </section>
+    <!-- ─── PAGE HEADER ────────────────────────────────────── -->
+    <section class="page-header">
+        <div class="page-header-inner" data-reveal="fade-up">
+            <div class="page-breadcrumb">
+                <a href="../index.html">Home</a>
+                <i data-lucide="chevron-right"></i>
+                <span>My Cart</span>
+            </div>
+            <h1 class="page-title">Review Your <span>Order</span></h1>
+            <p class="page-subtitle">Confirm your selected builds and add-ons before checking out via WhatsApp.</p>
+        </div>
+    </section>
 
-  <!-- ─── CART PAGE CONTENT ───────────────────────────────── -->
-  <main class="page-wrap">
-    <div id="cartViewContainer" class="cart-grid">
-        <!-- Rendered by JS -->
-    </div>
-  </main>
+    <!-- ─── CART PAGE CONTENT ───────────────────────────────── -->
+    <main class="page-wrap">
+        <div id="cartViewContainer" class="cart-grid">
+            <!-- Rendered by JS -->
+        </div>
+    </main>
 
-  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
-  <script src="../assets/js/main.js"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const renderPageCart = () => {
-            const container = document.getElementById('cartViewContainer');
-            // From main.js global state
-            const raw = JSON.parse(localStorage.getItem('gbz_cart'));
-            const state = (raw && raw.version >= 2 && raw.items) ? raw.items : [];
-            
-            if(state.length === 0) {
-                container.style.display = 'block';
-                container.innerHTML = `
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <script src="../assets/js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const renderPageCart = () => {
+                const container = document.getElementById('cartViewContainer');
+                // From main.js global state
+                const raw = JSON.parse(localStorage.getItem('gbz_cart'));
+                const state = (raw && raw.version >= 2 && raw.items) ? raw.items : [];
+
+                if (state.length === 0) {
+                    container.style.display = 'block';
+                    container.innerHTML = `
                     <div class="empty-state">
                         <i data-lucide="shopping-bag"></i>
                         <h3>Your cart is empty</h3>
@@ -244,35 +440,35 @@
                         <a href="../prebuilts/index.html">Browse Prebuilts</a>
                     </div>
                 `;
-                lucide.createIcons();
-                return;
-            }
+                    lucide.createIcons();
+                    return;
+                }
 
-            container.style.display = 'grid';
-            let listHTML = '<div class="cart-full-list">';
-            let summaryHTML = '';
-            let grandTotal = 0;
+                container.style.display = 'grid';
+                let listHTML = '<div class="cart-full-list">';
+                let summaryHTML = '';
+                let grandTotal = 0;
 
-            state.forEach((item, index) => {
-                grandTotal += item.totalPrice;
+                state.forEach((item, index) => {
+                    grandTotal += item.totalPrice;
 
-                // Image
-                const productLink = item.id ? `../prebuilts/product.html?id=${item.id}` : '#';
-                const imgWrap = item.image
-                    ? `<div class="cart-row-img-wrap"><a href="${productLink}"><img src="${item.image}" alt="${item.name}" class="cart-row-img"></a></div>`
-                    : `<div class="cart-row-img-wrap"><div class="cart-row-img-placeholder"></div></div>`;
+                    // Image
+                    const productLink = item.id ? `../prebuilts/product.html?id=${item.id}` : '#';
+                    const imgWrap = item.image
+                        ? `<div class="cart-row-img-wrap"><a href="${productLink}"><img src="${item.image}" alt="${item.name}" class="cart-row-img"></a></div>`
+                        : `<div class="cart-row-img-wrap"><div class="cart-row-img-placeholder"></div></div>`;
 
-                // Title
-                const titleTag = item.id
-                    ? `<a href="${productLink}" class="cart-row-title-link">${item.name}</a>`
-                    : `<div class="cart-row-title">${item.name}</div>`;
+                    // Title
+                    const titleTag = item.id
+                        ? `<a href="${productLink}" class="cart-row-title-link">${item.name}</a>`
+                        : `<div class="cart-row-title">${item.name}</div>`;
 
-                // Add-ons
-                const addonsHtml = (item.addons && item.addons.length)
-                    ? `<div class="cart-addons">${item.addons.map(a => `<span>+ ${a}</span>`).join('')}</div>`
-                    : '';
+                    // Add-ons
+                    const addonsHtml = (item.addons && item.addons.length)
+                        ? `<div class="cart-addons">${item.addons.map(a => `<span>+ ${a}</span>`).join('')}</div>`
+                        : '';
 
-                listHTML += `
+                    listHTML += `
                     <div class="cart-row">
                         ${imgWrap}
                         <div class="cart-row-info">
@@ -289,10 +485,10 @@
                         </div>
                     </div>
                 `;
-            });
-            listHTML += '</div>';
+                });
+                listHTML += '</div>';
 
-            summaryHTML = `
+                summaryHTML = `
                 <div class="cart-summary">
                     <h3>Order Summary</h3>
                     <div class="cart-sum-row">
@@ -319,115 +515,131 @@
                 </div>
             `;
 
-            container.innerHTML = listHTML + summaryHTML;
-            lucide.createIcons();
-        };
+                container.innerHTML = listHTML + summaryHTML;
+                lucide.createIcons();
+            };
 
-        window.removePageItem = function(index) {
-            window.removeFromCart(index);
+            window.removePageItem = function (index) {
+                window.removeFromCart(index);
+                renderPageCart();
+            };
+
+            // Render once on mount
             renderPageCart();
-        };
 
-        // Render once on mount
-        renderPageCart();
+            // Listen for storage changes from other tabs or if global cart overrides
+            window.addEventListener('storage', (e) => {
+                if (e.key === 'gbz_cart') renderPageCart();
+            });
 
-        // Listen for storage changes from other tabs or if global cart overrides
-        window.addEventListener('storage', (e) => {
-            if(e.key === 'gbz_cart') renderPageCart();
+            // Let's hook into the global removeFromCart safely
+            const originalRemove = window.removeFromCart;
+            window.removeFromCart = function (index) {
+                originalRemove(index);
+                renderPageCart();
+            };
         });
-        
-        // Let's hook into the global removeFromCart safely
-        const originalRemove = window.removeFromCart;
-        window.removeFromCart = function(index) {
-            originalRemove(index);
-            renderPageCart();
-        };
-    });
-  </script>
+    </script>
 
-  <!-- ─── FOOTER ───────────────────────────────────────── -->
-  <footer class="footer">
-      <div class="footer-inner">
-          <!-- Series strip -->
-          <div class="footer-series">
-              <a href="../prebuilts/index.html?series=branded" class="footer-series-tag branded">GBZ Branded PC</a>
-              <a href="../index.html#contact" class="footer-series-tag workstation">Our Stores</a>
-              <a href="../prebuilts/index.html?series=creatorx" class="footer-series-tag creator">GBZ CreatorX PC</a>
-              <a href="../prebuilts/index.html?series=gaming" class="footer-series-tag gaming">GBZ Gaming PC</a>
-          </div>
+    <!-- ─── FOOTER ───────────────────────────────────────── -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <!-- Series strip -->
+            <div class="footer-series">
+                <a href="../prebuilts/index.html?series=branded" class="footer-series-tag branded">GBZ Branded PC</a>
+                <a href="../index.html#contact" class="footer-series-tag workstation">Our Stores</a>
+                <a href="../prebuilts/index.html?series=creatorx" class="footer-series-tag creator">GBZ CreatorX PC</a>
+                <a href="../prebuilts/index.html?series=gaming" class="footer-series-tag gaming">GBZ Gaming PC</a>
+            </div>
 
-          <div class="footer-grid">
-              <!-- Brand -->
-              <div class="footer-brand">
-                  <a href="../index.html" class="footer-logo">
-                      <img src="../assets/images/geekbozlogo.png" alt="GeekBoz logo">
-                      <span class="footer-logo-name">Geek<span>Boz</span></span>
-                  </a>
-                  <p class="footer-tagline">Custom-built PCs, professional service, and hand-picked hardware — all from Kerala's most trusted PC builders.</p>
-                  <div class="footer-social">
-                      <a href="https://www.instagram.com/geekboz" class="footer-social-btn" aria-label="Instagram" target="_blank" rel="noopener">
-                          <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" /></svg>
-                      </a>
-                      <a href="https://www.youtube.com/c/GeekBoZ" class="footer-social-btn" aria-label="YouTube" target="_blank" rel="noopener">
-                          <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" /></svg>
-                      </a>
-                      <a href="https://www.facebook.com/GeekBoZ/" class="footer-social-btn" aria-label="Facebook" target="_blank" rel="noopener">
-                          <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" /></svg>
-                      </a>
-                  </div>
-              </div>
+            <div class="footer-grid">
+                <!-- Brand -->
+                <div class="footer-brand">
+                    <a href="../index.html" class="footer-logo">
+                        <img src="../assets/images/geekbozlogo.png" alt="GeekBoz logo">
+                        <span class="footer-logo-name">Geek<span>Boz</span></span>
+                    </a>
+                    <p class="footer-tagline">Custom-built PCs, professional service, and hand-picked hardware — all
+                        from Kerala's most trusted PC builders.</p>
+                    <div class="footer-social">
+                        <a href="https://www.instagram.com/geekboz" class="footer-social-btn" aria-label="Instagram"
+                            target="_blank" rel="noopener">
+                            <svg viewBox="0 0 24 24">
+                                <path
+                                    d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                            </svg>
+                        </a>
+                        <a href="https://www.youtube.com/c/GeekBoZ" class="footer-social-btn" aria-label="YouTube"
+                            target="_blank" rel="noopener">
+                            <svg viewBox="0 0 24 24">
+                                <path
+                                    d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+                            </svg>
+                        </a>
+                        <a href="https://www.facebook.com/GeekBoZ/" class="footer-social-btn" aria-label="Facebook"
+                            target="_blank" rel="noopener">
+                            <svg viewBox="0 0 24 24">
+                                <path
+                                    d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
 
-              <!-- Navigation -->
-              <div class="footer-col">
-                  <div class="footer-col-title">Navigation</div>
-                  <ul class="footer-links">
-                      <li><a href="../prebuilts/index.html">Prebuilts</a></li>
-                      <li><a href="../custom-build/index.html">Custom Build</a></li>
-                      <li><a href="../about/index.html">About Us</a></li>
-                      <li><a href="../service/index.html">PC Service</a></li>
-                      <li><a href="../index.html#contact">Our Stores</a></li>
-                      <li><a href="../help/index.html">Help &amp; FAQ</a></li>
-                      <li><a href="https://search.google.com/local/reviews?placeid=ChIJZXHsv726BTsRTXOTYqyzbxo" target="_blank" rel="noopener">Reviews</a></li>
-                  </ul>
-              </div>
+                <!-- Navigation -->
+                <div class="footer-col">
+                    <div class="footer-col-title">Navigation</div>
+                    <ul class="footer-links">
+                        <li><a href="../prebuilts/index.html">Prebuilts</a></li>
+                        <li><a href="../custom-build/index.html">Custom Build</a></li>
+                        <li><a href="../about/index.html">About Us</a></li>
+                        <li><a href="../service/index.html">PC Service</a></li>
+                        <li><a href="../index.html#contact">Our Stores</a></li>
+                        <li><a href="../help/index.html">Help &amp; FAQ</a></li>
+                        <li><a href="https://search.google.com/local/reviews?placeid=ChIJZXHsv726BTsRTXOTYqyzbxo"
+                                target="_blank" rel="noopener">Reviews</a></li>
+                    </ul>
+                </div>
 
-              <!-- About Us -->
-              <div class="footer-col">
-                  <div class="footer-col-title">About Us</div>
-                  <ul class="footer-links">
-                      <li><a href="../about/index.html#team">GBZ Team</a></li>
-                      <li><a href="../about/index.html#careers">Careers</a></li>
-                      <li><a href="../index.html#contact">Our Stores</a></li>
-                      <li><a href="https://search.google.com/local/reviews?placeid=ChIJZXHsv726BTsRTXOTYqyzbxo" target="_blank" rel="noopener">Testimonials</a></li>
-                  </ul>
-              </div>
+                <!-- About Us -->
+                <div class="footer-col">
+                    <div class="footer-col-title">About Us</div>
+                    <ul class="footer-links">
+                        <li><a href="../about/index.html#team">GBZ Team</a></li>
+                        <li><a href="../careers/index.html">Careers</a></li>
+                        <li><a href="../index.html#contact">Our Stores</a></li>
+                        <li><a href="https://search.google.com/local/reviews?placeid=ChIJZXHsv726BTsRTXOTYqyzbxo"
+                                target="_blank" rel="noopener">Testimonials</a></li>
+                    </ul>
+                </div>
 
-              <!-- More Information -->
-              <div class="footer-col">
-                  <div class="footer-col-title">More Information</div>
-                  <ul class="footer-links">
-                      <li><a href="../legal/terms.html">General Terms &amp; Conditions</a></li>
-                      <li><a href="../legal/warranty.html">Warranty Policy</a></li>
-                      <li><a href="../legal/privacy.html">Privacy Policy</a></li>
-                      <li><a href="../legal/refunds.html">Cancellation &amp; Refund</a></li>
-                      <li><a href="../legal/sales-terms.html">Sales Terms &amp; Conditions</a></li>
-                  </ul>
-              </div>
+                <!-- More Information -->
+                <div class="footer-col">
+                    <div class="footer-col-title">More Information</div>
+                    <ul class="footer-links">
+                        <li><a href="../legal/terms.html">General Terms &amp; Conditions</a></li>
+                        <li><a href="../legal/warranty.html">Warranty Policy</a></li>
+                        <li><a href="../legal/privacy.html">Privacy Policy</a></li>
+                        <li><a href="../legal/refunds.html">Cancellation &amp; Refund</a></li>
+                        <li><a href="../legal/sales-terms.html">Sales Terms &amp; Conditions</a></li>
+                    </ul>
+                </div>
 
-          </div>
-      </div>
+            </div>
+        </div>
 
-      <!-- Bottom bar -->
-      <div class="footer-bottom" style="max-width:1280px; margin:0 auto; padding-left:5vw; padding-right:5vw;">
-          <p class="footer-copy">© 2025 <span>GeekBoz</span> Pvt Ltd. All rights reserved.</p>
-          <nav class="footer-legal">
-              <a href="../legal/privacy.html">Privacy</a>
-              <a href="../legal/terms.html">Terms</a>
-              <a href="../legal/warranty.html">Warranty</a>
-              <a href="../legal/refunds.html">Refunds</a>
-          </nav>
-      </div>
-  </footer>
+        <!-- Bottom bar -->
+        <div class="footer-bottom" style="max-width:1280px; margin:0 auto; padding-left:5vw; padding-right:5vw;">
+            <p class="footer-copy">© 2025 <span>GeekBoz</span> Pvt Ltd. All rights reserved.</p>
+            <nav class="footer-legal">
+                <a href="../legal/privacy.html">Privacy</a>
+                <a href="../legal/terms.html">Terms</a>
+                <a href="../legal/warranty.html">Warranty</a>
+                <a href="../legal/refunds.html">Refunds</a>
+            </nav>
+        </div>
+    </footer>
 
 </body>
+
 </html>

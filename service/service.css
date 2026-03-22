@@ -2,6 +2,7 @@
     padding: 2rem 5vw 6rem 5vw;
     display: flex;
     justify-content: center;
+    background: var(--bg);
 }
 
 .service-wrapper {
@@ -11,7 +12,9 @@
     border: 1px solid var(--border);
     border-radius: 16px;
     padding: 3rem;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+    position: relative;
+    z-index: 5;
 }
 
 .service-alert {
@@ -246,9 +249,9 @@
 @media (max-width: 768px) {
     .service-wrapper {
         padding: 2rem 1.5rem;
-        border: none;
-        background: transparent;
-        box-shadow: none;
+        border: 1px solid var(--border);
+        background: var(--surface);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.5);
     }
     
     .service-section {

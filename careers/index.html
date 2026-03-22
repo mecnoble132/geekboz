@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Careers — GeekBoz</title>
+    <meta name="description" content="Join the GBZ Army. Explore open positions at GeekBoz — Kerala's most trusted custom PC brand. Apply now and become a GBZian.">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=Oxanium:wght@600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="../assets/css/global.css">
+    <link rel="stylesheet" href="../assets/css/animations.css">
+    <link rel="stylesheet" href="../assets/css/components.css">
+    <link rel="stylesheet" href="careers.css">
+
+    <link rel="icon" href="../assets/images/geekbozfavicon.png">
+</head>
+
+<body>
+
+    <!-- ─── NAVBAR ──────────────────────────────────────────── -->
+    <nav class="navbar">
+        <a href="../index.html" class="nav-brand">
+            <div class="nav-logo"><img src="../assets/images/geekbozlogo.png" alt="GeekBoz logo"></div>
+            <span class="nav-name">Geek<span>Boz</span></span>
+        </a>
+
+        <ul class="nav-links">
+            <li><a href="../prebuilts/index.html">Prebuilts</a></li>
+            <li><a href="../custom-build/index.html">Custom Build</a></li>
+            <li><a href="../about/index.html">About Us</a></li>
+            <li><a href="../index.html#contact">Contact</a></li>
+            <li class="more-wrapper">
+                <button class="more-btn" id="moreBtn">
+                    More
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                        <path d="M2 4L6 8L10 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg>
+                </button>
+                <ul class="dropdown" id="dropdown">
+                    <li><a href="../cart/">My Cart</a></li>
+                    <li><a href="../service/index.html">PC Service</a></li>
+                    <li><a href="../index.html#contact">Our Stores</a></li>
+                    <li><a href="../help/index.html">Help &amp; FAQ</a></li>
+                    <li><a href="https://search.google.com/local/reviews?placeid=ChIJZXHsv726BTsRTXOTYqyzbxo"
+                            target="_blank" rel="noopener">Reviews</a></li>
+                </ul>
+            </li>
+        </ul>
+
+        <div class="nav-right">
+            <a href="../cart/" class="cart-btn" aria-label="Cart">
+                <i data-lucide="shopping-cart"></i>
+                <span class="cart-badge">0</span>
+            </a>
+            <button class="cta-btn" onclick="location.href='../custom-build/index.html'">Build Custom PC</button>
+            <button class="hamburger" id="hamburger" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile menu -->
+    <nav class="mobile-menu" id="mobileMenu">
+        <span class="mobile-label">Main</span>
+        <a href="../prebuilts/index.html">Prebuilts</a>
+        <a href="../custom-build/index.html">Custom Build</a>
+        <a href="../about/index.html">About Us</a>
+        <a href="../index.html#contact">Contact</a>
+        <span class="mobile-label">More</span>
+        <a href="../cart/">My Cart</a>
+        <a href="../service/index.html">PC Service</a>
+        <a href="../index.html#contact">Our Stores</a>
+        <a href="../help/index.html">Help &amp; FAQ</a>
+        <a href="https://search.google.com/local/reviews?placeid=ChIJZXHsv726BTsRTXOTYqyzbxo" target="_blank"
+            rel="noopener">Reviews</a>
+        <a href="../custom-build/index.html" class="mobile-cta">Build Custom PC</a>
+    </nav>
+
+    <!-- ─── PAGE HEADER ───────────────────────────────────── -->
+    <section class="page-header">
+        <div class="page-header-inner" data-reveal="fade-up">
+            <div class="page-breadcrumb">
+                <a href="../index.html">Home</a>
+                <i data-lucide="chevron-right"></i>
+                <a href="../about/index.html">About Us</a>
+                <i data-lucide="chevron-right"></i>
+                <span>Careers</span>
+            </div>
+            <h1 class="page-title">Join the <span>GBZ Army</span></h1>
+            <p class="page-subtitle">Be part of something bigger. Help us build the future of gaming in Kerala.</p>
+        </div>
+    </section>
+
+    <!-- ─── CAREERS FORM SECTION ─────────────────────────── -->
+    <section class="careers-form-section" data-reveal="fade-up">
+        <div class="careers-form-inner">
+
+            <!-- Left: Info panel -->
+            <div class="careers-info">
+                <div class="careers-eyebrow">
+                    <span class="careers-eyebrow-line"></span>
+                    Open Positions
+                </div>
+                <h2 class="careers-info-title">We're Always<br><span>Looking for</span><br>Great People.</h2>
+                <p class="careers-info-body">At GeekBoz, we're not just building PCs — we're building a community. If you're passionate about gaming, technology, or customer experience, we want to hear from you.</p>
+
+                <div class="careers-perks">
+                    <div class="careers-perk">
+                        <div class="careers-perk-icon"><i data-lucide="zap"></i></div>
+                        <div>
+                            <div class="careers-perk-title">Hands-on Experience</div>
+                            <div class="careers-perk-desc">Work with cutting-edge hardware every day</div>
+                        </div>
+                    </div>
+                    <div class="careers-perk">
+                        <div class="careers-perk-icon"><i data-lucide="users"></i></div>
+                        <div>
+                            <div class="careers-perk-title">Team Culture</div>
+                            <div class="careers-perk-desc">A tight-knit team of passionate GBZians</div>
+                        </div>
+                    </div>
+                    <div class="careers-perk">
+                        <div class="careers-perk-icon"><i data-lucide="trending-up"></i></div>
+                        <div>
+                            <div class="careers-perk-title">Growth Opportunity</div>
+                            <div class="careers-perk-desc">Kerala's fastest-growing PC brand</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right: Application Form Card -->
+            <div class="careers-form-card">
+                <div class="careers-form-header">
+                    <div class="careers-form-title">Application Form</div>
+                    <div class="careers-form-subtitle">Fill in your details and we'll get in touch.</div>
+                </div>
+
+                <form class="careers-form" id="careersForm" action="#" method="POST">
+
+                    <!-- Name -->
+                    <div class="form-group">
+                        <label for="applicant-name">Full Name</label>
+                        <div class="input-wrapper">
+                            <div class="input-icon-box"><i data-lucide="user"></i></div>
+                            <input type="text" id="applicant-name" name="name"
+                                placeholder="Your full name" required autocomplete="name">
+                        </div>
+                    </div>
+
+                    <!-- Email -->
+                    <div class="form-group">
+                        <label for="applicant-email">Email Address</label>
+                        <div class="input-wrapper">
+                            <div class="input-icon-box"><i data-lucide="mail"></i></div>
+                            <input type="email" id="applicant-email" name="email"
+                                placeholder="you@example.com" required autocomplete="email">
+                        </div>
+                    </div>
+
+                    <!-- Phone -->
+                    <div class="form-group">
+                        <label for="applicant-phone">Phone Number</label>
+                        <div class="input-wrapper">
+                            <div class="input-icon-box"><i data-lucide="phone"></i></div>
+                            <input type="tel" id="applicant-phone" name="phone"
+                                placeholder="+91 XXXXX XXXXX" required autocomplete="tel">
+                        </div>
+                    </div>
+
+                    <!-- Location -->
+                    <div class="form-group">
+                        <label for="applicant-location">Location</label>
+                        <div class="input-wrapper">
+                            <div class="input-icon-box"><i data-lucide="map-pin"></i></div>
+                            <input type="text" id="applicant-location" name="location"
+                                placeholder="City, District" required autocomplete="address-level2">
+                        </div>
+                    </div>
+
+                    <!-- Date of Birth — branded triple dropdown -->
+                    <div class="form-group">
+                        <label>Date of Birth</label>
+                        <div class="dob-row">
+
+                            <!-- Day -->
+                            <div class="input-wrapper custom-select-wrapper dob-part" id="dobDayWrapper">
+                                <div class="input-icon-box"><i data-lucide="calendar"></i></div>
+                                <div class="custom-select-trigger" tabindex="0" id="dobDayTrigger">
+                                    <span class="selected-value">Day</span>
+                                    <div class="chevron"></div>
+                                </div>
+                                <ul class="custom-options" id="dobDayOptions"></ul>
+                            </div>
+
+                            <!-- Month -->
+                            <div class="input-wrapper custom-select-wrapper dob-part" id="dobMonthWrapper">
+                                <div class="input-icon-box dob-icon-hidden"></div>
+                                <div class="custom-select-trigger" tabindex="0" id="dobMonthTrigger">
+                                    <span class="selected-value">Month</span>
+                                    <div class="chevron"></div>
+                                </div>
+                                <ul class="custom-options" id="dobMonthOptions"></ul>
+                            </div>
+
+                            <!-- Year -->
+                            <div class="input-wrapper custom-select-wrapper dob-part" id="dobYearWrapper">
+                                <div class="input-icon-box dob-icon-hidden"></div>
+                                <div class="custom-select-trigger" tabindex="0" id="dobYearTrigger">
+                                    <span class="selected-value">Year</span>
+                                    <div class="chevron"></div>
+                                </div>
+                                <ul class="custom-options" id="dobYearOptions"></ul>
+                            </div>
+
+                        </div>
+                        <input type="hidden" id="applicant-dob" name="dob">
+                    </div>
+
+                    <!-- Qualification — branded custom dropdown -->
+                    <div class="form-group">
+                        <label>Qualification</label>
+                        <div class="input-wrapper custom-select-wrapper" id="qualWrapper">
+                            <div class="input-icon-box"><i data-lucide="graduation-cap"></i></div>
+                            <div class="custom-select-trigger" tabindex="0" id="qualTrigger">
+                                <span class="selected-value">Select your qualification</span>
+                                <div class="chevron"></div>
+                            </div>
+                            <ul class="custom-options">
+                                <li data-value="plus2">+2 and Above</li>
+                                <li data-value="graduate">Graduate</li>
+                                <li data-value="postgraduate">Post Graduate</li>
+                            </ul>
+                            <input type="hidden" id="applicant-qualification" name="qualification">
+                        </div>
+                    </div>
+
+                    <!-- Preferred Job Role — branded custom dropdown with groups -->
+                    <div class="form-group">
+                        <label>Preferred Job Role</label>
+                        <div class="input-wrapper custom-select-wrapper" id="jobWrapper">
+                            <div class="input-icon-box"><i data-lucide="briefcase"></i></div>
+                            <div class="custom-select-trigger" tabindex="0" id="jobTrigger">
+                                <span class="selected-value">Select a role</span>
+                                <div class="chevron"></div>
+                            </div>
+                            <ul class="custom-options">
+                                <li class="options-group-label">GeekBoz Frontline</li>
+                                <li data-value="cre">CRE (Customer Relations Executive)</li>
+                                <li data-value="sales-executive">Sales Executive</li>
+                                <li data-value="tech-consultant">Tech Consultant</li>
+                                <li class="options-group-label">Media &amp; Content</li>
+                                <li data-value="media-team">Media Team</li>
+                                <li data-value="content-creator">Content Creator</li>
+                                <li data-value="designer">Designer</li>
+                                <li data-value="social-media-moderator">Social Media Moderator</li>
+                                <li class="options-group-label">Technical</li>
+                                <li data-value="service-technician">Service Technician</li>
+                                <li data-value="system-builder">System Builder</li>
+                                <li class="options-group-label">Partnership</li>
+                                <li data-value="affiliate">Affiliate</li>
+                            </ul>
+                            <input type="hidden" id="applicant-job" name="preferred_job">
+                        </div>
+                    </div>
+
+                    <!-- Submit -->
+                    <div class="form-actions">
+                        <button type="submit" class="submit-btn" id="careersSubmitBtn">
+                            <span class="btn-text">Submit Application</span>
+                            <i data-lucide="arrow-right"></i>
+                            <span class="btn-loading" style="display:none;">
+                                <i data-lucide="loader-2" class="spin-icon"></i> Submitting…
+                            </span>
+                        </button>
+                        <p class="form-footer-note">We'll review your application and reach out within 5–7 working days.</p>
+                    </div>
+
+                </form>
+
+                <!-- Success state -->
+                <div class="careers-success" id="careersSuccess" style="display:none;">
+                    <div class="careers-success-icon"><i data-lucide="check-circle-2"></i></div>
+                    <h3>Application Received!</h3>
+                    <p>Thanks for your interest in joining the GBZ Army. We'll review your application and get back to you soon.</p>
+                    <a href="../about/index.html" class="careers-back-btn">
+                        <i data-lucide="arrow-left"></i> Back to About Us
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ─── FOOTER ───────────────────────────────────────── -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <div class="footer-series">
+                <a href="../prebuilts/index.html?series=branded" class="footer-series-tag branded">GBZ Branded PC</a>
+                <a href="../index.html#contact" class="footer-series-tag workstation">Our Stores</a>
+                <a href="../prebuilts/index.html?series=creatorx" class="footer-series-tag creator">GBZ CreatorX PC</a>
+                <a href="../prebuilts/index.html?series=gaming" class="footer-series-tag gaming">GBZ Gaming PC</a>
+            </div>
+
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="../index.html" class="footer-logo">
+                        <img src="../assets/images/geekbozlogo.png" alt="GeekBoz logo">
+                        <span class="footer-logo-name">Geek<span>Boz</span></span>
+                    </a>
+                    <p class="footer-tagline">Custom-built PCs, professional service, and hand-picked hardware — all from Kerala's most trusted PC builders.</p>
+                    <div class="footer-social">
+                        <a href="https://www.instagram.com/geekboz" class="footer-social-btn" aria-label="Instagram" target="_blank" rel="noopener">
+                            <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" /></svg>
+                        </a>
+                        <a href="https://www.youtube.com/c/GeekBoZ" class="footer-social-btn" aria-label="YouTube" target="_blank" rel="noopener">
+                            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" /></svg>
+                        </a>
+                        <a href="https://www.facebook.com/GeekBoZ/" class="footer-social-btn" aria-label="Facebook" target="_blank" rel="noopener">
+                            <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" /></svg>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="footer-col">
+                    <div class="footer-col-title">Navigation</div>
+                    <ul class="footer-links">
+                        <li><a href="../prebuilts/index.html">Prebuilts</a></li>
+                        <li><a href="../custom-build/index.html">Custom Build</a></li>
+                        <li><a href="../about/index.html">About Us</a></li>
+                        <li><a href="../service/index.html">PC Service</a></li>
+                        <li><a href="../index.html#contact">Our Stores</a></li>
+                        <li><a href="../help/index.html">Help &amp; FAQ</a></li>
+                        <li><a href="https://search.google.com/local/reviews?placeid=ChIJZXHsv726BTsRTXOTYqyzbxo" target="_blank" rel="noopener">Reviews</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <div class="footer-col-title">About Us</div>
+                    <ul class="footer-links">
+                        <li><a href="../about/index.html#team">GBZ Team</a></li>
+                        <li><a href="index.html" class="footer-link-active">Careers</a></li>
+                        <li><a href="../index.html#contact">Our Stores</a></li>
+                        <li><a href="https://search.google.com/local/reviews?placeid=ChIJZXHsv726BTsRTXOTYqyzbxo" target="_blank" rel="noopener">Testimonials</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <div class="footer-col-title">More Information</div>
+                    <ul class="footer-links">
+                        <li><a href="../legal/terms.html">General Terms &amp; Conditions</a></li>
+                        <li><a href="../legal/warranty.html">Warranty Policy</a></li>
+                        <li><a href="../legal/privacy.html">Privacy Policy</a></li>
+                        <li><a href="../legal/refunds.html">Cancellation &amp; Refund</a></li>
+                        <li><a href="../legal/sales-terms.html">Sales Terms &amp; Conditions</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom" style="max-width:1280px; margin:0 auto; padding-left:5vw; padding-right:5vw;">
+            <p class="footer-copy">© 2025 <span>GeekBoz</span> Pvt Ltd. All rights reserved.</p>
+            <nav class="footer-legal">
+                <a href="../legal/privacy.html">Privacy</a>
+                <a href="../legal/terms.html">Terms</a>
+                <a href="../legal/warranty.html">Warranty</a>
+                <a href="../legal/refunds.html">Refunds</a>
+            </nav>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <script src="../assets/js/main.js"></script>
+    <script>
+        lucide.createIcons();
+
+        // ── Branded Custom Dropdown helper ─────────────────────────────
+        function initCustomSelect(wrapperId, triggerId, onSelect) {
+            var wrapper = document.getElementById(wrapperId);
+            var trigger = document.getElementById(triggerId);
+            var selectedValue = wrapper.querySelector('.selected-value');
+
+            trigger.addEventListener('click', function (e) {
+                e.stopPropagation();
+                document.querySelectorAll('.custom-select-wrapper.open').forEach(function (el) {
+                    if (el !== wrapper) el.classList.remove('open');
+                });
+                wrapper.classList.toggle('open');
+            });
+
+            wrapper.querySelectorAll('.custom-options li:not(.options-group-label)').forEach(function (option) {
+                option.addEventListener('click', function () {
+                    wrapper.querySelectorAll('.custom-options li').forEach(function (o) { o.classList.remove('selected'); });
+                    this.classList.add('selected');
+                    selectedValue.textContent = this.textContent;
+                    selectedValue.classList.add('has-value');
+                    wrapper.classList.remove('open');
+                    wrapper.classList.remove('select-error');
+                    if (onSelect) onSelect(this.getAttribute('data-value'));
+                });
+            });
+        }
+
+        initCustomSelect('qualWrapper', 'qualTrigger', function (val) {
+            document.getElementById('applicant-qualification').value = val;
+        });
+        initCustomSelect('jobWrapper', 'jobTrigger', function (val) {
+            document.getElementById('applicant-job').value = val;
+        });
+
+        // ── DOB branded dropdowns ──────────────────────────────────────
+        var dobDay   = null, dobMonth = null, dobYear = null;
+        var dobHidden = document.getElementById('applicant-dob');
+
+        function updateDobHidden() {
+            if (dobDay && dobMonth && dobYear) {
+                dobHidden.value = dobYear + '-' + String(dobMonth).padStart(2, '0') + '-' + String(dobDay).padStart(2, '0');
+            }
+        }
+
+        // Populate Day (1–31)
+        (function () {
+            var ul = document.getElementById('dobDayOptions');
+            for (var d = 1; d <= 31; d++) {
+                var li = document.createElement('li');
+                li.setAttribute('data-value', d);
+                li.textContent = d;
+                ul.appendChild(li);
+            }
+            initCustomSelect('dobDayWrapper', 'dobDayTrigger', function (val) {
+                dobDay = parseInt(val); updateDobHidden();
+            });
+        })();
+
+        // Populate Month
+        (function () {
+            var months = ['January','February','March','April','May','June',
+                          'July','August','September','October','November','December'];
+            var ul = document.getElementById('dobMonthOptions');
+            months.forEach(function (m, i) {
+                var li = document.createElement('li');
+                li.setAttribute('data-value', i + 1);
+                li.textContent = m;
+                ul.appendChild(li);
+            });
+            initCustomSelect('dobMonthWrapper', 'dobMonthTrigger', function (val) {
+                dobMonth = parseInt(val); updateDobHidden();
+            });
+        })();
+
+        // Populate Year (current − 60 → current − 18)
+        (function () {
+            var currentYear = new Date().getFullYear();
+            var ul = document.getElementById('dobYearOptions');
+            for (var y = currentYear - 18; y >= currentYear - 60; y--) {
+                var li = document.createElement('li');
+                li.setAttribute('data-value', y);
+                li.textContent = y;
+                ul.appendChild(li);
+            }
+            initCustomSelect('dobYearWrapper', 'dobYearTrigger', function (val) {
+                dobYear = parseInt(val); updateDobHidden();
+            });
+        })();
+
+        // ── Close all dropdowns when clicking outside ──────────────────
+        document.addEventListener('click', function () {
+            document.querySelectorAll('.custom-select-wrapper.open').forEach(function (el) {
+                el.classList.remove('open');
+            });
+        });
+
+        // ── Form submission ────────────────────────────────────────────
+        var form      = document.getElementById('careersForm');
+        var successEl = document.getElementById('careersSuccess');
+        var submitBtn = document.getElementById('careersSubmitBtn');
+
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            var qualVal = document.getElementById('applicant-qualification').value;
+            var jobVal  = document.getElementById('applicant-job').value;
+            var dobVal  = document.getElementById('applicant-dob').value;
+            var valid   = true;
+
+            // Text inputs
+            ['applicant-name','applicant-email','applicant-phone','applicant-location'].forEach(function (id) {
+                var el = document.getElementById(id);
+                if (!el.value.trim()) {
+                    el.closest('.input-wrapper').classList.add('input-error');
+                    valid = false;
+                }
+            });
+
+            // Branded dropdowns
+            if (!qualVal) { document.getElementById('qualWrapper').classList.add('select-error'); valid = false; }
+            if (!jobVal)  { document.getElementById('jobWrapper').classList.add('select-error');  valid = false; }
+
+            // DOB — all three parts must be selected
+            if (!dobVal) {
+                ['dobDayWrapper','dobMonthWrapper','dobYearWrapper'].forEach(function (id) {
+                    var w = document.getElementById(id);
+                    if (!w.querySelector('.selected-value').classList.contains('has-value')) {
+                        w.classList.add('select-error');
+                    }
+                });
+                valid = false;
+            }
+
+            if (!valid) return;
+
+            // Loading
+            submitBtn.querySelector('.btn-text').style.display = 'none';
+            submitBtn.querySelector('.btn-loading').style.display = 'inline-flex';
+            submitBtn.disabled = true;
+
+            var name     = document.getElementById('applicant-name').value;
+            var email    = document.getElementById('applicant-email').value;
+            var phone    = document.getElementById('applicant-phone').value;
+            var location = document.getElementById('applicant-location').value;
+            var dob      = document.getElementById('applicant-dob').value;
+            var qualText = document.querySelector('#qualWrapper .selected-value').textContent;
+            var jobText  = document.querySelector('#jobWrapper .selected-value').textContent;
+
+            var subject = encodeURIComponent('Careers Application — ' + jobText + ' — ' + name);
+            var body = encodeURIComponent(
+                'New Job Application from GeekBoz Careers Page\n\n' +
+                'Name: ' + name + '\n' +
+                'Email: ' + email + '\n' +
+                'Phone: ' + phone + '\n' +
+                'Location: ' + location + '\n' +
+                'Date of Birth: ' + dob + '\n' +
+                'Qualification: ' + qualText + '\n' +
+                'Preferred Role: ' + jobText + '\n'
+            );
+
+            setTimeout(function () {
+                window.location.href = 'mailto:geekboz.frontline@gmail.com?subject=' + subject + '&body=' + body;
+                form.style.display = 'none';
+                successEl.style.display = 'flex';
+                lucide.createIcons();
+            }, 800);
+        });
+
+        // Clear errors on text input
+        ['applicant-name','applicant-email','applicant-phone','applicant-location'].forEach(function (id) {
+            document.getElementById(id).addEventListener('input', function () {
+                this.closest('.input-wrapper').classList.remove('input-error');
+            });
+        });
+    </script>
+
+</body>
+
+</html>

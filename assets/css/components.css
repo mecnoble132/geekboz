@@ -94,6 +94,7 @@
 }
 
 @media (hover: hover) {
+
   .nav-links a:hover,
   .more-btn:hover {
     color: var(--text);
@@ -1175,8 +1176,10 @@
   overflow-y: visible;
   padding: 0.5rem 5vw 1.25rem;
   cursor: grab;
-  user-select: none; /* Prevent text selection while dragging */
-  scrollbar-width: none; /* Hide scrollbar for cleaner look */
+  user-select: none;
+  /* Prevent text selection while dragging */
+  scrollbar-width: none;
+  /* Hide scrollbar for cleaner look */
 }
 
 .pb-track-wrapper::-webkit-scrollbar {
@@ -1356,6 +1359,7 @@
 }
 
 @media (hover: hover) {
+
   .pb-card-btn:hover svg,
   .pb-card-btn:hover i {
     transform: translateX(3px);
@@ -2341,7 +2345,7 @@
   .footer-brand {
     grid-column: 1 / -1;
   }
-  
+
   .footer-col:last-child {
     grid-column: 1 / -1;
   }
