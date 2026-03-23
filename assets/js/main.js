@@ -173,15 +173,15 @@ if (pbWrapper) {
 
   pbWrapper.addEventListener('mousemove', (e) => {
     if (!isDown) return;
-    
+
     const x = e.pageX - pbWrapper.offsetLeft;
     const walk = (x - startX) * 2; // scroll-fast multiplier
-    
+
     // Check if we've actually moved enough to be a "drag"
     if (Math.abs(walk) > 5) {
       hasDragged = true;
     }
-    
+
     e.preventDefault();
     pbWrapper.scrollLeft = scrollLeft - walk;
   });
@@ -198,19 +198,43 @@ if (pbWrapper) {
 // ── Prebuilt Teaser (Loading from JSON) ───────────────
 const teaserTrack = document.getElementById('pbTeaserTrack');
 if (teaserTrack) {
-  fetch('./prebuilts/product/s.json')
+  // Inject skeleton cards immediately
+  const SKELETON_COUNT = 5;
+  teaserTrack.innerHTML = Array.from({ length: SKELETON_COUNT }).map(() => `
+    <div class="pb-card pb-card-skeleton">
+      <div class="pb-card-img skeleton-block"></div>
+      <div class="pb-card-body">
+        <div class="skeleton-line skeleton-title"></div>
+        <div class="skeleton-line skeleton-spec"></div>
+        <div class="skeleton-line skeleton-spec short"></div>
+        <div class="pb-card-footer">
+          <div class="skeleton-line skeleton-price"></div>
+          <div class="skeleton-line skeleton-btn"></div>
+        </div>
+      </div>
+    </div>
+  `).join('');
+
+  fetch('./prebuilts/products.json')
     .then(r => r.json())
     .then(data => {
+      // Filter to featured only, then take up to 5
+      const featured = data.filter(p => p.featured === true);
+      const teaserItems = featured.slice(0, 5);
+
       teaserTrack.innerHTML = '';
-      // Show first 5 or any specific number
-      const teaserItems = data.slice(0, 5);
-      
+
+      if (teaserItems.length === 0) {
+        teaserTrack.innerHTML = '<p class="pb-teaser-empty">No featured builds available right now.</p>';
+        return;
+      }
+
       teaserItems.forEach((p, i) => {
         const card = document.createElement('div');
         card.className = 'pb-card';
         card.style.animationDelay = `${i * 0.1}s`;
 
-        // Image path adjustment: JSON uses ../assets/ for prebuilt page. 
+        // Image path adjustment: JSON uses ../assets/ for prebuilt page.
         // Homepage needs ./assets/
         const imgSrc = p.image ? p.image.replace('../', './') : `./assets/images/prebuiltph3.webp`;
 
@@ -224,6 +248,7 @@ if (teaserTrack) {
           <div class="pb-card-img">
             <img src="${imgSrc}" alt="${p.name}">
             <span class="pb-series-tag ${seriesClass}">${p.tag}</span>
+            ${p.badge ? `<span class="pb-badge-tag">${p.badge}</span>` : ''}
           </div>
           <div class="pb-card-body">
             <div class="pb-card-name">GBZ <span>${p.name.replace('GBZ ', '')}</span></div>
@@ -245,70 +270,72 @@ if (teaserTrack) {
         teaserTrack.appendChild(card);
       });
 
-      // Initialize Lucide icons
       if (window.lucide) lucide.createIcons();
     })
-    .catch(err => console.error('Error loading teaser prebuilts:', err));
+    .catch(err => {
+      console.error('Error loading teaser prebuilts:', err);
+      teaserTrack.innerHTML = '<p class="pb-teaser-empty">Could not load builds. Please try again later.</p>';
+    });
 }
 
 // ── Cart System & WhatsApp Checkout ────────────────────
 const CART_VERSION = 2; // bump when cart schema changes
 
 function loadCart() {
-    try {
-        const raw = JSON.parse(localStorage.getItem('gbz_cart'));
-        // If version doesn't match or data is in old format, reset it
-        if (!raw || !raw.version || raw.version < CART_VERSION) {
-            localStorage.removeItem('gbz_cart');
-            return [];
-        }
-        return raw.items || [];
-    } catch(e) {
-        localStorage.removeItem('gbz_cart');
-        return [];
+  try {
+    const raw = JSON.parse(localStorage.getItem('gbz_cart'));
+    // If version doesn't match or data is in old format, reset it
+    if (!raw || !raw.version || raw.version < CART_VERSION) {
+      localStorage.removeItem('gbz_cart');
+      return [];
     }
+    return raw.items || [];
+  } catch (e) {
+    localStorage.removeItem('gbz_cart');
+    return [];
+  }
 }
 
 const cartState = loadCart();
 const cartBadgeEls = document.querySelectorAll('.cart-badge');
 
 function saveCart() {
-    localStorage.setItem('gbz_cart', JSON.stringify({ version: CART_VERSION, items: cartState }));
-    updateCartUI();
+  localStorage.setItem('gbz_cart', JSON.stringify({ version: CART_VERSION, items: cartState }));
+  updateCartUI();
 }
 
 function updateCartUI() {
-    // Badges update
-    const total = cartState.length;
-    cartBadgeEls.forEach(b => {
-        b.textContent = total;
-        b.style.display = total > 0 ? 'flex' : 'none';
-    });
+  // Badges update
+  const total = cartState.length;
+  cartBadgeEls.forEach(b => {
+    b.textContent = total;
+    b.style.display = total > 0 ? 'flex' : 'none';
+  });
 
-    const list = document.getElementById('cartItemsList');
-    if(!list) return;
+  const list = document.getElementById('cartItemsList');
+  if (!list) return;
 
-    list.innerHTML = '';
-    let grandTotal = 0;
+  list.innerHTML = '';
+  let grandTotal = 0;
 
-    if(cartState.length === 0) {
-        list.innerHTML = '<div class="cart-empty" style="text-align:center; padding: 2rem; color: var(--muted); font-size:0.9rem;">Your cart is empty.</div>';
-    } else {
-        cartState.forEach((item, idx) => {
-            grandTotal += item.totalPrice;
-            const itemDiv = document.createElement('div');
-            itemDiv.className = 'mini-cart-item';
-            
-            const pLink = item.id ? (window.location.pathname.includes('/cart/') || window.location.pathname.includes('/prebuilts/') || window.location.pathname.includes('/custom-build/') || window.location.pathname.includes('/about/') || window.location.pathname.includes('/help/') || window.location.pathname.includes('/service/') ? `../prebuilts/product/?id=${item.id}` : `prebuilts/product/?id=${item.id}`) : '#';
+  if (cartState.length === 0) {
+    list.innerHTML = '<div class="cart-empty" style="text-align:center; padding: 2rem; color: var(--muted); font-size:0.9rem;">Your cart is empty.</div>';
+  } else {
+    cartState.forEach((item, idx) => {
+      grandTotal += item.totalPrice;
+      const itemDiv = document.createElement('div');
+      itemDiv.className = 'mini-cart-item';
 
-            let addonsHtml = '';
-            if(item.addons && item.addons.length) {
-                addonsHtml = `<div style="font-size: 0.7rem; color: var(--muted); margin-top: 0.15rem; line-height: 1.2;">+ ${item.addons.join('<br>+ ')}</div>`;
-            }
+      const pLink = item.id ? (window.location.pathname.includes('/cart/') || window.location.pathname.includes('/prebuilts/') || window.location.pathname.includes('/custom-build/') || window.location.pathname.includes('/about/') || window.location.pathname.includes('/help/') || window.location.pathname.includes('/service/') ? `../prebuilts/product/?id=${item.id}` : `prebuilts/product/?id=${item.id}`) : '#';
 
-            const imgHtml = item.image ? `<img src="${item.image}" alt="${item.name}" style="width: 60px; height: 60px; border-radius: 6px; object-fit: cover; border: 1px solid var(--border);">` : `<div style="width: 60px; height: 60px; background: var(--surface2); border-radius: 6px; border:1px solid var(--border);"></div>`;
+      let addonsHtml = '';
+      if (item.addons && item.addons.length) {
+        addonsHtml = `<div style="font-size: 0.7rem; color: var(--muted); margin-top: 0.15rem; line-height: 1.2;">+ ${item.addons.join('<br>+ ')}</div>`;
+      }
 
-            itemDiv.innerHTML = `
+      const imgHtml = item.image ? `<img src="${item.image}" alt="${item.name}" style="width: 60px; height: 60px; border-radius: 6px; object-fit: cover; border: 1px solid var(--border);">` : `<div style="width: 60px; height: 60px; background: var(--surface2); border-radius: 6px; border:1px solid var(--border);"></div>`;
+
+      itemDiv.innerHTML = `
                 ${imgHtml}
                 <div style="flex: 1; min-width: 0;">
                     <a href="${pLink}" style="font-family: 'DM Sans', sans-serif; font-size: 0.85rem; font-weight: 700; color: var(--text); text-decoration: none; display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; transition: color 0.2s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text)'">${item.name}</a>
@@ -317,67 +344,67 @@ function updateCartUI() {
                 </div>
                 <button onclick="window.removeFromCart(${idx})" style="background: transparent; border: none; color: #ff3c5f; cursor: pointer; padding: 0.2rem; opacity: 0.6; transition: 0.2s;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.6"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18m-2 0v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2m-6 3v8m4-8v8"/></svg></button>
             `;
-            list.appendChild(itemDiv);
-        });
-    }
+      list.appendChild(itemDiv);
+    });
+  }
 
-    const priceEl = document.getElementById('cartTotalPrice');
-    if(priceEl) priceEl.textContent = `₹${grandTotal.toLocaleString('en-IN')}`;
+  const priceEl = document.getElementById('cartTotalPrice');
+  if (priceEl) priceEl.textContent = `₹${grandTotal.toLocaleString('en-IN')}`;
 }
 
-window.removeFromCart = function(index) {
-    cartState.splice(index, 1);
-    saveCart();
+window.removeFromCart = function (index) {
+  cartState.splice(index, 1);
+  saveCart();
 };
 
-window.addToCart = function(name, base, total, addons, id = null, image = null) {
-    cartState.push({ name, basePrice: base, totalPrice: total, addons, id, image });
-    saveCart();
-    window.toggleCart(true); 
+window.addToCart = function (name, base, total, addons, id = null, image = null) {
+  cartState.push({ name, basePrice: base, totalPrice: total, addons, id, image });
+  saveCart();
+  window.toggleCart(true);
 };
 
-window.toggleCart = function(forceOpen = null) {
-    let cartWrap = document.getElementById('globalCartWrap');
-    if(cartWrap) {
-        if(forceOpen === true) cartWrap.classList.add('open');
-        else if(forceOpen === false) cartWrap.classList.remove('open');
-        else cartWrap.classList.toggle('open');
-        updateCartUI();
+window.toggleCart = function (forceOpen = null) {
+  let cartWrap = document.getElementById('globalCartWrap');
+  if (cartWrap) {
+    if (forceOpen === true) cartWrap.classList.add('open');
+    else if (forceOpen === false) cartWrap.classList.remove('open');
+    else cartWrap.classList.toggle('open');
+    updateCartUI();
+  }
+};
+
+window.checkoutCart = function () {
+  if (cartState.length === 0) return;
+  let text = "Hi GeekBoz! I'd like to place an order from my cart:%0A%0A";
+  let gt = 0;
+  cartState.forEach((item, i) => {
+    gt += item.totalPrice;
+    text += `*${i + 1}. ${item.name}* (Base: ₹${item.basePrice.toLocaleString('en-IN')})%0A`;
+    if (item.addons && item.addons.length) {
+      item.addons.forEach(a => text += `   + ${a}%0A`);
     }
+    text += `   Subtotal: ₹${item.totalPrice.toLocaleString('en-IN')}%0A%0A`;
+  });
+  text += `*Grand Total: ₹${gt.toLocaleString('en-IN')}*%0A%0A`;
+  text += "Please confirm my order details and share payment info.";
+  window.open(`https://wa.me/919567776571?text=${text}`, '_blank');
 };
 
-window.checkoutCart = function() {
-    if(cartState.length === 0) return;
-    let text = "Hi GeekBoz! I'd like to place an order from my cart:%0A%0A";
-    let gt = 0;
-    cartState.forEach((item, i) => {
-        gt += item.totalPrice;
-        text += `*${i+1}. ${item.name}* (Base: ₹${item.basePrice.toLocaleString('en-IN')})%0A`;
-        if(item.addons && item.addons.length) {
-            item.addons.forEach(a => text += `   + ${a}%0A`);
-        }
-        text += `   Subtotal: ₹${item.totalPrice.toLocaleString('en-IN')}%0A%0A`;
-    });
-    text += `*Grand Total: ₹${gt.toLocaleString('en-IN')}*%0A%0A`;
-    text += "Please confirm my order details and share payment info.";
-    window.open(`https://wa.me/919567776571?text=${text}`, '_blank');
-};
-
-window.goToCartPage = function() {
-    const p = window.location.pathname;
-    if(p.includes('/prebuilts/') || p.includes('/custom-build/') || p.includes('/about/') || p.includes('/help/') || p.includes('/legal/') || p.includes('/service/')) {
-        window.location.href = '../cart/';
-    } else {
-        window.location.href = './cart/';
-    }
+window.goToCartPage = function () {
+  const p = window.location.pathname;
+  if (p.includes('/prebuilts/') || p.includes('/custom-build/') || p.includes('/about/') || p.includes('/help/') || p.includes('/legal/') || p.includes('/service/')) {
+    window.location.href = '../cart/';
+  } else {
+    window.location.href = './cart/';
+  }
 };
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Inject UI globally
-    if(!document.getElementById('globalCartWrap')) {
-        const wrap = document.createElement('div');
-        wrap.id = 'globalCartWrap';
-        wrap.innerHTML = `
+  // Inject UI globally
+  if (!document.getElementById('globalCartWrap')) {
+    const wrap = document.createElement('div');
+    wrap.id = 'globalCartWrap';
+    wrap.innerHTML = `
             <div class="cart-overlay" onclick="window.toggleCart(false)" style="position: fixed; inset: 0; background: rgba(0,0,0,0.6); backdrop-filter: blur(4px); z-index: 9998; opacity: 0; pointer-events: none; transition: opacity 0.3s;"></div>
             <div class="cart-panel" style="position: fixed; top: 0; right: 0; width: 100%; max-width: 400px; height: 100vh; background: var(--surface); border-left: 1px solid var(--border); box-shadow: -10px 0 40px rgba(0,0,0,0.5); z-index: 9999; transform: translateX(100%); transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1); display: flex; flex-direction: column;">
                 <div style="padding: 1.5rem; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center;">
@@ -417,22 +444,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 .mini-cart-item:hover { border-color: var(--accent); }
             </style>
         `;
-        document.body.appendChild(wrap);
-    }
-    
-    document.querySelectorAll('.cart-btn').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-            // If it's a link (<a> tag), let it navigate naturally.
-            // If it's a <button>, open the side panel.
-            if(btn.tagName === 'BUTTON') {
-                e.preventDefault();
-                window.toggleCart(true);
-            }
-        });
+    document.body.appendChild(wrap);
+  }
+
+  document.querySelectorAll('.cart-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      // If it's a link (<a> tag), let it navigate naturally.
+      // If it's a <button>, open the side panel.
+      if (btn.tagName === 'BUTTON') {
+        e.preventDefault();
+        window.toggleCart(true);
+      }
     });
-    
-    updateCartUI();
-});
+  });
 
-
-
+  updateCartUI();
+});

@@ -449,13 +449,13 @@ document.getElementById('emptyReset')?.addEventListener('click', resetAllFilters
 document.querySelectorAll('.pb-series-pill').forEach(pill => {
     pill.addEventListener('click', () => {
         const seriesName = pill.dataset.series;
-        
+
         if (seriesName === 'all') {
             state.series = [];
         } else {
             state.series = [seriesName];
         }
-        
+
         // Sync checkboxes
         document.querySelectorAll('#seriesFilters input, #seriesFiltersMobile input').forEach(box => {
             box.checked = state.series.includes(box.value);
@@ -587,6 +587,24 @@ updateFill(minRange, maxRange, priceFill);
 updateFill(minRangeMob, maxRangeMob, priceFillMob);
 
 // ── Load products.json ────────────────────────────────────
+// Show skeleton cards while loading
+const SKELETON_COUNT = 6;
+grid.innerHTML = Array.from({ length: SKELETON_COUNT }).map(() => `
+    <div class="pb-card pb-card-skeleton">
+      <div class="pb-card-img skeleton-block"></div>
+      <div class="pb-card-body">
+        <div class="skeleton-line skeleton-title"></div>
+        <div class="skeleton-line skeleton-spec"></div>
+        <div class="skeleton-line skeleton-spec short"></div>
+        <div class="pb-card-footer">
+          <div class="skeleton-line skeleton-price"></div>
+          <div class="skeleton-line skeleton-btn"></div>
+        </div>
+      </div>
+    </div>
+`).join('');
+resultCount.innerHTML = '<span>—</span> builds found';
+
 fetch('./products.json')
     .then(r => r.json())
     .then(data => {
@@ -596,8 +614,6 @@ fetch('./products.json')
     })
     .catch(err => {
         console.error('Failed to load products.json:', err);
+        grid.innerHTML = '';
         resultCount.textContent = 'Failed to load products.';
     });
-
-
-
