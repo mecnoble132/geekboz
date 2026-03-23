@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 — Page Not Found | GeekBoz</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=Oxanium:wght@600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="assets/css/global.css">
+    <link rel="stylesheet" href="assets/css/animations.css">
+    <link rel="stylesheet" href="assets/css/components.css">
+
+    <link rel="icon" href="./assets/images/geekbozfavicon.png">
+
+    <style>
+        /* ── 404 page ── */
+        .notfound-section {
+            min-height: calc(100vh - var(--nav-h));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 6rem 5vw 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Ambient glow blobs */
+        .notfound-section::before,
+        .notfound-section::after {
+            content: '';
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(120px);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .notfound-section::before {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(164, 249, 63, 0.08) 0%, transparent 70%);
+            top: 10%;
+            left: -10%;
+        }
+
+        .notfound-section::after {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(255, 60, 95, 0.06) 0%, transparent 70%);
+            bottom: 10%;
+            right: -5%;
+        }
+
+        .notfound-inner {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Big glitchy 404 */
+        .notfound-code {
+            font-family: 'Oxanium', sans-serif;
+            font-size: clamp(7rem, 18vw, 13rem);
+            font-weight: 800;
+            line-height: 1;
+            letter-spacing: -4px;
+            color: transparent;
+            -webkit-text-stroke: 2px rgba(164, 249, 63, 0.3);
+            position: relative;
+            user-select: none;
+            margin-bottom: 0.25rem;
+        }
+
+        .notfound-code::before {
+            content: '404';
+            position: absolute;
+            inset: 0;
+            color: var(--accent);
+            opacity: 0.12;
+            transform: translate(-4px, 4px);
+            -webkit-text-stroke: 0;
+        }
+
+        /* Eyebrow */
+        .notfound-eyebrow {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 1.1rem;
+        }
+
+        .notfound-eyebrow-line {
+            display: block;
+            width: 28px;
+            height: 2px;
+            background: var(--accent);
+            border-radius: 2px;
+        }
+
+        .notfound-title {
+            font-family: 'Oxanium', sans-serif;
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            font-weight: 700;
+            color: var(--text);
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+
+        .notfound-title span {
+            color: var(--accent);
+        }
+
+        .notfound-desc {
+            font-size: 1rem;
+            color: var(--muted);
+            line-height: 1.7;
+            max-width: 480px;
+            margin-bottom: 2.5rem;
+        }
+
+        /* CTA buttons */
+        .notfound-actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .notfound-btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--accent);
+            color: #080c10;
+            font-weight: 700;
+            font-size: 0.9rem;
+            padding: 0.75rem 1.6rem;
+            border-radius: 10px;
+            text-decoration: none;
+            transition: background 0.2s, transform 0.2s;
+        }
+
+        .notfound-btn-primary:hover {
+            background: var(--accent-hover);
+            transform: translateY(-2px);
+        }
+
+        .notfound-btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: transparent;
+            color: var(--text);
+            font-weight: 600;
+            font-size: 0.9rem;
+            padding: 0.75rem 1.6rem;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            text-decoration: none;
+            transition: border-color 0.2s, color 0.2s, transform 0.2s;
+        }
+
+        .notfound-btn-secondary:hover {
+            border-color: rgba(164, 249, 63, 0.4);
+            color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        /* Quick links */
+        .notfound-links {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+            width: 100%;
+        }
+
+        .notfound-links-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 1rem;
+        }
+
+        .notfound-links-grid {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .notfound-link-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 0.5rem 1rem;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 0.85rem;
+            color: var(--text);
+            text-decoration: none;
+            transition: border-color 0.2s, color 0.2s, background 0.2s;
+        }
+
+        .notfound-link-chip:hover {
+            border-color: rgba(164, 249, 63, 0.35);
+            color: var(--accent);
+            background: var(--surface2);
+        }
+
+        .notfound-link-chip i,
+        .notfound-link-chip svg {
+            width: 14px;
+            height: 14px;
+            flex-shrink: 0;
+        }
+
+        @media (max-width: 480px) {
+            .notfound-code {
+                -webkit-text-stroke-width: 1.5px;
+            }
+
+            .notfound-actions {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .notfound-btn-primary,
+            .notfound-btn-secondary {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ─── NAVBAR ──────────────────────────────────────── -->
+    <nav class="navbar">
+        <a href="./" class="nav-brand">
+            <div class="nav-logo"><img src="./assets/images/geekbozlogo.png" alt="GeekBoz logo"></div>
+            <span class="nav-name">Geek<span>Boz</span></span>
+        </a>
+
+        <ul class="nav-links">
+            <li><a href="./prebuilts/">Prebuilts</a></li>
+            <li><a href="custom-build/">Custom Build</a></li>
+            <li><a href="about/">About Us</a></li>
+            <li><a href="./#contact">Contact</a></li>
+            <li class="more-wrapper">
+                <button class="more-btn" id="moreBtn">
+                    More
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                        <path d="M2 4L6 8L10 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg>
+                </button>
+                <ul class="dropdown" id="dropdown">
+                    <li><a href="cart/">My Cart</a></li>
+                    <li><a href="service/">PC Service</a></li>
+                    <li><a href="./#contact">Our Stores</a></li>
+                    <li><a href="help/">Help &amp; FAQ</a></li>
+                    <li><a href="https://search.google.com/local/reviews?placeid=ChIJZXHsv726BTsRTXOTYqyzbxo"
+                            target="_blank" rel="noopener">Reviews</a></li>
+                </ul>
+            </li>
+        </ul>
+
+        <div class="nav-right">
+            <a href="cart/" class="cart-btn" aria-label="Cart">
+                <i data-lucide="shopping-cart"></i>
+                <span class="cart-badge">0</span>
+            </a>
+            <button class="cta-btn" onclick="location.href='custom-build/'">Build Custom PC</button>
+            <button class="hamburger" id="hamburger" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile menu -->
+    <nav class="mobile-menu" id="mobileMenu">
+        <span class="mobile-label">Main</span>
+        <a href="prebuilts/">Prebuilts</a>
+        <a href="custom-build/">Custom Build</a>
+        <a href="about/">About Us</a>
+        <a href="./#contact">Contact</a>
+        <span class="mobile-label">More</span>
+        <a href="cart/">My Cart</a>
+        <a href="service/">PC Service</a>
+        <a href="./#contact">Our Stores</a>
+        <a href="help/">Help &amp; FAQ</a>
+        <a href="https://search.google.com/local/reviews?placeid=ChIJZXHsv726BTsRTXOTYqyzbxo" target="_blank"
+            rel="noopener">Reviews</a>
+        <a href="custom-build/" class="mobile-cta">Build Custom PC</a>
+    </nav>
+
+    <!-- ─── 404 CONTENT ──────────────────────────────────── -->
+    <section class="notfound-section">
+        <div class="notfound-inner">
+
+            <div class="notfound-code">404</div>
+
+            <div class="notfound-eyebrow">
+                <span class="notfound-eyebrow-line"></span>
+                Page Not Found
+                <span class="notfound-eyebrow-line"></span>
+            </div>
+
+            <h1 class="notfound-title">Looks Like This Page<br><span>Doesn't Exist.</span></h1>
+
+            <p class="notfound-desc">The page you're looking for may have been moved, deleted, or never existed. Don't
+                worry — let's get you back on track.</p>
+
+            <div class="notfound-actions">
+                <a href="./" class="notfound-btn-primary">
+                    <i data-lucide="house"></i>
+                    Back to Home
+                </a>
+                <a href="prebuilts/" class="notfound-btn-secondary">
+                    <i data-lucide="monitor"></i>
+                    Browse Prebuilts
+                </a>
+            </div>
+
+            <div class="notfound-links">
+                <div class="notfound-links-label">Or jump to</div>
+                <div class="notfound-links-grid">
+                    <a href="custom-build/" class="notfound-link-chip">
+                        <i data-lucide="cpu"></i> Custom Build
+                    </a>
+                    <a href="service/" class="notfound-link-chip">
+                        <i data-lucide="wrench"></i> PC Service
+                    </a>
+                    <a href="cart/" class="notfound-link-chip">
+                        <i data-lucide="shopping-cart"></i> My Cart
+                    </a>
+                    <a href="help/" class="notfound-link-chip">
+                        <i data-lucide="circle-help"></i> Help &amp; FAQ
+                    </a>
+                    <a href="./#contact" class="notfound-link-chip">
+                        <i data-lucide="map-pin"></i> Our Stores
+                    </a>
+                    <a href="about/" class="notfound-link-chip">
+                        <i data-lucide="users"></i> About Us
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script>lucide.createIcons();</script>
+
+</body>
+
+</html>
