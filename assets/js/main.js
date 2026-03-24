@@ -326,7 +326,23 @@ function updateCartUI() {
       const itemDiv = document.createElement('div');
       itemDiv.className = 'mini-cart-item';
 
-      const pLink = item.id ? (window.location.pathname.includes('/cart/') || window.location.pathname.includes('/prebuilts/') || window.location.pathname.includes('/custom-build/') || window.location.pathname.includes('/about/') || window.location.pathname.includes('/help/') || window.location.pathname.includes('/service/') ? `../prebuilts/product/?id=${item.id}` : `prebuilts/product/?id=${item.id}`) : '#';
+      let pLink = '#';
+      if (item.id) {
+        const path = window.location.pathname;
+        const isProductPage = path.includes('/product/');
+        const isSubPage = path.includes('/cart/') || path.includes('/prebuilts/') || path.includes('/custom-build/') || path.includes('/about/') || path.includes('/help/') || path.includes('/service/');
+        
+        if (isProductPage) {
+          pLink = `../?id=${item.id}`; // From prebuilts/product/ up to prebuilts/product/?id=... wait, no.
+          // If we are on prebuilts/product/index.html, and we want to go to another product,
+          // we just need ?id=... (since we stay in the same folder).
+          pLink = `?id=${item.id}`;
+        } else if (isSubPage) {
+          pLink = `../prebuilts/product/?id=${item.id}`;
+        } else {
+          pLink = `prebuilts/product/?id=${item.id}`;
+        }
+      }
 
       let addonsHtml = '';
       if (item.addons && item.addons.length) {
@@ -392,7 +408,9 @@ window.checkoutCart = function () {
 
 window.goToCartPage = function () {
   const p = window.location.pathname;
-  if (p.includes('/prebuilts/') || p.includes('/custom-build/') || p.includes('/about/') || p.includes('/help/') || p.includes('/legal/') || p.includes('/service/')) {
+  if (p.includes('/product/')) {
+    window.location.href = '../../cart/';
+  } else if (p.includes('/prebuilts/') || p.includes('/custom-build/') || p.includes('/about/') || p.includes('/help/') || p.includes('/legal/') || p.includes('/service/')) {
     window.location.href = '../cart/';
   } else {
     window.location.href = './cart/';

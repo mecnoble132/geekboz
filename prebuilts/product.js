@@ -24,6 +24,11 @@ document.addEventListener('DOMContentLoaded', async () => {
             return;
         }
 
+        // Helper to fix relative paths for subfolder
+        const fixPath = (path) => path.startsWith('../') ? '../' + path : path;
+        product.image = fixPath(product.image);
+        if (product.gallery) product.gallery = product.gallery.map(fixPath);
+
         // 1. Populate Hero
         document.title = `${product.name} — GeekBoz`;
         document.getElementById('bcName').textContent = product.name;
@@ -177,14 +182,15 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         related.forEach(r => {
             const a = document.createElement('a');
-            a.href = `product?id=${r.id}`;
+            a.href = `?id=${r.id}`;
             a.style.textDecoration = 'none';
             a.style.display = 'block';
+            const rImage = fixPath(r.image);
             a.innerHTML = `
                 <div class="pb-card">
                     <div class="pb-card-img">
                         <span class="pb-series-tag ${r.series}">${r.tag}</span>
-                        <img src="${r.image}" alt="${r.name}" loading="lazy">
+                        <img src="${rImage}" alt="${r.name}" loading="lazy">
                     </div>
                     <div class="pb-card-body">
                         <h3 class="pb-card-name">GEEKBOZ <br><span>${r.name.replace('GBZ ', '')}</span></h3>
