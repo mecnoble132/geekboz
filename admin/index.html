@@ -18,6 +18,22 @@
 
 <body>
     <div id="app">
+        <!-- ── Auth gate (Firebase Auth email/password) ── -->
+        <div id="authGate" class="auth-gate">
+            <div class="auth-card">
+                <h2 class="auth-title">Admin Login</h2>
+                <div class="auth-field">
+                    <label for="adminEmail">Email</label>
+                    <input id="adminEmail" type="email" placeholder="admin@example.com" autocomplete="email" />
+                </div>
+                <div class="auth-field">
+                    <label for="adminPassword">Password</label>
+                    <input id="adminPassword" type="password" placeholder="••••••••" autocomplete="current-password" />
+                </div>
+                <button id="adminSignInBtn" class="btn btn-primary" type="button">Sign In</button>
+                <div id="authMsg" class="auth-msg" role="status"></div>
+            </div>
+        </div>
 
         <!-- ── Mobile overlay ── -->
         <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
@@ -477,6 +493,13 @@
 
     <!-- ── Toast container ── -->
     <div class="toast-wrap" id="toastWrap"></div>
+
+    <!-- Firebase (Auth + Firestore) -->
+    <script src="https://www.gstatic.com/firebasejs/10.12.3/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.3/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.3/firebase-firestore-compat.js"></script>
+    <script src="../assets/js/firebase-config.js"></script>
+    <script src="../assets/js/firebase-init.js"></script>
 
     <script src="script.js"></script>
 </body>

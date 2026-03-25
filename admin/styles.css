@@ -1775,3 +1775,60 @@ body {
     margin-top: 8px;
     flex-wrap: wrap;
 }
+
+/* ── Auth gate (email/password) ── */
+.auth-gate {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.72);
+    backdrop-filter: blur(6px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 99999;
+    padding: 20px;
+}
+
+.auth-card {
+    width: 100%;
+    max-width: 420px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 22px;
+    box-shadow: 0 20px 80px rgba(0, 0, 0, 0.55);
+}
+
+.auth-title {
+    font-size: 20px;
+    font-weight: 800;
+    margin-bottom: 14px;
+}
+
+.auth-field {
+    margin-bottom: 12px;
+}
+
+.auth-field label {
+    display: block;
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 6px;
+}
+
+.auth-field input {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 10px;
+    border: 1px solid var(--border2);
+    background: rgba(8, 12, 16, 0.4);
+    color: var(--text);
+    outline: none;
+}
+
+.auth-msg {
+    margin-top: 10px;
+    font-size: 13px;
+    color: var(--muted);
+    min-height: 18px;
+}

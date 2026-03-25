@@ -586,7 +586,7 @@ function readURLParams() {
 updateFill(minRange, maxRange, priceFill);
 updateFill(minRangeMob, maxRangeMob, priceFillMob);
 
-// ── Load products.json ────────────────────────────────────
+// ── Load products (Firestore) ───────────────────────────────
 // Show skeleton cards while loading
 const SKELETON_COUNT = 6;
 grid.innerHTML = Array.from({ length: SKELETON_COUNT }).map(() => `
@@ -605,15 +605,34 @@ grid.innerHTML = Array.from({ length: SKELETON_COUNT }).map(() => `
 `).join('');
 resultCount.innerHTML = '<span>—</span> builds found';
 
-fetch('./products.json')
-    .then(r => r.json())
-    .then(data => {
-        state.products = data;
+async function loadProducts() {
+    // Prefer Firestore if initialized.
+    if (window.fb && window.fb.db) {
+        const snap = await window.fb.db.collection('prebuilts').orderBy('order').get();
+        state.products = snap.docs.map(doc => {
+            const d = doc.data() || {};
+            return {
+                id: d.id || doc.id,
+                ...d,
+                price: Number(d.price || 0),
+                order: Number(d.order || 0)
+            };
+        });
         readURLParams();
         applyFilters();
-    })
-    .catch(err => {
-        console.error('Failed to load products.json:', err);
-        grid.innerHTML = '';
-        resultCount.textContent = 'Failed to load products.';
-    });
+        return;
+    }
+
+    // Fallback to local JSON (dev mode).
+    const r = await fetch('./products.json');
+    const data = await r.json();
+    state.products = data;
+    readURLParams();
+    applyFilters();
+}
+
+loadProducts().catch(err => {
+    console.error('Failed to load products:', err);
+    grid.innerHTML = '';
+    resultCount.textContent = 'Failed to load products.';
+});
