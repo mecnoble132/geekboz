@@ -19,9 +19,148 @@ let carouselSlides = [
     { productId: "gbz-z7", tag: "Workstation", bgImage: "https://hips.hearstapps.com/hmg-prod/images/pop-gaming-desktops-social-697a79b13a6ff.jpg", order: 4, enabled: true }
 ];
 
+// Admin authentication gate (Firebase Auth)
+let adminAuthorized = false;
+let adminGateStarted = false;
+
+function setAuthGateVisible(visible) {
+    const gate = document.getElementById('authGate');
+    if (!gate) return;
+    gate.style.display = visible ? 'flex' : 'none';
+}
+
+async function isCurrentUserAdmin(user) {
+    try {
+        if (!user || !window.fb || !window.fb.db) return false;
+        const snap = await window.fb.db.collection('roles').doc(user.uid).get();
+        const data = snap.data();
+        return !!data && data.role === 'admin';
+    } catch (e) {
+        console.error('Role check failed:', e);
+        return false;
+    }
+}
+
+function initAdminAuthGate() {
+    if (adminGateStarted) return;
+    adminGateStarted = true;
+
+    setAuthGateVisible(true);
+    const statusSpan = document.querySelector('.sidebar-footer .status-info span');
+    if (statusSpan) statusSpan.textContent = 'Sign in required';
+
+    const emailEl = document.getElementById('adminEmail');
+    const passEl = document.getElementById('adminPassword');
+    const btn = document.getElementById('adminSignInBtn');
+    const msgEl = document.getElementById('authMsg');
+
+    if (!window.fb || !window.fb.auth || !window.fb.db) {
+        if (msgEl) msgEl.textContent = 'Firebase is not configured yet.';
+        return;
+    }
+
+    if (btn && emailEl && passEl) {
+        btn.addEventListener('click', async () => {
+            const email = (emailEl.value || '').trim();
+            const password = passEl.value || '';
+
+            if (!email || !password) {
+                if (msgEl) msgEl.textContent = 'Enter email and password.';
+                return;
+            }
+
+            try {
+                btn.disabled = true;
+                if (msgEl) msgEl.textContent = 'Signing in...';
+                await window.fb.auth.signInWithEmailAndPassword(email, password);
+            } catch (e) {
+                console.error('Sign-in failed:', e);
+                if (msgEl) msgEl.textContent = e?.message || 'Sign-in failed.';
+                setAuthGateVisible(true);
+            } finally {
+                btn.disabled = false;
+            }
+        });
+    }
+
+    window.fb.auth.onAuthStateChanged(async (user) => {
+        adminAuthorized = false;
+
+        if (!user) {
+            if (msgEl) msgEl.textContent = 'Please sign in as admin.';
+            setAuthGateVisible(true);
+            return;
+        }
+
+        const ok = await isCurrentUserAdmin(user);
+        if (!ok) {
+            if (msgEl) msgEl.textContent = 'Access denied: admin role required.';
+            setAuthGateVisible(true);
+            try { await window.fb.auth.signOut(); } catch (_) { }
+            return;
+        }
+
+        // Authorized.
+        adminAuthorized = true;
+        if (msgEl) msgEl.textContent = '';
+        setAuthGateVisible(false);
+        if (statusSpan) statusSpan.textContent = 'Signed in (admin)';
+
+        // Load Firestore-backed state, then render views.
+        await loadAdminDataFromFirestore();
+        renderDashboard();
+        renderProductTable();
+        renderTeaserList();
+        renderCarouselList();
+    });
+}
+
 /* ══════════════════════════════════════════════════════
    SIDEBAR (mobile)
 ══════════════════════════════════════════════════════ */
+async function loadAdminDataFromFirestore() {
+    // Products
+    const productsSnap = await window.fb.db.collection('prebuilts').orderBy('order').get();
+    products = productsSnap.docs.map(doc => {
+        const d = doc.data() || {};
+        return {
+            id: d.id || doc.id,
+            ...d,
+            price: Number(d.price || 0),
+            order: Number(d.order || 0),
+            featured: !!d.featured,
+            inStock: !!d.inStock,
+            badge: d.badge || null,
+            fps: Array.isArray(d.fps) ? d.fps : [],
+            highlights: Array.isArray(d.highlights) ? d.highlights : [],
+            details: d.details && typeof d.details === 'object'
+                ? d.details
+                : { performance: '', design: '', cooling: '', features: '' },
+            gallery: Array.isArray(d.gallery) ? d.gallery : [],
+            image: d.image || ''
+        };
+    });
+
+    // Carousel settings
+    carouselSlides = [];
+    const carouselSnap = await window.fb.db.collection('settings').doc('homepageCarousel').get();
+    if (carouselSnap.exists) {
+        const rawSlides = (carouselSnap.data() || {}).slides;
+        if (Array.isArray(rawSlides)) {
+            carouselSlides = rawSlides
+                .filter(s => s)
+                .map(s => ({
+                    productId: s.productId,
+                    tag: s.tag || '',
+                    bgImage: s.bgImage || '',
+                    order: Number(s.order || 0),
+                    enabled: !!s.enabled
+                }))
+                .sort((a, b) => a.order - b.order);
+        }
+    }
+}
+
 function openSidebar() {
     const sidebar = document.getElementById('sidebar');
     const overlay = document.getElementById('sidebarOverlay');
@@ -75,6 +214,11 @@ function navigate(page) {
    DASHBOARD
 ══════════════════════════════════════════════════════ */
 function renderDashboard() {
+    if (!adminAuthorized) {
+        // Start the auth gate when the dashboard is first requested.
+        initAdminAuthGate();
+        return;
+    }
     document.getElementById('stat-total').textContent = products.length;
     document.getElementById('stat-stock').textContent = products.filter(p => p.inStock).length;
     document.getElementById('stat-featured').textContent = products.filter(p => p.featured).length;
@@ -180,9 +324,27 @@ function renderProductTable() {
         <p>No products match your filters.</p></div>`;
 }
 
-function toggleFeatured(id, val) {
+async function toggleFeatured(id, val) {
     const p = products.find(x => x.id === id);
-    if (p) p.featured = val;
+    if (!p) return;
+
+    const prev = p.featured;
+    p.featured = val;
+
+    try {
+        if (!window.fb || !window.fb.db) throw new Error('Firebase not initialized');
+        await window.fb.db.collection('prebuilts').doc(id).update({ featured: !!val });
+        renderProductTable();
+        renderDashboard();
+        renderTeaserList();
+    } catch (e) {
+        console.error('Failed to update featured:', e);
+        p.featured = prev;
+        toast('error', 'Could not update featured status.');
+        renderProductTable();
+        renderDashboard();
+        renderTeaserList();
+    }
 }
 
 /* ══════════════════════════════════════════════════════
@@ -333,7 +495,7 @@ function clearForm() {
 function get(id) { return document.getElementById(id)?.value || ''; }
 function set(id, val) { const el = document.getElementById(id); if (el) el.value = val; }
 
-function saveProduct() {
+async function saveProduct() {
     const id = get('f-id').trim();
     const name = get('f-name').trim();
     if (!id || !name) { toast('error', 'ID and Name are required'); return; }
@@ -364,19 +526,45 @@ function saveProduct() {
         gallery: collectImgGallery()
     };
 
-    if (editingId) {
-        const idx = products.findIndex(p => p.id === editingId);
-        if (idx >= 0) products[idx] = prod;
-        toast('success', `${name} updated`);
-    } else {
-        if (products.find(p => p.id === id)) { toast('error', 'A product with this ID already exists'); return; }
-        products.push(prod);
-        toast('success', `${name} added to catalog`);
+    if (imgStore.some(img => img.uploading)) {
+        toast('error', 'Please wait for image uploads to finish.');
+        return;
+    }
+
+    if (!adminAuthorized) { toast('error', 'Please sign in as admin.'); return; }
+    if (!window.fb || !window.fb.db) { toast('error', 'Firebase not initialized.'); return; }
+
+    const prodRef = window.fb.db.collection('prebuilts').doc(id);
+
+    try {
+        // Prevent accidental overwrites on "Add".
+        if (!editingId) {
+            const existing = await prodRef.get();
+            if (existing.exists) { toast('error', 'A product with this ID already exists'); return; }
+        }
+
+        await prodRef.set(prod);
+
+        if (editingId) {
+            const idx = products.findIndex(p => p.id === editingId);
+            if (idx >= 0) products[idx] = prod;
+            else products.push(prod);
+            toast('success', `${name} updated`);
+        } else {
+            products.push(prod);
+            toast('success', `${name} added to catalog`);
+        }
+    } catch (e) {
+        console.error('Failed to save product:', e);
+        toast('error', 'Could not save product.');
+        return;
     }
 
     closeModal();
     renderProductTable();
     renderDashboard();
+    renderTeaserList();
+    renderCarouselList();
     updateCarouselDropdown();
 }
 
@@ -396,12 +584,39 @@ function confirmDelete(id) {
 
 function closeConfirm() { document.getElementById('confirmModal').classList.remove('open'); }
 
-function doDelete() {
-    products = products.filter(p => p.id !== deleteTargetId);
-    carouselSlides = carouselSlides.filter(s => s.productId !== deleteTargetId);
+async function doDelete() {
+    const id = deleteTargetId;
+    if (!id) return;
+    if (!adminAuthorized) { toast('error', 'Please sign in as admin.'); return; }
+    if (!window.fb || !window.fb.db) { toast('error', 'Firebase not initialized.'); return; }
+
+    try {
+        await window.fb.db.collection('prebuilts').doc(id).delete();
+
+        // Remove carousel slides referencing this product.
+        const settingsRef = window.fb.db.collection('settings').doc('homepageCarousel');
+        const settingsSnap = await settingsRef.get();
+        const rawSlides = settingsSnap.exists ? (settingsSnap.data() || {}).slides : [];
+        let nextSlides = Array.isArray(rawSlides) ? rawSlides.filter(s => s.productId !== id) : [];
+
+        nextSlides.sort((a, b) => Number(a.order || 0) - Number(b.order || 0));
+        nextSlides = nextSlides.map((s, i) => ({ ...s, order: i + 1 }));
+
+        await settingsRef.set({ slides: nextSlides });
+
+        products = products.filter(p => p.id !== id);
+        carouselSlides = nextSlides;
+    } catch (e) {
+        console.error('Failed to delete product:', e);
+        toast('error', 'Could not delete product.');
+        return;
+    }
+
     closeConfirm();
     renderProductTable();
     renderDashboard();
+    renderTeaserList();
+    renderCarouselList();
     updateCarouselDropdown();
     toast('success', 'Product deleted');
 }
@@ -437,7 +652,23 @@ function renderTeaserList() {
 
 function setTeaserFeatured(id, val) {
     const p = products.find(x => x.id === id);
-    if (p) { p.featured = val; renderTeaserList(); }
+    if (!p) return;
+
+    const prev = p.featured;
+    p.featured = val;
+    renderTeaserList();
+    renderDashboard();
+
+    if (!window.fb || !window.fb.db) return;
+    window.fb.db.collection('prebuilts').doc(id).update({ featured: !!val }).then(() => {
+        // no-op; UI already updated optimistically
+    }).catch(e => {
+        console.error('Failed to update teaser featured:', e);
+        p.featured = prev;
+        toast('error', 'Could not update teaser featured.');
+        renderTeaserList();
+        renderDashboard();
+    });
 }
 
 function saveTeaser() {
@@ -529,8 +760,30 @@ function updateSlideBg(i, val) {
     if (sorted[i]) sorted[i].bgImage = val;
 }
 
-function saveCarousel() {
-    toast('success', 'Carousel saved');
+async function saveCarousel() {
+    if (!adminAuthorized) { toast('error', 'Please sign in as admin.'); return; }
+    if (!window.fb || !window.fb.db) { toast('error', 'Firebase not initialized.'); return; }
+
+    try {
+        const slides = carouselSlides
+            .map(s => ({
+                productId: s.productId,
+                tag: s.tag || '',
+                bgImage: s.bgImage || '',
+                order: Number(s.order || 0),
+                enabled: !!s.enabled
+            }))
+            .sort((a, b) => a.order - b.order);
+
+        // Re-normalize order after sort.
+        slides.forEach((s, i) => { s.order = i + 1; });
+
+        await window.fb.db.collection('settings').doc('homepageCarousel').set({ slides });
+        toast('success', 'Carousel saved');
+    } catch (e) {
+        console.error('Failed to save carousel:', e);
+        toast('error', 'Could not save carousel.');
+    }
 }
 
 /* ══════════════════════════════════════════════════════
@@ -540,6 +793,37 @@ function saveCarousel() {
 // In-memory store for the currently open product's images
 // Each entry: { dataUrl: string, isMain: boolean }
 let imgStore = [];
+
+// Cloudinary (unsigned upload) configuration.
+// TODO: replace placeholders with your Cloudinary values.
+const CLOUDINARY_CLOUD_NAME = 'PUT_CLOUDINARY_CLOUD_NAME_HERE';
+const CLOUDINARY_UPLOAD_PRESET = 'PUT_CLOUDINARY_UPLOAD_PRESET_HERE';
+// Folder is optional but recommended for organization.
+const CLOUDINARY_FOLDER = 'geekboz/prebuilts';
+
+function isCloudinaryConfigured() {
+    return !!CLOUDINARY_CLOUD_NAME &&
+        !CLOUDINARY_CLOUD_NAME.includes('PUT_') &&
+        !!CLOUDINARY_UPLOAD_PRESET &&
+        !CLOUDINARY_UPLOAD_PRESET.includes('PUT_');
+}
+
+async function uploadImageToCloudinary(file) {
+    // If not configured yet, we silently skip uploads and keep local previews.
+    if (!isCloudinaryConfigured()) return null;
+    const endpoint = `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/image/upload`;
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
+    if (CLOUDINARY_FOLDER) formData.append('folder', CLOUDINARY_FOLDER);
+
+    const res = await fetch(endpoint, { method: 'POST', body: formData });
+    const data = await res.json().catch(() => null);
+    if (!res.ok || !data || !data.secure_url) {
+        throw new Error('Cloudinary upload failed');
+    }
+    return data.secure_url;
+}
 
 function initImgDropZone() {
     const zone = document.getElementById('imgDropZone');
@@ -556,11 +840,31 @@ function initImgDropZone() {
 function handleImgFiles(files) {
     [...files].forEach(file => {
         if (!file.type.startsWith('image/')) return;
+
         const reader = new FileReader();
-        reader.onload = e => {
-            imgStore.push({ dataUrl: e.target.result, isMain: imgStore.length === 0 });
+        reader.onload = async e => {
+            const previewUrl = e.target.result;
+            const isMain = imgStore.length === 0;
+            const entry = { dataUrl: previewUrl, secureUrl: null, isMain, uploading: true };
+            imgStore.push(entry);
+
             renderImgGrid();
             syncImgToForm();
+
+            try {
+                const secureUrl = await uploadImageToCloudinary(file);
+                if (secureUrl) {
+                    entry.secureUrl = secureUrl;
+                    entry.dataUrl = secureUrl;
+                }
+            } catch (err) {
+                console.error('Image upload failed:', err);
+                toast('error', 'Image upload failed.');
+            } finally {
+                entry.uploading = false;
+                renderImgGrid();
+                syncImgToForm();
+            }
         };
         reader.readAsDataURL(file);
     });
@@ -612,7 +916,7 @@ function loadImgStore(mainUrl, galleryUrls) {
     imgStore = [];
     const all = galleryUrls && galleryUrls.length ? galleryUrls : (mainUrl ? [mainUrl] : []);
     all.forEach(url => {
-        imgStore.push({ dataUrl: url, isMain: url === mainUrl });
+        imgStore.push({ dataUrl: url, secureUrl: url, isMain: url === mainUrl, uploading: false });
     });
     if (imgStore.length && !imgStore.some(i => i.isMain)) imgStore[0].isMain = true;
     renderImgGrid();
@@ -634,6 +938,17 @@ function handleSlideBgFile(i, input) {
         renderCarouselList();
     };
     reader.readAsDataURL(file);
+
+    uploadImageToCloudinary(file)
+        .then(secureUrl => {
+            if (!secureUrl) return;
+            updateSlideBg(i, secureUrl);
+            renderCarouselList();
+        })
+        .catch(err => {
+            console.error('Slide background upload failed:', err);
+            toast('error', 'Slide background upload failed.');
+        });
 }
 
 /* ══════════════════════════════════════════════════════

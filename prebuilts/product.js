@@ -13,8 +13,23 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     try {
-        const response = await fetch('../products.json');
-        const products = await response.json();
+        let products = [];
+        if (window.fb && window.fb.db) {
+            const snap = await window.fb.db.collection('prebuilts').get();
+            products = snap.docs.map(doc => {
+                const d = doc.data() || {};
+                return {
+                    id: d.id || doc.id,
+                    ...d,
+                    price: Number(d.price || 0),
+                    order: Number(d.order || 0)
+                };
+            });
+        } else {
+            const response = await fetch('../products.json');
+            products = await response.json();
+        }
+
         const product = products.find(p => p.id === productId);
 
         loadingState.style.display = 'none';
@@ -226,7 +241,10 @@ document.addEventListener('DOMContentLoaded', async () => {
             const addons = Array.from(document.querySelectorAll('.addon-checkbox:checked')).map(cb => cb.nextElementSibling.textContent);
             // Normalize image path to root-relative so it works from any page
             const rawImg = product.image || '';
-            const rootImg = rawImg.startsWith('/') ? rawImg : '/assets/images/' + rawImg.split('/').pop();
+            const isExternal = /^https?:\/\//i.test(rawImg);
+            const rootImg = isExternal
+                ? rawImg
+                : (rawImg.startsWith('/') ? rawImg : '/assets/images/' + rawImg.split('/').pop());
             window.addToCart(product.name, basePrice, currentTotal, addons, product.id, rootImg);
 
             const btn = document.getElementById('addCartBtn');

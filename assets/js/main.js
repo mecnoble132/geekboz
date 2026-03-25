@@ -53,96 +53,206 @@ const paginationEl = document.getElementById('pagination');
 const progressBar = document.getElementById('progress');
 
 if (track && paginationEl && progressBar) {
-  const slides = track.querySelectorAll('.carousel-slide');
-  const TOTAL = slides.length;
-  const INTERVAL = 5000;
-  let current = 0;
-  let autoTimer = null;
-  let isTransitioning = false;
+  const fallbackBgValue = (() => {
+    const existing = track.querySelector('.carousel-slide .slide-bg')?.style?.backgroundImage;
+    if (existing) return existing; // usually already contains url(...)
+    // Absolute fallback (only used if Firestore has no bgImage + DOM has no slides).
+    return "url('https://hips.hearstapps.com/hmg-prod/images/pop-gaming-desktops-social-697a79b13a6ff.jpg')";
+  })();
 
-  // Dots
-  slides.forEach((_, i) => {
-    const dot = document.createElement('button');
-    dot.className = 'page-dot' + (i === 0 ? ' active' : '');
-    dot.setAttribute('aria-label', 'Slide ' + (i + 1));
-    dot.addEventListener('click', () => {
-      if (current === i) return;
-      goTo(i);
-    });
-    paginationEl.appendChild(dot);
-  });
+  function createSlideMarkup(product, slide) {
+    const name = product?.name || '';
+    const shortName = name.replace(/^GBZ\s+/i, '') || product?.id || '';
 
-  function updateDots() {
-    paginationEl.querySelectorAll('.page-dot').forEach((d, i) => {
-      d.classList.toggle('active', i === current);
-    });
+    const bgValue = slide?.bgImage
+      ? `url('${slide.bgImage}')`
+      : fallbackBgValue;
+
+    const seriesTag = slide?.tag || '';
+
+    return `
+      <div class="carousel-slide">
+        <div class="slide-bg" style="background-image: ${bgValue}"></div>
+        <div class="slide-overlay"></div>
+        <div class="slide-content">
+          <div class="slide-content-inner">
+            <span class="slide-tag">${seriesTag}</span>
+            <h2 class="slide-name">GBZ<br><span>${shortName}</span></h2>
+            <p class="slide-desc">${product?.description || ''}</p>
+            <div class="slide-specs">
+              <div class="spec-item">
+                <span class="spec-label">CPU</span>
+                <span class="spec-val">${product?.cpu || ''}</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">GPU</span>
+                <span class="spec-val">${product?.gpu || ''}</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">RAM</span>
+                <span class="spec-val">${product?.ram || ''}</span>
+              </div>
+            </div>
+            <a href="prebuilts/product/?id=${product?.id}" class="slide-cta">
+              View PC
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    `;
   }
 
-  function startProgress() {
-    progressBar.style.transition = 'none';
-    progressBar.style.width = '0%';
-    void progressBar.offsetWidth; // force reflow
-    progressBar.style.transition = 'width ' + INTERVAL + 'ms linear';
-    progressBar.style.width = '100%';
-  }
+  async function maybeRenderHomepageCarouselFromFirestore() {
+    if (!window.fb || !window.fb.db) return false;
+    try {
+      const settingsSnap = await window.fb.db.collection('settings').doc('homepageCarousel').get();
+      if (!settingsSnap.exists) return false;
 
-  function resetAutoPlay() {
-    stopAutoPlay();
-    startProgress();
-    autoTimer = setTimeout(advance, INTERVAL);
-  }
+      const data = settingsSnap.data() || {};
+      const slides = Array.isArray(data.slides) ? data.slides : [];
+      const enabledSlides = slides
+        .filter(s => s && s.enabled)
+        .sort((a, b) => (Number(a.order || 0) - Number(b.order || 0)));
 
-  function stopAutoPlay() {
-    if (autoTimer) {
-      clearTimeout(autoTimer);
-      autoTimer = null;
+      if (!enabledSlides.length) return false;
+
+      const uniqueProductIds = [...new Set(enabledSlides.map(s => s.productId).filter(Boolean))];
+      const productSnaps = await Promise.all(
+        uniqueProductIds.map(pid => window.fb.db.collection('prebuilts').doc(pid).get())
+      );
+
+      const productById = {};
+      productSnaps.forEach(snap => {
+        if (snap.exists) {
+          const d = snap.data() || {};
+          productById[snap.id] = { id: snap.id, ...d };
+        }
+      });
+
+      const slidesToRender = enabledSlides
+        .map(s => {
+          const product = productById[s.productId];
+          if (!product) return null;
+          return { product, slide: s };
+        })
+        .filter(Boolean);
+
+      if (!slidesToRender.length) return false;
+
+      track.innerHTML = '';
+      track.innerHTML = slidesToRender.map(x => createSlideMarkup(x.product, x.slide)).join('');
+      return true;
+    } catch (err) {
+      console.error('Failed to load homepage carousel from Firestore:', err);
+      return false;
     }
-    // Stop progress bar exactly where it is
-    progressBar.style.transition = 'none';
   }
 
-  function advance() {
-    goTo(current + 1);
-  }
+  function initCarousel() {
+    const slides = track.querySelectorAll('.carousel-slide');
+    const TOTAL = slides.length;
+    if (!TOTAL) return;
 
-  function goTo(index) {
-    if (isTransitioning) return;
-    isTransitioning = true;
+    // Reset any existing dots (defensive).
+    paginationEl.innerHTML = '';
 
-    current = (index + TOTAL) % TOTAL;
-    track.style.transform = 'translate3d(-' + (current * 100) + '%, 0, 0)';
-    updateDots();
-    resetAutoPlay();
+    const INTERVAL = 5000;
+    let current = 0;
+    let autoTimer = null;
+    let isTransitioning = false;
 
-    // prevent rapid clicking glitches by matching CSS track transition (0.65s)
-    setTimeout(() => { isTransitioning = false; }, 650);
-  }
-
-  // Arrows
-  const prevBtn = document.getElementById('prevBtn');
-  const nextBtn = document.getElementById('nextBtn');
-  if (prevBtn) prevBtn.addEventListener('click', () => goTo(current - 1));
-  if (nextBtn) nextBtn.addEventListener('click', () => goTo(current + 1));
-
-  // Pause on hover
-  const carouselSection = document.getElementById('carousel');
-  if (carouselSection) {
-    carouselSection.addEventListener('mouseenter', stopAutoPlay);
-    carouselSection.addEventListener('mouseleave', resetAutoPlay);
-
-    // Gestures
-    let touchX = null;
-    carouselSection.addEventListener('touchstart', e => { touchX = e.touches[0].clientX; }, { passive: true });
-    carouselSection.addEventListener('touchend', e => {
-      if (touchX === null) return;
-      const dx = e.changedTouches[0].clientX - touchX;
-      if (Math.abs(dx) > 50) goTo(dx < 0 ? current + 1 : current - 1);
-      touchX = null;
+    // Dots
+    slides.forEach((_, i) => {
+      const dot = document.createElement('button');
+      dot.className = 'page-dot' + (i === 0 ? ' active' : '');
+      dot.setAttribute('aria-label', 'Slide ' + (i + 1));
+      dot.addEventListener('click', () => {
+        if (current === i) return;
+        goTo(i);
+      });
+      paginationEl.appendChild(dot);
     });
+
+    function updateDots() {
+      paginationEl.querySelectorAll('.page-dot').forEach((d, i) => {
+        d.classList.toggle('active', i === current);
+      });
+    }
+
+    function startProgress() {
+      progressBar.style.transition = 'none';
+      progressBar.style.width = '0%';
+      void progressBar.offsetWidth; // force reflow
+      progressBar.style.transition = 'width ' + INTERVAL + 'ms linear';
+      progressBar.style.width = '100%';
+    }
+
+    function stopAutoPlay() {
+      if (autoTimer) {
+        clearTimeout(autoTimer);
+        autoTimer = null;
+      }
+      // Stop progress bar exactly where it is
+      progressBar.style.transition = 'none';
+    }
+
+    function resetAutoPlay() {
+      stopAutoPlay();
+      startProgress();
+      autoTimer = setTimeout(advance, INTERVAL);
+    }
+
+    function advance() {
+      goTo(current + 1);
+    }
+
+    function goTo(index) {
+      if (isTransitioning) return;
+      isTransitioning = true;
+
+      current = (index + TOTAL) % TOTAL;
+      track.style.transform = 'translate3d(-' + (current * 100) + '%, 0, 0)';
+      updateDots();
+      resetAutoPlay();
+
+      // prevent rapid clicking glitches by matching CSS track transition (0.65s)
+      setTimeout(() => { isTransitioning = false; }, 650);
+    }
+
+    // Arrows
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    if (prevBtn) prevBtn.addEventListener('click', () => goTo(current - 1));
+    if (nextBtn) nextBtn.addEventListener('click', () => goTo(current + 1));
+
+    // Pause on hover
+    const carouselSection = document.getElementById('carousel');
+    if (carouselSection) {
+      carouselSection.addEventListener('mouseenter', stopAutoPlay);
+      carouselSection.addEventListener('mouseleave', resetAutoPlay);
+
+      // Gestures
+      let touchX = null;
+      carouselSection.addEventListener('touchstart', e => { touchX = e.touches[0].clientX; }, { passive: true });
+      carouselSection.addEventListener('touchend', e => {
+        if (touchX === null) return;
+        const dx = e.changedTouches[0].clientX - touchX;
+        if (Math.abs(dx) > 50) goTo(dx < 0 ? current + 1 : current - 1);
+        touchX = null;
+      });
+    }
+
+    // Init
+    resetAutoPlay();
   }
 
-  // Init
-  resetAutoPlay();
+  (async () => {
+    await maybeRenderHomepageCarouselFromFirestore();
+    initCarousel();
+  })();
 }
 
 // ── Prebuilts drag to scroll ───────────────────────────
@@ -215,13 +325,32 @@ if (teaserTrack) {
     </div>
   `).join('');
 
-  fetch('./prebuilts/products.json')
-    .then(r => r.json())
-    .then(data => {
-      // Filter to featured only, then take up to 5
-      const featured = data.filter(p => p.featured === true);
-      const teaserItems = featured.slice(0, 5);
+  async function loadTeaserItems() {
+    if (window.fb && window.fb.db) {
+      const snap = await window.fb.db.collection('prebuilts').where('featured', '==', true).get();
+      return snap.docs
+        .map(doc => {
+          const d = doc.data() || {};
+          return {
+            id: d.id || doc.id,
+            ...d,
+            price: Number(d.price || 0),
+            order: Number(d.order || 0)
+          };
+        })
+        .sort((a, b) => a.order - b.order)
+        .slice(0, 5);
+    }
 
+    // Fallback to local JSON (dev mode).
+    const r = await fetch('./prebuilts/products.json');
+    const data = await r.json();
+    const featured = data.filter(p => p.featured === true);
+    return featured.slice(0, 5);
+  }
+
+  loadTeaserItems()
+    .then(teaserItems => {
       teaserTrack.innerHTML = '';
 
       if (teaserItems.length === 0) {
@@ -234,9 +363,7 @@ if (teaserTrack) {
         card.className = 'pb-card';
         card.style.animationDelay = `${i * 0.1}s`;
 
-        // Image path adjustment: JSON uses ../assets/ for prebuilt page.
-        // Homepage needs ./assets/
-        const imgSrc = p.image ? p.image.replace('../', './') : `./assets/images/prebuiltph3.webp`;
+        const imgSrc = p.image || `./assets/images/prebuiltph3.webp`;
 
         const seriesClass = {
           gaming: 'gaming',
