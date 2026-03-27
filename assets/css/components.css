@@ -2739,14 +2739,18 @@
     background: var(--surface);
     width: 100%;
     max-width: 500px;
+    max-height: 90vh;
     border-radius: 20px;
     border: 1px solid var(--border);
-    overflow: hidden;
+    overflow-y: auto;
+    overflow-x: hidden;
     position: relative;
     box-shadow: 0 30px 60px rgba(0,0,0,0.5);
     transform: translateY(20px) scale(0.95);
     transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
+.event-modal::-webkit-scrollbar { width: 4px; }
+.event-modal::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 10px; }
 .event-backdrop.open .event-modal {
     transform: translateY(0) scale(1);
 }
@@ -2769,10 +2773,11 @@
 .event-close:hover { background: rgba(0,0,0,0.8); }
 .event-image {
     width: 100%;
-    aspect-ratio: 16/9;
-    background: var(--surface2);
+    height: auto;
+    max-height: 350px;
+    background: #000;
     display: block;
-    object-fit: cover;
+    object-fit: contain;
 }
 .event-body { padding: 2rem; }
 .event-status {

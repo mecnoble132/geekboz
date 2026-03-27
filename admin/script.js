@@ -1029,7 +1029,9 @@ function openEventAddModal() {
     editingEventId = null;
     document.getElementById('eventModalTitle').textContent = 'Create Event';
     clearEventForm();
+    renderEventImg(''); 
     document.getElementById('eventModal').classList.add('open');
+    setTimeout(initEventImgDropZone, 0);
 }
 
 function openEventEditModal(id) {
@@ -1048,7 +1050,10 @@ function openEventEditModal(id) {
     set('ev-desc', ev.desc || '');
     document.getElementById('ev-enabled').checked = !!ev.enabled;
 
+    renderEventImg(ev.image || '');
+
     document.getElementById('eventModal').classList.add('open');
+    setTimeout(initEventImgDropZone, 0);
 }
 
 function closeEventModal() {
@@ -1128,6 +1133,66 @@ async function doDeleteEvent() {
 document.getElementById('eventModal').addEventListener('click', e => {
     if (e.target === document.getElementById('eventModal')) closeEventModal();
 });
+
+function initEventImgDropZone() {
+    const zone = document.getElementById('eventImgDropZone');
+    if (!zone) return;
+    zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('drag-over'); });
+    zone.addEventListener('dragleave', () => zone.classList.remove('drag-over'));
+    zone.addEventListener('drop', e => {
+        e.preventDefault();
+        zone.classList.remove('drag-over');
+        handleEventImgFiles(e.dataTransfer.files);
+    });
+}
+
+function handleEventImgFiles(files) {
+    const file = files[0];
+    if (!file || !file.type.startsWith('image/')) return;
+
+    const reader = new FileReader();
+    reader.onload = async e => {
+        const previewUrl = e.target.result;
+        renderEventImg(previewUrl, true);
+        
+        try {
+            const secureUrl = await uploadImageToCloudinary(file);
+            if (secureUrl) {
+                renderEventImg(secureUrl, false);
+                document.getElementById('ev-image').value = secureUrl;
+            }
+        } catch (err) {
+            console.error('Event image upload failed:', err);
+            toast('error', 'Image upload failed.');
+            renderEventImg('', false);
+        }
+    };
+    reader.readAsDataURL(file);
+}
+
+function renderEventImg(url, uploading = false) {
+    const grid = document.getElementById('eventImgGrid');
+    if (!grid) return;
+    if (!url) { grid.innerHTML = ''; return; }
+    
+    grid.innerHTML = `
+        <div class="img-tile ${uploading ? 'uploading' : ''}" style="width:100%; max-width:200px">
+            <img src="${url}" alt="Event Image" />
+            <button class="img-remove-btn" onclick="removeEventImg(event)" title="Remove">
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 3l10 10M13 3L3 13"/></svg>
+            </button>
+            ${uploading ? '<div style="position:absolute; inset:0; background:rgba(0,0,0,0.4); display:grid; place-items:center; font-size:10px; color:white">Uploading...</div>' : ''}
+        </div>
+    `;
+    document.getElementById('ev-image').value = url;
+}
+
+function removeEventImg(e) {
+    if (e) e.stopPropagation();
+    renderEventImg('');
+    document.getElementById('ev-image').value = '';
+}
+
 
 /* ══════════════════════════════════════════════════════
    INIT
