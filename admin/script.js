@@ -1002,6 +1002,8 @@ window.addEventListener('resize', () => {
 ══════════════════════════════════════════════════════ */
 function renderEventTable() {
     const list = events;
+    
+    // Desktop table
     document.getElementById('eventTableBody').innerHTML = list.map(ev => `
         <tr>
             <td>
@@ -1021,6 +1023,30 @@ function renderEventTable() {
             </td>
         </tr>
     `).join('') || `<tr><td colspan="4"><div class="empty-state"><p>No events found.</p></div></td></tr>`;
+
+    // Mobile cards
+    const cardEl = document.getElementById('eventCards');
+    if (cardEl) {
+        cardEl.innerHTML = list.map(ev => `
+            <div class="product-card-item">
+                <div class="product-card-info">
+                    <div class="product-card-name">${ev.title}</div>
+                    <div class="product-card-meta">
+                        <span class="badge ${ev.enabled ? 'badge-gaming' : ''}">${ev.enabled ? 'Active' : 'Inactive'}</span>
+                        <span>${ev.date || 'No schedule'}</span>
+                    </div>
+                </div>
+                <div class="product-card-actions">
+                    <button class="btn btn-ghost btn-sm btn-icon" onclick="openEventEditModal('${ev.id}')">
+                        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M11 2l3 3-8 8H3v-3L11 2z"/></svg>
+                    </button>
+                    <button class="btn btn-danger btn-sm btn-icon" onclick="confirmDeleteEvent('${ev.id}')">
+                        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 4h12M5 4V2h6v2M6 7v5M10 7v5M3 4l1 10h8l1-10"/></svg>
+                    </button>
+                </div>
+            </div>
+        `).join('') || `<div class="empty-state"><p>No events found.</p></div>`;
+    }
 }
 
 let editingEventId = null;
