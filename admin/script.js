@@ -19,6 +19,8 @@ let carouselSlides = [
     { productId: "gbz-z7", tag: "Workstation", bgImage: "https://hips.hearstapps.com/hmg-prod/images/pop-gaming-desktops-social-697a79b13a6ff.jpg", order: 4, enabled: true }
 ];
 
+let events = [];
+
 // Admin authentication gate (Firebase Auth)
 let adminAuthorized = false;
 let adminGateStarted = false;
@@ -112,6 +114,7 @@ function initAdminAuthGate() {
         renderProductTable();
         renderTeaserList();
         renderCarouselList();
+        renderEventTable();
     });
 }
 
@@ -159,6 +162,10 @@ async function loadAdminDataFromFirestore() {
                 .sort((a, b) => a.order - b.order);
         }
     }
+
+    // Events
+    const eventsSnap = await window.fb.db.collection('events').get();
+    events = eventsSnap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
 }
 
 function openSidebar() {
@@ -189,7 +196,8 @@ const pageTitles = {
     dashboard: 'Dashboard',
     products: 'All Products',
     teaser: 'Teaser Section',
-    carousel: 'Hero Carousel'
+    carousel: 'Hero Carousel',
+    events: 'Live Events'
 };
 
 function navigate(page) {
@@ -205,6 +213,7 @@ function navigate(page) {
     if (page === 'products') renderProductTable();
     if (page === 'teaser') renderTeaserList();
     if (page === 'carousel') renderCarouselList();
+    if (page === 'events') renderEventTable();
 
     // Close sidebar on mobile after navigating
     closeSidebar();
@@ -986,6 +995,138 @@ window.addEventListener('resize', () => {
         document.getElementById('sidebarOverlay').classList.remove('visible');
         document.body.style.overflow = '';
     }
+});
+
+/* ══════════════════════════════════════════════════════
+   EVENTS
+══════════════════════════════════════════════════════ */
+function renderEventTable() {
+    const list = events;
+    document.getElementById('eventTableBody').innerHTML = list.map(ev => `
+        <tr>
+            <td>
+                <div style="font-weight:600">${ev.title}</div>
+            </td>
+            <td>${ev.date || '—'}</td>
+            <td><span class="badge ${ev.enabled ? 'badge-gaming' : ''}">${ev.enabled ? 'Active' : 'Inactive'}</span></td>
+            <td style="text-align:right">
+                <div style="display:flex;gap:6px;justify-content:flex-end">
+                    <button class="btn btn-ghost btn-sm btn-icon" onclick="openEventEditModal('${ev.id}')">
+                        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M11 2l3 3-8 8H3v-3L11 2z"/></svg>
+                    </button>
+                    <button class="btn btn-danger btn-sm btn-icon" onclick="confirmDeleteEvent('${ev.id}')">
+                        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 4h12M5 4V2h6v2M6 7v5M10 7v5M3 4l1 10h8l1-10"/></svg>
+                    </button>
+                </div>
+            </td>
+        </tr>
+    `).join('') || `<tr><td colspan="4"><div class="empty-state"><p>No events found.</p></div></td></tr>`;
+}
+
+let editingEventId = null;
+
+function openEventAddModal() {
+    editingEventId = null;
+    document.getElementById('eventModalTitle').textContent = 'Create Event';
+    clearEventForm();
+    document.getElementById('eventModal').classList.add('open');
+}
+
+function openEventEditModal(id) {
+    editingEventId = id;
+    const ev = events.find(x => x.id === id);
+    if (!ev) return;
+
+    document.getElementById('eventModalTitle').textContent = 'Edit Event';
+    clearEventForm();
+
+    set('ev-title', ev.title);
+    set('ev-date', ev.date || '');
+    set('ev-image', ev.image || '');
+    set('ev-btn-text', ev.btnText || '');
+    set('ev-btn-url', ev.btnUrl || '');
+    set('ev-desc', ev.desc || '');
+    document.getElementById('ev-enabled').checked = !!ev.enabled;
+
+    document.getElementById('eventModal').classList.add('open');
+}
+
+function closeEventModal() {
+    document.getElementById('eventModal').classList.remove('open');
+}
+
+function clearEventForm() {
+    ['ev-title', 'ev-date', 'ev-image', 'ev-btn-text', 'ev-btn-url', 'ev-desc'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.value = '';
+    });
+    document.getElementById('ev-enabled').checked = true;
+}
+
+async function saveEvent() {
+    const title = get('ev-title').trim();
+    if (!title) { toast('error', 'Title is required'); return; }
+
+    const ev = {
+        title,
+        date: get('ev-date'),
+        image: get('ev-image'),
+        btnText: get('ev-btn-text'),
+        btnUrl: get('ev-btn-url'),
+        desc: get('ev-desc'),
+        enabled: document.getElementById('ev-enabled').checked,
+        updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+    };
+
+    if (!adminAuthorized) { toast('error', 'Please sign in as admin.'); return; }
+
+    try {
+        if (editingEventId) {
+            await window.fb.db.collection('events').doc(editingEventId).update(ev);
+            const idx = events.findIndex(x => x.id === editingEventId);
+            if (idx >= 0) events[idx] = { ...events[idx], ...ev };
+            toast('success', 'Event updated');
+        } else {
+            const docRef = await window.fb.db.collection('events').add(ev);
+            events.push({ id: docRef.id, ...ev });
+            toast('success', 'Event created');
+        }
+    } catch (e) {
+        console.error('Failed to save event:', e);
+        toast('error', 'Could not save event.');
+        return;
+    }
+
+    closeEventModal();
+    renderEventTable();
+}
+
+let deleteEventTargetId = null;
+function confirmDeleteEvent(id) {
+    deleteEventTargetId = id;
+    const ev = events.find(x => x.id === id);
+    document.getElementById('confirmTitle').textContent = `Delete ${ev?.title}?`;
+    document.getElementById('confirmMsg').textContent = 'This event will be removed.';
+    document.getElementById('confirmOkBtn').onclick = doDeleteEvent;
+    document.getElementById('confirmModal').classList.add('open');
+}
+
+async function doDeleteEvent() {
+    if (!deleteEventTargetId) return;
+    try {
+        await window.fb.db.collection('events').doc(deleteEventTargetId).delete();
+        events = events.filter(x => x.id !== deleteEventTargetId);
+        toast('success', 'Event deleted');
+    } catch (e) {
+        console.error('Failed to delete event:', e);
+        toast('error', 'Could not delete event.');
+    }
+    closeConfirm();
+    renderEventTable();
+}
+
+document.getElementById('eventModal').addEventListener('click', e => {
+    if (e.target === document.getElementById('eventModal')) closeEventModal();
 });
 
 /* ══════════════════════════════════════════════════════
