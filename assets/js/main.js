@@ -609,5 +609,93 @@ document.addEventListener('DOMContentLoaded', () => {
     yearEl.textContent = new Date().getFullYear();
   }
 
+  // ── WhatsApp Widget Injection ─────────────────────────
+  if (!document.getElementById('whatsapp-widget')) {
+    const waWidget = document.createElement('a');
+    waWidget.id = 'whatsapp-widget';
+    waWidget.className = 'whatsapp-widget';
+    waWidget.href = 'https://wa.me/919567776571';
+    waWidget.target = '_blank';
+    waWidget.rel = 'noopener noreferrer';
+    waWidget.setAttribute('aria-label', 'Chat with us on WhatsApp');
+    waWidget.innerHTML = `
+      <div class="whatsapp-label">
+        <span>Online</span>
+        Chat with us
+      </div>
+      <div class="whatsapp-icon-wrap">
+        <svg viewBox="0 0 24 24" fill="white">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.72.94 3.659 1.437 5.634 1.437h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+        </svg>
+      </div>
+    `;
+
+    document.body.appendChild(waWidget);
+  }
+
+
+  // ── Event Popup Injection ─────────────────────────────
+  async function checkEventPopup() {
+    if (!window.fb || !window.fb.db) return;
+    try {
+      // Get the most recent enabled event
+      const snap = await window.fb.db.collection('events')
+        .where('enabled', '==', true)
+        .orderBy('updatedAt', 'desc')
+        .limit(1)
+        .get();
+
+      if (snap.empty) return;
+      const event = snap.docs[0].data();
+      const eventId = snap.docs[0].id;
+
+      // Check if already seen in this session
+      if (sessionStorage.getItem('gbz_event_seen_' + eventId)) return;
+
+      // Inject HTML
+      const backdrop = document.createElement('div');
+      backdrop.className = 'event-backdrop';
+      backdrop.innerHTML = `
+        <div class="event-modal">
+          <button class="event-close" id="closeEvent">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+          ${event.image ? `<img src="${event.image}" class="event-image" alt="${event.title}">` : ''}
+          <div class="event-body">
+            <div class="event-status">Live Event</div>
+            <h2 class="event-title">${event.title}</h2>
+            ${event.date ? `<div class="event-schedule"><i data-lucide="calendar" style="width:14px"></i> ${event.date}</div>` : ''}
+            <p class="event-desc">${event.desc || ''}</p>
+            ${event.btnUrl ? `<a href="${event.btnUrl}" class="event-cta" target="_blank" rel="noopener">${event.btnText || 'Learn More'}</a>` : ''}
+          </div>
+        </div>
+      `;
+      document.body.appendChild(backdrop);
+      if (window.lucide) lucide.createIcons();
+
+      // Show after short delay
+      setTimeout(() => backdrop.classList.add('open'), 1500);
+
+      const closeBtn = backdrop.querySelector('#closeEvent');
+      closeBtn.onclick = () => {
+        backdrop.classList.remove('open');
+        sessionStorage.setItem('gbz_event_seen_' + eventId, 'true');
+        setTimeout(() => backdrop.remove(), 500);
+      };
+
+      // Close on backdrop click
+      backdrop.onclick = (e) => {
+        if (e.target === backdrop) closeBtn.onclick();
+      };
+    } catch (err) {
+      console.error('Event popup failed:', err);
+    }
+  }
+
+  checkEventPopup();
+
   updateCartUI();
 });
+

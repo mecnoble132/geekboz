@@ -91,6 +91,18 @@
                 </button>
             </div>
 
+            <div class="nav-section">
+                <div class="nav-label">Campaigns</div>
+                <button class="nav-item" onclick="navigate('events')">
+                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6">
+                        <rect x="2" y="3" width="12" height="10" rx="1.5" />
+                        <path d="M5 2v2M11 2v2M2 7h12" />
+                        <circle cx="8" cy="10" r="1" />
+                    </svg>
+                    Live Events
+                </button>
+            </div>
+
             <div class="sidebar-footer">
                 <div class="status-info">
                     <div class="status-dot"></div>
@@ -291,6 +303,38 @@
                     </div>
                 </div>
 
+                <!-- ── EVENTS ── -->
+                <div id="page-events" class="page">
+                    <div class="section-head">
+                        <div>
+                            <h2>Live & Upcoming Events</h2>
+                            <p>Promote special events with a popup. Only the top-most enabled event will be shown.</p>
+                        </div>
+                        <button class="btn btn-primary" onclick="openEventAddModal()">
+                            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M8 2v12M2 8h12" />
+                            </svg>
+                            <span class="btn-label">Create Event</span>
+                        </button>
+                    </div>
+
+                    <div class="card">
+                        <div class="table-wrap">
+                            <table class="product-table">
+                                <thead>
+                                    <tr>
+                                        <th>Event Title</th>
+                                        <th>Schedule</th>
+                                        <th>Status</th>
+                                        <th style="text-align:right">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="eventTableBody"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
             </div><!-- /content -->
         </main>
     </div>
@@ -474,6 +518,63 @@
                         <rect x="5" y="2" width="5" height="4" />
                     </svg>
                     Save Product
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── Event modal ── -->
+    <div id="eventModal" class="modal-backdrop">
+        <div class="modal">
+            <div class="modal-header">
+                <h2 id="eventModalTitle">Create Event</h2>
+                <button class="btn btn-ghost btn-icon" onclick="closeEventModal()">
+                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M3 3l10 10M13 3L3 13" />
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-grid">
+                    <div class="form-group form-full">
+                        <label>Title *</label>
+                        <input type="text" id="ev-title" placeholder="E.g. VALORANT Tournament 2024" />
+                    </div>
+                    <div class="form-group">
+                        <label>Schedule / Date</label>
+                        <input type="text" id="ev-date" placeholder="E.g. Dec 15th, 10:00 AM" />
+                    </div>
+                    <div class="form-group">
+                        <label>Image URL</label>
+                        <input type="text" id="ev-image" placeholder="https://…" />
+                    </div>
+                    <div class="form-group">
+                        <label>Primary Action Text</label>
+                        <input type="text" id="ev-btn-text" placeholder="E.g. Register Now" />
+                    </div>
+                    <div class="form-group">
+                        <label>Primary Action URL</label>
+                        <input type="text" id="ev-btn-url" placeholder="https://…" />
+                    </div>
+                    <div class="form-group form-full">
+                        <label>Description</label>
+                        <textarea id="ev-desc" rows="3" placeholder="Brief details about the event…"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="ev-enabled" checked />
+                            <span>Currently Active</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-ghost" onclick="closeEventModal()">Cancel</button>
+                <button class="btn btn-primary" onclick="saveEvent()">
+                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M13 2H5L2 5v9h12V2z" />
+                    </svg>
+                    Save Event
                 </button>
             </div>
         </div>
