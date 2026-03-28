@@ -518,7 +518,7 @@ window.toggleCart = function (forceOpen = null) {
 
 window.checkoutCart = function () {
   if (cartState.length === 0) return;
-  let text = "Hi GeekBoz! I'd like to place an order from my cart:%0A%0A";
+  let text = "Hi GeekBoZ! I'd like to place an order from my cart:%0A%0A";
   let gt = 0;
   cartState.forEach((item, i) => {
     gt += item.totalPrice;
@@ -699,3 +699,4 @@ document.addEventListener('DOMContentLoaded', () => {
   updateCartUI();
 });
 
+

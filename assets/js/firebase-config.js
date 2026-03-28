@@ -11,3 +11,4 @@ window.firebaseConfig = {
   appId: "1:343530275646:web:df652ebc6a6e063d09226f",
   measurementId: "G-171RQ6GSGH"
 };
+

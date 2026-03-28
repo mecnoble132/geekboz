@@ -1224,3 +1224,4 @@ function removeEventImg(e) {
    INIT
 ══════════════════════════════════════════════════════ */
 renderDashboard();
+

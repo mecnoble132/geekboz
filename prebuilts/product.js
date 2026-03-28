@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (product.gallery) product.gallery = product.gallery.map(fixPath);
 
         // 1. Populate Hero
-        document.title = `${product.name} — GeekBoz`;
+        document.title = `${product.name} — GeekBoZ`;
         document.getElementById('bcName').textContent = product.name;
         document.getElementById('prodName').textContent = product.name;
         document.getElementById('prodTagline').textContent = product.description;
@@ -208,7 +208,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                         <img src="${rImage}" alt="${r.name}" loading="lazy">
                     </div>
                     <div class="pb-card-body">
-                        <h3 class="pb-card-name">GEEKBOZ <br><span>${r.name.replace('GBZ ', '')}</span></h3>
+                        <h3 class="pb-card-name">GeekBoZ <br><span>${r.name.replace('GBZ ', '')}</span></h3>
                         <div class="pb-card-specs">
                             <span><i data-lucide="cpu"></i> ${r.cpu}</span>
                             <span><i data-lucide="monitor"></i> ${r.gpu}</span>
@@ -233,7 +233,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         const getWAUrl = () => {
             const addons = Array.from(document.querySelectorAll('.addon-checkbox:checked')).map(cb => cb.nextElementSibling.textContent);
             let addonText = addons.length ? `\nAdd-ons included: ${addons.join(', ')}` : '';
-            const text = `Hi GeekBoz! I'm interested in the ${product.name} (Total: ₹${currentTotal.toLocaleString('en-IN')}).${addonText}\nCan we discuss further?`;
+            const text = `Hi GeekBoZ! I'm interested in the ${product.name} (Total: ₹${currentTotal.toLocaleString('en-IN')}).${addonText}\nCan we discuss further?`;
             return `https://wa.me/919567776571?text=${encodeURIComponent(text)}`;
         }
 
@@ -268,6 +268,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         errorState.style.display = 'block';
     }
 });
+
+
 
 
 

@@ -636,3 +636,4 @@ loadProducts().catch(err => {
     grid.innerHTML = '';
     resultCount.textContent = 'Failed to load products.';
 });
+
