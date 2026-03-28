@@ -97,22 +97,6 @@ body {
   transform: rotate(10deg);
 }
 
-/* Pulse Animation */
-.whatsapp-icon-wrap::before {
-  content: '';
-  position: absolute;
-  inset: -4px;
-  border-radius: 50%;
-  background: #25D366;
-  opacity: 0.3;
-  z-index: -1;
-  animation: wa-pulse 2s infinite;
-}
-
-@keyframes wa-pulse {
-  0% { transform: scale(1); opacity: 0.3; }
-  100% { transform: scale(1.5); opacity: 0; }
-}
 
 .whatsapp-icon-wrap svg {
   width: 32px;
