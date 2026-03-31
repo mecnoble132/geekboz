@@ -963,6 +963,18 @@
     font-size: 0.95rem;
     color: var(--text);
     letter-spacing: -0.02em;
+    display: flex;
+    align-items: baseline;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+}
+
+.pb-original-price {
+    font-size: 0.72rem;
+    font-weight: 500;
+    color: var(--muted);
+    text-decoration: line-through;
+    opacity: 0.55;
 }
 
 .pb-card-btn {

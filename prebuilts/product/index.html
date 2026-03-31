@@ -115,53 +115,19 @@
                     <p id="prodTagline" class="prod-tagline">Tagline placeholder</p>
                     <div id="prodPrice" class="prod-price">₹0</div>
 
-                    <!-- Featured Service Addon -->
-                    <div class="prod-addons" style="border-color: rgba(164, 249, 63, 0.4); background: linear-gradient(135deg, rgba(8,12,16,1) 0%, rgba(164, 249, 63, 0.05) 100%); margin-bottom: 1rem;">
-                        <h3 class="addons-title" style="color: var(--accent); display: flex; align-items: center; gap: 0.4rem; font-size: 0.95rem;">
-                            <i data-lucide="shield"></i> GeekBoZ Elite Protection
-                        </h3>
-                        <label class="addon-label" style="border-bottom: none; padding-bottom: 0;">
-                            <div class="addon-left">
-                                <input type="checkbox" class="addon-checkbox" value="4999">
-                                <span class="addon-name" style="color: var(--text); font-weight: 600; font-size: 0.95rem;">10-Year Service Plan</span>
-                            </div>
-                            <span class="addon-price">+₹4,999</span>
-                        </label>
-                        <p style="font-size: 0.75rem; color: rgba(255,255,255,0.6); margin-top: 0.6rem; line-height: 1.4; font-family: 'DM Sans', sans-serif; padding-left: 1.6rem;">
-                            Includes priority tech support, annual deep cleaning, and zero-cost labor for all upgrades, maintenance, and diagnostics for a full decade.
-                        </p>
+                    <!-- Highlighted Add-ons Container -->
+                    <div id="highlightedAddonsContainer"></div>
+
+                    <!-- Standard Add-ons Section -->
+                    <div class="prod-addons" id="standardAddonsWrapper" style="display: none;">
+                        <h3 class="addons-title" id="standardAddonsTitle">Additional Upgrades</h3>
+                        <div id="standardAddonsContainer"></div>
                     </div>
 
-                    <!-- Add-ons Section -->
-                    <div class="prod-addons">
-                        <h3 class="addons-title">Additional Accessories</h3>
-                        <label class="addon-label">
-                            <div class="addon-left">
-                                <input type="checkbox" class="addon-checkbox" value="2500">
-                                <span class="addon-name">Extended 2-Year Part Warranty</span>
-                            </div>
-                            <span class="addon-price">+₹2,500</span>
-                        </label>
-                        <label class="addon-label">
-                            <div class="addon-left">
-                                <input type="checkbox" class="addon-checkbox" value="1500">
-                                <span class="addon-name">GeekBoZ Gaming Mouse</span>
-                            </div>
-                            <span class="addon-price">+₹1,500</span>
-                        </label>
-                        <label class="addon-label">
-                            <div class="addon-left">
-                                <input type="checkbox" class="addon-checkbox" value="3000">
-                                <span class="addon-name">Premium Headset</span>
-                            </div>
-                            <span class="addon-price">+₹3,000</span>
-                        </label>
-
-                        <!-- Dynamically appear when addons are selected -->
-                        <div id="priceSummary" style="display: none; justify-content: space-between; align-items: flex-end; margin-top: 1rem; padding-top: 1rem; border-top: 1px dashed rgba(255,255,255,0.1);">
-                            <span style="font-family: 'DM Sans', sans-serif; font-size: 0.85rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em;">Final Total:</span>
-                            <span id="totalPriceDisplay" style="font-family: 'Oxanium', sans-serif; font-size: 1.5rem; font-weight: 800; color: var(--accent); line-height: 1;">₹0</span>
-                        </div>
+                    <!-- Dynamically appear when addons are selected -->
+                    <div id="priceSummary" style="display: none; justify-content: space-between; align-items: flex-end; margin-top: 1rem; margin-bottom: 1.5rem; padding-top: 1rem; border-top: 1px dashed rgba(255,255,255,0.1);">
+                        <span style="font-family: 'DM Sans', sans-serif; font-size: 0.85rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em;">Final Total:</span>
+                        <span id="totalPriceDisplay" style="font-family: 'Oxanium', sans-serif; font-size: 1.5rem; font-weight: 800; color: var(--accent); line-height: 1;">₹0</span>
                     </div>
 
                     <!-- CTA -->
@@ -179,7 +145,7 @@
                         <div class="trust-item"><i data-lucide="shield-check"></i> 3-Year Warranty</div>
                         <div class="trust-item"><i data-lucide="truck"></i> Free Shipping</div>
                         <div class="trust-item"><i data-lucide="lock"></i> Secure Payment</div>
-                        <div class="trust-item"><i data-lucide="refresh-cw"></i> 7-Day Returns</div>
+                        <div class="trust-item"><i data-lucide="refresh-cw"></i> 5-Day Returns</div>
                     </div>
                 </div>
             </div>

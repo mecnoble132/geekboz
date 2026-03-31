@@ -56,6 +56,14 @@ document.addEventListener('DOMContentLoaded', async () => {
         const priceEl = document.getElementById('prodPrice');
         priceEl.textContent = `₹${basePrice.toLocaleString('en-IN')}`; // Keep base price static
 
+        // Show strikethrough original price if available
+        if (product.originalPrice && product.originalPrice > basePrice) {
+            const origEl = document.createElement('span');
+            origEl.className = 'prod-original-price';
+            origEl.textContent = `₹${Number(product.originalPrice).toLocaleString('en-IN')}`;
+            priceEl.parentNode.insertBefore(origEl, priceEl);
+        }
+
         const summaryEl = document.getElementById('priceSummary');
         const totalEl = document.getElementById('totalPriceDisplay');
         
@@ -69,11 +77,75 @@ document.addEventListener('DOMContentLoaded', async () => {
         };
         updatePriceDisplay();
         
-        // Addons Logic
+        // Fetch and Render Addons
+        let addons = [];
+        if (window.fb && window.fb.db) {
+            try {
+                const addonsSnap = await window.fb.db.collection('addons').orderBy('order', 'asc').get();
+                addons = addonsSnap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+            } catch (err) {
+                console.warn('Failed to fetch addons from Firestore:', err);
+            }
+        }
+        
+        const highContainer = document.getElementById('highlightedAddonsContainer');
+        const stdContainer = document.getElementById('standardAddonsContainer');
+        const stdWrapper = document.getElementById('standardAddonsWrapper');
+
+        if (highContainer && stdContainer && addons.length > 0) {
+            let hasStd = false;
+            let highHtml = '';
+            let stdHtml = '';
+
+            addons.forEach(ad => {
+                if (ad.highlighted) {
+                    highHtml += `
+                        <div class="prod-addons" style="border-color: rgba(164, 249, 63, 0.4); background: linear-gradient(135deg, rgba(8,12,16,1) 0%, rgba(164, 249, 63, 0.05) 100%); margin-bottom: 1rem;">
+                            <h3 class="addons-title" style="color: var(--accent); display: flex; align-items: center; gap: 0.4rem; font-size: 0.95rem;">
+                                <i data-lucide="shield"></i> ${ad.subtitle || 'Premium Upgrade'}
+                            </h3>
+                            <label class="addon-label" style="border-bottom: none; padding-bottom: 0;">
+                                <div class="addon-left">
+                                    <input type="checkbox" class="addon-checkbox" value="${ad.price}">
+                                    <span class="addon-name" style="color: var(--text); font-weight: 600; font-size: 0.95rem;">${ad.title}</span>
+                                </div>
+                                <span class="addon-price">+₹${Number(ad.price).toLocaleString('en-IN')}</span>
+                            </label>
+                            ${ad.desc ? `<p style="font-size: 0.75rem; color: rgba(255,255,255,0.6); margin-top: 0.6rem; line-height: 1.4; font-family: 'DM Sans', sans-serif; padding-left: 1.6rem;">${ad.desc}</p>` : ''}
+                        </div>
+                    `;
+                } else {
+                    hasStd = true;
+                    stdHtml += `
+                        <label class="addon-label">
+                            <div class="addon-left">
+                                <input type="checkbox" class="addon-checkbox" value="${ad.price}">
+                                <span class="addon-name">${ad.title}</span>
+                            </div>
+                            <span class="addon-price">+₹${Number(ad.price).toLocaleString('en-IN')}</span>
+                        </label>
+                    `;
+                }
+            });
+
+            highContainer.innerHTML = highHtml;
+            stdContainer.innerHTML = stdHtml;
+
+            if (hasStd) {
+                stdWrapper.style.display = 'block';
+            }
+            
+            if (window.lucide) {
+                window.lucide.createIcons();
+            }
+        }
+
+        // Addons Pricing Logic
         document.querySelectorAll('.addon-checkbox').forEach(cb => {
             cb.addEventListener('change', (e) => {
-                if(e.target.checked) currentTotal += parseInt(e.target.value);
-                else currentTotal -= parseInt(e.target.value);
+                const val = parseInt(e.target.value) || 0;
+                if(e.target.checked) currentTotal += val;
+                else currentTotal -= val;
                 updatePriceDisplay();
             });
         });
@@ -134,8 +206,11 @@ document.addEventListener('DOMContentLoaded', async () => {
             { icon: 'monitor', label: 'Graphics', val: product.gpu },
             { icon: 'memory-stick', label: 'Memory', val: product.ram },
             { icon: 'hard-drive', label: 'Storage', val: product.storage },
-            { icon: 'tv', label: 'Display Opt', val: product.display || 'N/A' },
+            { icon: 'circuit-board', label: 'Motherboard', val: product.motherboard || '—' },
             { icon: 'snowflake', label: 'Cooling', val: product.cooling || 'Advanced Cooling' },
+            { icon: 'plug-zap', label: 'PSU', val: product.psu || '—' },
+            { icon: 'box', label: 'Case', val: product.case || '—' },
+            { icon: 'tv', label: 'Display Opt', val: product.display || 'N/A', hidden: true },
             { icon: 'weight', label: 'Weight', val: product.weight || '—', hidden: true }
         ];
 

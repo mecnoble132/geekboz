@@ -1,28 +1,44 @@
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
+
     function isAdmin() {
       return request.auth != null &&
+        exists(/databases/$(database)/documents/roles/$(request.auth.uid)) &&
         get(/databases/$(database)/documents/roles/$(request.auth.uid)).data.role == 'admin';
     }
 
-    // Public catalog reads.
+    // 🔹 Prebuilt products (public read, admin write)
     match /prebuilts/{productId} {
       allow read: if true;
       allow create, update, delete: if isAdmin();
     }
 
-    // Public homepage settings reads (carousel config).
+    // 🔹 Addons (from your first rules)
+    match /addons/{addonId} {
+      allow read: if true;
+      allow create, update, delete: if isAdmin();
+    }
+
+    // 🔹 Homepage / app settings
     match /settings/{settingId} {
       allow read: if true;
       allow create, update, delete: if isAdmin();
     }
 
-    // Role docs: read your own role; write is admin-only (seed roles once manually).
+    // 🔹 Roles collection
     match /roles/{uid} {
       allow read: if request.auth != null && request.auth.uid == uid;
       allow create, update, delete: if isAdmin();
     }
+
+    // 🔹 EVENTS (your original logic preserved EXACTLY)
+    match /events/{eventId} {
+      allow read: if true;
+
+      // ❗ Kept exactly as you wrote (no exists() added intentionally)
+      allow write: if request.auth != null && 
+        get(/databases/$(database)/documents/roles/$(request.auth.uid)).data.role == 'admin';
+    }
   }
 }
-
