@@ -75,6 +75,12 @@
                     </svg>
                     All Products
                 </button>
+                <button class="nav-item" onclick="navigate('addons')">
+                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6">
+                        <path d="M8 3v10M3 8h10" />
+                    </svg>
+                    Add-ons
+                </button>
                 <button class="nav-item" onclick="navigate('teaser')">
                     <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6">
                         <path d="M1 12l4-4 3 3 3-4 4 5" />
@@ -139,6 +145,15 @@
                             <h2>Overview</h2>
                             <p>All your key numbers at a glance</p>
                         </div>
+                        <button class="btn btn-secondary" onclick="syncDefaultProductsToFirestore()" style="gap:6px; font-size:13px; font-weight:600">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14">
+                                <path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
+                                <path d="M3 3v5h5"></path>
+                                <path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"></path>
+                                <path d="M16 21v-5h5"></path>
+                            </svg>
+                            Sync Specs to Database
+                        </button>
                     </div>
 
                     <div class="stats-grid">
@@ -223,6 +238,39 @@
                         </div>
                         <!-- Mobile cards -->
                         <div class="product-cards" id="productCards"></div>
+                    </div>
+                </div>
+
+                <!-- ── ADD-ONS ── -->
+                <div id="page-addons" class="page">
+                    <div class="section-head">
+                        <div>
+                            <h2>Add-ons & Upgrades</h2>
+                            <p>Manage extra services and accessories available during checkout</p>
+                        </div>
+                        <button class="btn btn-primary" onclick="openAddonModal()">
+                            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M8 2v12M2 8h12" />
+                            </svg>
+                            <span class="btn-label">Create Add-on</span>
+                        </button>
+                    </div>
+
+                    <div class="card">
+                        <div class="table-wrap">
+                            <table class="product-table">
+                                <thead>
+                                    <tr>
+                                        <th>Title & Subtitle</th>
+                                        <th>Price</th>
+                                        <th>Highlighted</th>
+                                        <th style="text-align:right">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="addonTableBody"></tbody>
+                            </table>
+                        </div>
+                        <div class="product-cards" id="addonCards"></div>
                     </div>
                 </div>
 
@@ -378,6 +426,10 @@
                         <input type="number" id="f-price" placeholder="72499" />
                     </div>
                     <div class="form-group">
+                        <label>Original Price (₹)</label>
+                        <input type="number" id="f-originalPrice" placeholder="85999" />
+                    </div>
+                    <div class="form-group">
                         <label>Badge</label>
                         <input type="text" id="f-badge" placeholder="Best Seller" />
                     </div>
@@ -432,6 +484,18 @@
                         <div class="form-group">
                             <label>Weight</label>
                             <input type="text" id="f-weight" placeholder="Approx 13 kg" />
+                        </div>
+                        <div class="form-group">
+                            <label>Motherboard</label>
+                            <input type="text" id="f-motherboard" placeholder="MSI B650M Gaming WiFi" />
+                        </div>
+                        <div class="form-group">
+                            <label>PSU</label>
+                            <input type="text" id="f-psu" placeholder="Deepcool PL 550W | 80+ Bronze" />
+                        </div>
+                        <div class="form-group">
+                            <label>Case</label>
+                            <input type="text" id="f-case" placeholder="AURORA ARGB" />
                         </div>
                         <div class="form-group">
                             <label>Display</label>
@@ -589,6 +653,59 @@
                         <path d="M13 2H5L2 5v9h12V2z" />
                     </svg>
                     Save Event
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── Addon modal ── -->
+    <div id="addonModal" class="modal-backdrop">
+        <div class="modal">
+            <div class="modal-header">
+                <h2 id="addonModalTitle">Create Add-on</h2>
+                <button class="btn btn-ghost btn-icon" onclick="closeAddonModal()">
+                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M3 3l10 10M13 3L3 13" />
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-grid">
+                    <div class="form-group form-full">
+                        <label>Title *</label>
+                        <input type="text" id="ad-title" placeholder="E.g. 10-Year Service Plan" />
+                    </div>
+                    <div class="form-group">
+                        <label>Price (₹) *</label>
+                        <input type="number" id="ad-price" placeholder="4999" />
+                    </div>
+                    <div class="form-group">
+                        <label>Order / Priority position</label>
+                        <input type="number" id="ad-order" placeholder="1" />
+                    </div>
+                    <div class="form-group form-full">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="ad-highlighted" />
+                            <span style="font-weight: 500;">Is Highlighted (Premium formatting)</span>
+                        </label>
+                    </div>
+                    <div class="form-group form-full">
+                        <label>Highlight Subtitle (Only used if highlighted)</label>
+                        <input type="text" id="ad-subtitle" placeholder="E.g. GeekBoZ Elite Protection" />
+                    </div>
+                    <div class="form-group form-full">
+                        <label>Description (Optional text explaining)</label>
+                        <textarea id="ad-desc" rows="3" placeholder="Includes priority tech support..."></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-ghost" onclick="closeAddonModal()">Cancel</button>
+                <button class="btn btn-primary" onclick="saveAddon()">
+                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M13 2H5L2 5v9h12V2z" />
+                    </svg>
+                    Save Add-on
                 </button>
             </div>
         </div>

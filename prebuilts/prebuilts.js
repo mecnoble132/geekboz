@@ -156,7 +156,10 @@ function renderCards(products) {
           </span>
         </div>
         <div class="pb-card-footer">
-          <div class="pb-price">${formatPrice(p.price)}</div>
+          <div class="pb-price">
+            ${p.originalPrice && p.originalPrice > p.price ? `<span class="pb-original-price">${formatPrice(p.originalPrice)}</span>` : ''}
+            ${formatPrice(p.price)}
+          </div>
           <a href="product/?id=${p.id}" class="pb-card-btn">
             View Build
             <svg width="12" height="12" viewBox="0 0 16 16" fill="none">

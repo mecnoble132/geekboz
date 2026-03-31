@@ -3,13 +3,13 @@
    (in production this is replaced by Firebase reads)
 ══════════════════════════════════════════════════════ */
 let products = [
-    { id: "gbz-x1-air", name: "GBZ X1 AiR", series: "gaming", tag: "Gaming", price: 45399, badge: "Entry", featured: true, inStock: true, order: 1, cpu: "Intel Core i3 / AMD Ryzen 5", gpu: "NVIDIA GTX 1650 / AMD RX 6500 XT", ram: "16GB DDR4 3200MHz", storage: "500GB NVMe M.2 SSD", description: "An excellent entry into PC gaming that balances cost and performance effectively.", display: "N/A (Desktop)", cooling: "Standard Air Cooler", weight: "Approx 10 kg", fps: [{ game: "Valorant", fps: 200, settings: "Competitive" }, { game: "CS:GO", fps: 250, settings: "High" }], highlights: [{ icon: "zap", title: "Great Value", desc: "Solid 1080p gaming performance." }, { icon: "snowflake", title: "Quiet Cooling", desc: "Stays cool under regular load." }, { icon: "cpu", title: "Upgradable", desc: "Ready for future upgrades." }, { icon: "gamepad-2", title: "Game Ready", desc: "Perfect for esports." }], details: { performance: "Entry level performance for everyday gaming at 1080p.", design: "Compact ATX chassis with essential lighting.", cooling: "Reliable air cooling for sustained usage.", features: "Wired connectivity with upgrade paths for future components." }, gallery: ["../assets/images/prebuiltph3.webp", "../assets/images/prebuiltph3.webp", "../assets/images/prebuiltph3.webp"], image: "../assets/images/prebuiltph3.webp" },
-    { id: "gbz-m3", name: "GBZ M3", series: "gaming", tag: "Gaming", price: 72499, badge: "Value Pick", featured: true, inStock: true, order: 2, cpu: "Intel Core i5 / AMD Ryzen 5", gpu: "NVIDIA RTX 4060 / AMD RX 7600", ram: "16GB DDR5 5200MHz", storage: "1TB NVMe M.2 SSD", description: "High performance mid-tier gaming powerhouse that delivers excellent framerates.", display: "N/A (Desktop)", cooling: "120mm AIO / Tower Air Cooler", weight: "Approx 12 kg", fps: [{ game: "Cyberpunk 2077", fps: 70, settings: "High 1080p" }, { game: "Call of Duty", fps: 120, settings: "High 1440p" }], highlights: [{ icon: "rocket", title: "Fast Performance", desc: "Handles 1440p gaming effortlessly." }, { icon: "snowflake", title: "Advanced Thermals", desc: "Tower cooler for better temps." }, { icon: "zap", title: "Rapid Storage", desc: "1TB Gen4 NVMe speeds." }, { icon: "gamepad-2", title: "Modern Gaming", desc: "Built for current-gen titles." }], details: { performance: "Solid 1440p performance in modern titles without breaking the bank.", design: "Clean aesthetic with moderate RGB configurations.", cooling: "Advanced thermals to keep components cool under heavy usage.", features: "High-fidelity audio jacks and improved VRM cooling." }, gallery: ["../assets/images/prebuiltph3.webp", "../assets/images/prebuiltph3.webp"], image: "../assets/images/prebuiltph3.webp" },
-    { id: "gbz-m5", name: "GBZ M5", series: "gaming", tag: "Gaming", price: 98599, badge: "Best Seller", featured: true, inStock: true, order: 3, cpu: "Intel Core i7 / AMD Ryzen 7", gpu: "NVIDIA RTX 4070 / AMD RX 7800 XT", ram: "32GB DDR5 6000MHz", storage: "1TB Gen4 NVMe M.2 SSD", description: "A high-end rig designed purely for pushing maximum frames in your favorite games.", display: "N/A (Desktop)", cooling: "240mm AIO Liquid Cooler", weight: "Approx 13 kg", fps: [{ game: "Cyberpunk 2077", fps: 90, settings: "Ultra 1440p" }, { game: "Valorant", fps: 400, settings: "Competitive" }], highlights: [{ icon: "rocket", title: "Top Tier", desc: "Premium graphics and processor sync." }, { icon: "snowflake", title: "Liquid Cooled", desc: "240mm AIO for silent operation." }, { icon: "cpu", title: "Multitasking", desc: "32GB RAM for streaming while playing." }, { icon: "gamepad-2", title: "4K Capable", desc: "Push pixels in high resolution." }], details: { performance: "Enthusiast-level framerates even on the newest demanding releases.", design: "Tempered glass panels showcasing premium internal components.", cooling: "Dual-fan AIO setups for near-silent operation under pressure.", features: "Wi-Fi 6 readiness and vast USB I/O selection." }, gallery: ["../assets/images/prebuiltph3.webp", "../assets/images/prebuiltph3.webp"], image: "../assets/images/prebuiltph3.webp" },
-    { id: "gbz-z1", name: "GBZ Z1", series: "creatorx", tag: "CreatorX", price: 107999, badge: null, featured: true, inStock: true, order: 4, cpu: "Intel Core i7 / AMD Ryzen 9", gpu: "NVIDIA RTX 4070 Super", ram: "32GB DDR5 6000MHz", storage: "2TB Gen4 NVMe M.2 SSD", description: "Built for creative professionals tackling demanding photo and video projects.", display: "N/A (Desktop)", cooling: "280mm AIO Liquid Cooler", weight: "Approx 13 kg", fps: [{ game: "Blender Render", fps: 120, settings: "Samples/min" }, { game: "Premiere Pro", fps: 60, settings: "4K Playback" }], highlights: [{ icon: "cpu", title: "Productivity", desc: "Fast rendering and real-time playback." }, { icon: "zap", title: "Massive Storage", desc: "2TB NVMe for scratch disks." }, { icon: "snowflake", title: "Reliable Cooling", desc: "280mm liquid cooling." }, { icon: "monitor", title: "Multi-Monitor", desc: "Support for up to 4 displays." }], details: { performance: "Designed with a strong multi-core capability to handle creative software suites.", design: "Professional chassis prioritizing function and minimalism.", cooling: "Optimized airflow focused on hard drive and CPU temperatures.", features: "Excellent connectivity for creative peripherals and external drives." }, gallery: ["../assets/images/prebuiltph3.webp", "../assets/images/prebuiltph3.webp"], image: "../assets/images/prebuiltph3.webp" },
-    { id: "gbz-z3", name: "GBZ Z3", series: "creatorx", tag: "CreatorX", price: 143969, badge: "Pro", featured: false, inStock: true, order: 5, cpu: "Intel Core i9 / AMD Ryzen 9", gpu: "NVIDIA RTX 4080", ram: "64GB DDR5 6000MHz", storage: "2TB NVMe SSD + 2TB HDD", description: "Serious rendering capabilities for 3D modeling, high-res editing, and simulation.", display: "N/A (Desktop)", cooling: "360mm AIO Liquid Cooler", weight: "Approx 14 kg", fps: [{ game: "Unreal Engine", fps: 140, settings: "Viewport FPS" }, { game: "After Effects", fps: 60, settings: "Real-time preview" }], highlights: [{ icon: "zap", title: "Lightning Fast", desc: "Unmatched speed in compile times." }, { icon: "cpu", title: "Massive Memory", desc: "64GB RAM for huge timelines." }, { icon: "snowflake", title: "360mm AIO", desc: "Keeps the flagship CPU icy cool." }, { icon: "rocket", title: "Dual Storage", desc: "SSD speed paired with HDD bulk." }], details: { performance: "Provides top-of-the-line performance required for commercial level rendering.", design: "Stunning aesthetics with comprehensive cable management.", cooling: "Massive radiator setup to quickly exhaust heavy workload heat.", features: "Expansion slots aplenty and cutting-edge networking hardware." }, gallery: ["../assets/images/prebuiltph3.webp"], image: "../assets/images/prebuiltph3.webp" },
-    { id: "gbz-z5", name: "GBZ Z5", series: "creatorx", tag: "CreatorX", price: 148999, badge: "Studio", featured: true, inStock: true, order: 6, cpu: "Intel Core i9-14900K / AMD Ryzen 9 7950X", gpu: "NVIDIA RTX 4080 Super", ram: "64GB DDR5 6400MHz", storage: "4TB NVMe SSD", description: "High-tier creator machine perfectly tuned for motion designers and seasoned editors.", display: "N/A (Desktop)", cooling: "360mm AIO Liquid Cooler", weight: "Approx 14.5 kg", fps: [{ game: "DaVinci Resolve", fps: 60, settings: "8K Playback" }, { game: "AutoCAD", fps: 160, settings: "Viewport" }], highlights: [{ icon: "cpu", title: "Heavy-duty", desc: "Multi-VFX processing made simple." }, { icon: "zap", title: "Ultra Space", desc: "4TB of ultra-fast Gen4 storage." }, { icon: "snowflake", title: "Acoustic Dampening", desc: "Silent operation chassis." }, { icon: "monitor", title: "AI Ready", desc: "Tensor cores for AI upscaling." }], details: { performance: "Extreme multi-threading capabilities handling multiple 4K/8K playbacks.", design: "Sleek and professional tower format with acoustic dampening.", cooling: "Top to bottom active cooling ensuring stability through hours of export.", features: "Premium components designed for immense longevity." }, gallery: ["../assets/images/prebuiltph3.webp"], image: "../assets/images/prebuiltph3.webp" },
-    { id: "gbz-z7", name: "GBZ Z7", series: "workstation", tag: "Workstation AI", price: 199999, badge: "Flagship", featured: true, inStock: true, order: 7, cpu: "AMD Ryzen 9 9950X / Intel Core Ultra 9", gpu: "NVIDIA RTX 4090 24GB", ram: "128GB DDR5 6000MHz", storage: "8TB NVMe SSD", description: "Absolute flagship workstation geared towards AI, complex scientific simulations, and top-tier VFX.", display: "N/A (Desktop)", cooling: "Custom Loop / 420mm AIO", weight: "Approx 16 kg", fps: [{ game: "AI Training", fps: 1000, settings: "Images/sec" }, { game: "V-Ray", fps: 300, settings: "Render speed" }], highlights: [{ icon: "rocket", title: "No Compromises", desc: "The ultimate specification for AI." }, { icon: "cpu", title: "Massive RAM", desc: "128GB memory for huge datasets." }, { icon: "zap", title: "Unrivaled GPU", desc: "24GB VRAM for deep learning." }, { icon: "snowflake", title: "Maximum Airflow", desc: "Maintains clocks indefinitely." }], details: { performance: "Mind-bending performance for machine learning datasets and dense scene renders.", design: "A massive engineering feat wrapped in a professional-grade chassis.", cooling: "Customized cooling solutions designed for completely unrestrained thermal envelopes.", features: "Limitless connectivity, professional GPU support, and vast storage expandability." }, gallery: ["../assets/images/prebuiltph3.webp"], image: "../assets/images/prebuiltph3.webp" }
+    { id: "gbz-x1-air", name: "GBZ X1 AiR", series: "gaming", tag: "Gaming", price: 45399, originalPrice: 48899, badge: "Entry", featured: true, inStock: true, order: 1, cpu: "AMD Ryzen 5 5600G | 6C / 12T | 4.6 GHz Max Clock", gpu: "Radeon Vega 7 iGPU | 2 GB", ram: "8 GB XPG DDR4 3200 MHz", storage: "512 GB M.2 Gen 4.0 NVMe SSD", motherboard: "ASUS Prime A520 CSM", psu: "Deepcool 550W | 80+ Bronze", case: "StarLight Gaming Cabinet", description: "Entry-level office & light gaming PC with AMD's integrated Vega 7 graphics — no discrete GPU.", display: "N/A (Desktop)", cooling: "Wraith Air Cooler", weight: "Approx 10 kg", fps: [], highlights: [{ icon: "zap", title: "Great Value", desc: "Solid 1080p gaming performance." }, { icon: "snowflake", title: "Quiet Cooling", desc: "Stays cool under regular load." }, { icon: "cpu", title: "Upgradable", desc: "Ready for future upgrades." }, { icon: "gamepad-2", title: "Game Ready", desc: "Perfect for esports." }], details: { performance: "Entry level performance for everyday gaming at 1080p.", design: "Compact ATX chassis with essential lighting.", cooling: "Reliable air cooling for sustained usage.", features: "Wired connectivity with upgrade paths for future components." }, gallery: ["../assets/images/prebuiltph3.webp", "../assets/images/prebuiltph3.webp", "../assets/images/prebuiltph3.webp"], image: "../assets/images/prebuiltph3.webp" },
+    { id: "gbz-m3", name: "GBZ M3", series: "gaming", tag: "Gaming", price: 72499, originalPrice: 75689, badge: "Value Pick", featured: true, inStock: true, order: 2, cpu: "AMD Ryzen 5 5500 | 6C / 12T | 4.2 GHz Max Clock", gpu: "NVIDIA RTX 3050 2X | 6 GB VRAM", ram: "16 GB DDR4 3200 MHz", storage: "512 GB XPG Gen 4.0 SSD", motherboard: "ASUS Prime A520", psu: "Deepcool PL 550W | 80+ Bronze", case: "Starlight ARGB", description: "Budget gaming entry with RTX 3050 — solid for 1080p casual gaming and esports titles.", display: "N/A (Desktop)", cooling: "Stock Cooler", weight: "Approx 12 kg", fps: [{ game: "Valorant", fps: "250+", settings: "Ultra / 1080p" }, { game: "Fortnite", fps: "140 - 160", settings: "Competitive / High" }, { game: "Cyberpunk 2077", fps: "60 - 70", settings: "Medium (DLSS Quality)" }], highlights: [{ icon: "rocket", title: "Fast Performance", desc: "Handles 1080p gaming effortlessly." }, { icon: "snowflake", title: "Advanced Thermals", desc: "Tower cooler for better temps." }, { icon: "zap", title: "Rapid Storage", desc: "Gen4 NVMe speeds." }, { icon: "gamepad-2", title: "Modern Gaming", desc: "Built for current-gen titles." }], details: { performance: "Solid 1080p performance in modern titles without breaking the bank.", design: "Clean aesthetic with moderate RGB configurations.", cooling: "Advanced thermals to keep components cool under heavy usage.", features: "High-fidelity audio jacks and improved VRM cooling." }, gallery: ["../assets/images/prebuiltph3.webp", "../assets/images/prebuiltph3.webp", "../assets/images/prebuiltph3.webp"], image: "../assets/images/prebuiltph3.webp" },
+    { id: "gbz-m5", name: "GBZ M5", series: "gaming", tag: "Gaming", price: 98599, originalPrice: 103489, badge: "Best Seller", featured: true, inStock: true, order: 3, cpu: "AMD Ryzen 5 7500F | 6C / 12T | 5.0 GHz Max Clock", gpu: "NVIDIA RTX 3050 2X | 6 GB VRAM", ram: "16 GB DDR5 6000 MHz CL36", storage: "1 TB XPG S60 Gen 4.0 SSD", motherboard: "MSI B650M Gaming WiFi", psu: "Deepcool PL 550W | 80+ Bronze", case: "Starlight ARGB", description: "Mid-range 1080p gaming with Ryzen 5 7500F and RTX 3050 on a modern DDR5 platform.", display: "N/A (Desktop)", cooling: "AMD Wraith Stealth", weight: "Approx 13 kg", fps: [{ game: "Valorant", fps: "450+", settings: "Ultra / 1080p" }, { game: "Fortnite", fps: "210 - 240", settings: "Competitive (DX12)" }, { game: "Cyberpunk 2077", fps: "70 - 85", settings: "Medium (DLSS Quality)" }], highlights: [{ icon: "rocket", title: "Top Tier", desc: "Premium graphics and processor sync." }, { icon: "snowflake", title: "Air Cooled", desc: "Wraith Stealth for silent operation." }, { icon: "cpu", title: "Multitasking", desc: "16GB DDR5 for streaming while playing." }, { icon: "gamepad-2", title: "1080p Capable", desc: "Push pixels in high resolution." }], details: { performance: "Enthusiast-level framerates even on the newest demanding releases.", design: "Tempered glass panels showcasing premium internal components.", cooling: "Air setups for near-silent operation under pressure.", features: "Wi-Fi 6 readiness and vast USB I/O selection." }, gallery: ["../assets/images/prebuiltph3.webp", "../assets/images/prebuiltph3.webp"], image: "../assets/images/prebuiltph3.webp" },
+    { id: "gbz-z1", name: "GBZ Z1", series: "gaming", tag: "Gaming", price: 107999, originalPrice: 117899, badge: null, featured: true, inStock: true, order: 4, cpu: "AMD Ryzen 5 8400F | 6C / 12T | 4.7 GHz Max Clock", gpu: "NVIDIA RTX 3060 2X | 12 GB VRAM", ram: "16 GB DDR5 6000 MHz", storage: "1 TB XPG 860 Gen 4.0 SSD", motherboard: "MSI B650M Gaming WiFi", psu: "Deepcool PL 550W | 80+ Bronze", case: "AURORA ARGB", description: "A well-rounded 1080p gaming rig with RTX 3060 12 GB — great for high FPS and modern titles.", display: "N/A (Desktop)", cooling: "Deepcool AG400 ARGB", weight: "Approx 13 kg", fps: [{ game: "Valorant", fps: "580+", settings: "Ultra / 1080p" }, { game: "Fortnite", fps: "175 - 195", settings: "Epic (DX12)" }, { game: "Cyberpunk 2077", fps: "90 - 105", settings: "High (DLSS Quality)" }], highlights: [{ icon: "cpu", title: "Productivity", desc: "Fast rendering and real-time playback." }, { icon: "zap", title: "Massive Storage", desc: "1TB NVMe for scratch disks." }, { icon: "snowflake", title: "Reliable Cooling", desc: "Deepcool AG400 air cooling." }, { icon: "monitor", title: "Multi-Monitor", desc: "Support for up to 4 displays." }], details: { performance: "Designed with a strong multi-core capability to handle creative software suites.", design: "Professional chassis prioritizing function and minimalism.", cooling: "Optimized airflow focused on hard drive and CPU temperatures.", features: "Excellent connectivity for creative peripherals and external drives." }, gallery: ["../assets/images/prebuiltph3.webp", "../assets/images/prebuiltph3.webp", "../assets/images/prebuiltph3.webp"], image: "../assets/images/prebuiltph3.webp" },
+    { id: "gbz-z3", name: "GBZ Z3", series: "gaming", tag: "Gaming", price: 143969, originalPrice: 151999, badge: "Pro", featured: false, inStock: true, order: 5, cpu: "AMD Ryzen 5 7600X | 6C / 12T | 4.7 GHz Max Clock", gpu: "AMD Radeon RX 9060 XT | 16 GB VRAM", ram: "16 GB DDR5 6000 MHz", storage: "1 TB XPG S60 Gen 4.0 SSD", motherboard: "MSI B650M Gaming WiFi", psu: "Deepcool PL 650W | 80+ Bronze", case: "AURORA ARGB", description: "AMD-focused 1080p/1440p build with RX 9060 XT 16 GB — outstanding VRAM for the price.", display: "N/A (Desktop)", cooling: "MSI A13 240mm AIO", weight: "Approx 14 kg", fps: [], highlights: [{ icon: "zap", title: "Lightning Fast", desc: "Unmatched speed in compile times." }, { icon: "cpu", title: "Massive Memory", desc: "16GB RAM for huge timelines." }, { icon: "snowflake", title: "240mm AIO", desc: "Keeps the flagship CPU icy cool." }, { icon: "rocket", title: "VRAM Storage", desc: "High VRAM speed for textures." }], details: { performance: "Provides top-of-the-line performance required for commercial level rendering.", design: "Stunning aesthetics with comprehensive cable management.", cooling: "Massive radiator setup to quickly exhaust heavy workload heat.", features: "Expansion slots aplenty and cutting-edge networking hardware." }, gallery: ["../assets/images/prebuiltph3.webp"], image: "../assets/images/prebuiltph3.webp" },
+    { id: "gbz-z5", name: "GBZ Z5", series: "creatorx", tag: "CreatorX", price: 148999, originalPrice: 154999, badge: "Studio", featured: true, inStock: true, order: 6, cpu: "AMD Ryzen 7 9700X | 8C / 16T | 5.5 GHz Max Clock", gpu: "NVIDIA RTX 5060 Ti | 16 GB VRAM", ram: "16 GB DDR5 6000 MHz", storage: "1 TB XPG S60 Gen 4.0 SSD", motherboard: "MSI B650M Gaming WiFi", psu: "Deepcool PL 650W | 80+ Bronze", case: "AURORA ARGB", description: "Powerful 1440p gaming PC pairing Ryzen 7 9700X with RTX 5060 Ti 16 GB on a DDR5 platform.", display: "N/A (Desktop)", cooling: "MSI A13 360mm AIO", weight: "Approx 14.5 kg", fps: [{ game: "Valorant", fps: "300+", settings: "Ultra / 1440p" }, { game: "Fortnite", fps: "130 - 150", settings: "Epic (DX12)" }, { game: "Cyberpunk 2077", fps: "75 - 90", settings: "Ultra (DLSS Quality, RT Med)" }], highlights: [{ icon: "cpu", title: "Heavy-duty", desc: "Multi-VFX processing made simple." }, { icon: "zap", title: "Ultra Space", desc: "1TB of ultra-fast Gen4 storage." }, { icon: "snowflake", title: "Acoustic Dampening", desc: "Silent operation chassis." }, { icon: "monitor", title: "AI Ready", desc: "Tensor cores for AI upscaling." }], details: { performance: "Extreme multi-threading capabilities handling multiple 4K/8K playbacks.", design: "Sleek and professional tower format with acoustic dampening.", cooling: "Top to bottom active cooling ensuring stability through hours of export.", features: "Premium components designed for immense longevity." }, gallery: ["../assets/images/prebuiltph3.webp", "../assets/images/prebuiltph3.webp", "../assets/images/prebuiltph3.webp"], image: "../assets/images/prebuiltph3.webp" },
+    { id: "gbz-z7", name: "GBZ Z7", series: "workstation", tag: "Workstation AI", price: 199999, originalPrice: 214899, badge: "Flagship", featured: true, inStock: true, order: 7, cpu: "AMD Ryzen 7 9700X | 8C / 16T | 5.5 GHz Max Clock", gpu: "NVIDIA RTX 5070 | 12 GB VRAM", ram: "32 GB DDR5 6000 MHz RGB", storage: "1 TB XPG Legend 860 SSD", motherboard: "MSI B850 PRO Gaming WiFi", psu: "750W | 80+ PCIe 5 Certified", case: "Stellar Prime ARGB", description: "Flagship build with RTX 5070 12 GB and Ryzen 7 9700X — the best of the range for 1440p and 4K gaming.", display: "N/A (Desktop)", cooling: "MSI A13 360mm AIO", weight: "Approx 16 kg", fps: [], highlights: [{ icon: "rocket", title: "No Compromises", desc: "The ultimate specification for AI." }, { icon: "cpu", title: "Massive RAM", desc: "32GB memory for huge datasets." }, { icon: "zap", title: "Unrivaled GPU", desc: "12GB VRAM for deep learning." }, { icon: "snowflake", title: "Maximum Airflow", desc: "Maintains clocks indefinitely." }], details: { performance: "Mind-bending performance for machine learning datasets and dense scene renders.", design: "A massive engineering feat wrapped in a professional-grade chassis.", cooling: "Customized cooling solutions designed for completely unrestrained thermal envelopes.", features: "Limitless connectivity, professional GPU support, and vast storage expandability." }, gallery: ["../assets/images/prebuiltph3.webp", "../assets/images/prebuiltph3.webp", "../assets/images/prebuiltph3.webp"], image: "../assets/images/prebuiltph3.webp" }
 ];
 
 let carouselSlides = [
@@ -20,6 +20,7 @@ let carouselSlides = [
 ];
 
 let events = [];
+let addons = [];
 
 // Admin authentication gate (Firebase Auth)
 let adminAuthorized = false;
@@ -115,6 +116,7 @@ function initAdminAuthGate() {
         renderTeaserList();
         renderCarouselList();
         renderEventTable();
+        renderAddonTable();
     });
 }
 
@@ -122,50 +124,72 @@ function initAdminAuthGate() {
    SIDEBAR (mobile)
 ══════════════════════════════════════════════════════ */
 async function loadAdminDataFromFirestore() {
-    // Products
-    const productsSnap = await window.fb.db.collection('prebuilts').orderBy('order').get();
-    products = productsSnap.docs.map(doc => {
-        const d = doc.data() || {};
-        return {
-            id: d.id || doc.id,
-            ...d,
-            price: Number(d.price || 0),
-            order: Number(d.order || 0),
-            featured: !!d.featured,
-            inStock: !!d.inStock,
-            badge: d.badge || null,
-            fps: Array.isArray(d.fps) ? d.fps : [],
-            highlights: Array.isArray(d.highlights) ? d.highlights : [],
-            details: d.details && typeof d.details === 'object'
-                ? d.details
-                : { performance: '', design: '', cooling: '', features: '' },
-            gallery: Array.isArray(d.gallery) ? d.gallery : [],
-            image: d.image || ''
-        };
-    });
-
-    // Carousel settings
-    carouselSlides = [];
-    const carouselSnap = await window.fb.db.collection('settings').doc('homepageCarousel').get();
-    if (carouselSnap.exists) {
-        const rawSlides = (carouselSnap.data() || {}).slides;
-        if (Array.isArray(rawSlides)) {
-            carouselSlides = rawSlides
-                .filter(s => s)
-                .map(s => ({
-                    productId: s.productId,
-                    tag: s.tag || '',
-                    bgImage: s.bgImage || '',
-                    order: Number(s.order || 0),
-                    enabled: !!s.enabled
-                }))
-                .sort((a, b) => a.order - b.order);
+    try {
+        // Products
+        const productsSnap = await window.fb.db.collection('prebuilts').orderBy('order').get();
+        if (!productsSnap.empty) {
+            products = productsSnap.docs.map(doc => {
+                const d = doc.data() || {};
+                return {
+                    id: d.id || doc.id,
+                    ...d,
+                    price: Number(d.price || 0),
+                    order: Number(d.order || 0),
+                    featured: !!d.featured,
+                    inStock: !!d.inStock,
+                    badge: d.badge || null,
+                    fps: Array.isArray(d.fps) ? d.fps : [],
+                    highlights: Array.isArray(d.highlights) ? d.highlights : [],
+                    details: d.details && typeof d.details === 'object'
+                        ? d.details
+                        : { performance: '', design: '', cooling: '', features: '' },
+                    gallery: Array.isArray(d.gallery) ? d.gallery : [],
+                    image: d.image || ''
+                };
+            });
         }
+    } catch (e) {
+        console.warn('Could not load products from Firebase (using fallbacks):', e);
     }
 
-    // Events
-    const eventsSnap = await window.fb.db.collection('events').get();
-    events = eventsSnap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+    try {
+        // Carousel settings
+        carouselSlides = [];
+        const carouselSnap = await window.fb.db.collection('settings').doc('homepageCarousel').get();
+        if (carouselSnap.exists) {
+            const rawSlides = (carouselSnap.data() || {}).slides;
+            if (Array.isArray(rawSlides)) {
+                carouselSlides = rawSlides
+                    .filter(s => s)
+                    .map(s => ({
+                        productId: s.productId,
+                        tag: s.tag || '',
+                        bgImage: s.bgImage || '',
+                        order: Number(s.order || 0),
+                        enabled: !!s.enabled
+                    }))
+                    .sort((a, b) => a.order - b.order);
+            }
+        }
+    } catch (e) {
+        console.warn('Could not load carousel settings:', e);
+    }
+
+    try {
+        // Events
+        const eventsSnap = await window.fb.db.collection('events').get();
+        events = eventsSnap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+    } catch (e) {
+        console.warn('Could not load events:', e);
+    }
+
+    try {
+        // Add-ons
+        const addonsSnap = await window.fb.db.collection('addons').orderBy('order', 'asc').get();
+        addons = addonsSnap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+    } catch (e) {
+        console.warn('Could not load addons:', e);
+    }
 }
 
 function openSidebar() {
@@ -195,6 +219,7 @@ function closeSidebar() {
 const pageTitles = {
     dashboard: 'Dashboard',
     products: 'All Products',
+    addons: 'Add-ons & Upgrades',
     teaser: 'Teaser Section',
     carousel: 'Hero Carousel',
     events: 'Live Events'
@@ -214,6 +239,7 @@ function navigate(page) {
     if (page === 'teaser') renderTeaserList();
     if (page === 'carousel') renderCarouselList();
     if (page === 'events') renderEventTable();
+    if (page === 'addons') renderAddonTable();
 
     // Close sidebar on mobile after navigating
     closeSidebar();
@@ -243,6 +269,44 @@ function renderDashboard() {
             <div class="series-chip-count">${v}</div>
         </div>
     `).join('');
+}
+
+async function syncDefaultProductsToFirestore() {
+    if (!adminAuthorized || !window.fb || !window.fb.db) {
+        toast('error', 'Authentication required.');
+        return;
+    }
+    const btn = document.querySelector('.btn-secondary[onclick="syncDefaultProductsToFirestore()"]');
+    if(btn) btn.disabled = true;
+    toast('success', 'Syncing products to DB...');
+    
+    try {
+        const response = await fetch('../prebuilts/products.json');
+        const defaultProducts = await response.json();
+        
+        let batch = window.fb.db.batch();
+        let count = 0;
+        
+        for (const dp of defaultProducts) {
+            const docRef = window.fb.db.collection('prebuilts').doc(dp.id);
+            batch.set(docRef, dp, { merge: true });
+            count++;
+        }
+        
+        await batch.commit();
+        toast('success', `Synced ${count} default specs to DB!`);
+        
+        // Reload dashboard
+        await loadAdminDataFromFirestore();
+        renderDashboard();
+        renderProductTable();
+        
+    } catch(err) {
+        console.error('Error syncing:', err);
+        toast('error', 'Sync failed. See console.');
+    } finally {
+        if(btn) btn.disabled = false;
+    }
 }
 
 /* ══════════════════════════════════════════════════════
@@ -437,6 +501,7 @@ function openEditModal(id) {
     document.getElementById('f-series').value = p.series;
     set('f-tag', p.tag);
     set('f-price', p.price);
+    set('f-originalPrice', p.originalPrice || '');
     set('f-badge', p.badge || '');
     set('f-order', p.order);
     set('f-image', p.image || '');
@@ -447,7 +512,10 @@ function openEditModal(id) {
     set('f-gpu', p.gpu || '');
     set('f-ram', p.ram || '');
     set('f-storage', p.storage || '');
+    set('f-motherboard', p.motherboard || '');
     set('f-cooling', p.cooling || '');
+    set('f-psu', p.psu || '');
+    set('f-case', p.case || '');
     set('f-weight', p.weight || '');
     set('f-display', p.display || '');
 
@@ -486,8 +554,8 @@ function closeModal() {
 }
 
 function clearForm() {
-    ['f-id', 'f-name', 'f-tag', 'f-price', 'f-badge', 'f-order', 'f-image', 'f-description',
-        'f-cpu', 'f-gpu', 'f-ram', 'f-storage', 'f-cooling', 'f-weight', 'f-display',
+    ['f-id', 'f-name', 'f-tag', 'f-price', 'f-originalPrice', 'f-badge', 'f-order', 'f-image', 'f-description',
+        'f-cpu', 'f-gpu', 'f-ram', 'f-storage', 'f-motherboard', 'f-cooling', 'f-psu', 'f-case', 'f-weight', 'f-display',
         'f-det-performance', 'f-det-design', 'f-det-cooling', 'f-det-features'
     ].forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
 
@@ -515,15 +583,17 @@ async function saveProduct() {
         series: get('f-series'),
         tag: get('f-tag'),
         price: Number(get('f-price')) || 0,
+        originalPrice: Number(get('f-originalPrice')) || null,
         badge: get('f-badge') || null,
         order: Number(get('f-order')) || 99,
         featured: document.getElementById('f-featured').checked,
         inStock: document.getElementById('f-instock').checked,
         description: get('f-description'),
         cpu: get('f-cpu'), gpu: get('f-gpu'), ram: get('f-ram'),
-        storage: get('f-storage'), cooling: get('f-cooling'),
+        storage: get('f-storage'), motherboard: get('f-motherboard'),
+        cooling: get('f-cooling'), psu: get('f-psu'), case: get('f-case'),
         weight: get('f-weight'), display: get('f-display'),
-        image: get('f-image'),
+        image: get('f-image').startsWith('data:') ? '' : get('f-image'),
         fps: collectRows('fpsList', ['game', 'fps', 'settings']),
         highlights: collectRows('highlightsList', ['icon', 'title', 'desc']),
         details: {
@@ -805,8 +875,8 @@ let imgStore = [];
 
 // Cloudinary (unsigned upload) configuration.
 // TODO: replace placeholders with your Cloudinary values.
-const CLOUDINARY_CLOUD_NAME = 'PUT_CLOUDINARY_CLOUD_NAME_HERE';
-const CLOUDINARY_UPLOAD_PRESET = 'PUT_CLOUDINARY_UPLOAD_PRESET_HERE';
+const CLOUDINARY_CLOUD_NAME = 'dzbjr3asg';
+const CLOUDINARY_UPLOAD_PRESET = 'geekboz_unsigned_prebuilts';
 // Folder is optional but recommended for organization.
 const CLOUDINARY_FOLDER = 'geekboz/prebuilts';
 
@@ -846,9 +916,21 @@ function initImgDropZone() {
     });
 }
 
+const MAX_IMG_SIZE_MB = 5;
+
 function handleImgFiles(files) {
+    if (!isCloudinaryConfigured()) {
+        toast('error', 'Image hosting (Cloudinary) is not configured. Upload images via Cloudinary or use external URLs in the image fields.');
+        return;
+    }
+
     [...files].forEach(file => {
         if (!file.type.startsWith('image/')) return;
+
+        if (file.size > MAX_IMG_SIZE_MB * 1024 * 1024) {
+            toast('error', `"${file.name}" exceeds ${MAX_IMG_SIZE_MB} MB limit.`);
+            return;
+        }
 
         const reader = new FileReader();
         reader.onload = async e => {
@@ -915,9 +997,9 @@ function syncImgToForm() {
     document.getElementById('f-image').value = main ? main.dataUrl : '';
 }
 
-// Returns gallery array for saveProduct()
+// Returns gallery array for saveProduct() — excludes base64 data URLs to avoid Firestore 1MB limit
 function collectImgGallery() {
-    return imgStore.map(img => img.dataUrl);
+    return imgStore.map(img => img.secureUrl || img.dataUrl).filter(url => !url.startsWith('data:'));
 }
 
 // Populate imgStore when editing an existing product
@@ -939,8 +1021,16 @@ function triggerSlideBgUpload(i) {
 }
 
 function handleSlideBgFile(i, input) {
+    if (!isCloudinaryConfigured()) {
+        toast('error', 'Image hosting not configured.');
+        return;
+    }
     const file = input.files[0];
     if (!file) return;
+    if (file.size > MAX_IMG_SIZE_MB * 1024 * 1024) {
+        toast('error', `Image exceeds ${MAX_IMG_SIZE_MB} MB limit.`);
+        return;
+    }
     const reader = new FileReader();
     reader.onload = e => {
         updateSlideBg(i, e.target.result);
@@ -1173,8 +1263,17 @@ function initEventImgDropZone() {
 }
 
 function handleEventImgFiles(files) {
+    if (!isCloudinaryConfigured()) {
+        toast('error', 'Image hosting not configured.');
+        return;
+    }
     const file = files[0];
     if (!file || !file.type.startsWith('image/')) return;
+    
+    if (file.size > MAX_IMG_SIZE_MB * 1024 * 1024) {
+        toast('error', `Image exceeds ${MAX_IMG_SIZE_MB} MB limit.`);
+        return;
+    }
 
     const reader = new FileReader();
     reader.onload = async e => {
@@ -1217,6 +1316,164 @@ function removeEventImg(e) {
     if (e) e.stopPropagation();
     renderEventImg('');
     document.getElementById('ev-image').value = '';
+}
+
+
+/* ══════════════════════════════════════════════════════
+   ADD-ONS
+══════════════════════════════════════════════════════ */
+function renderAddonTable() {
+    const tableBody = document.getElementById('addonTableBody');
+    const cardsBody = document.getElementById('addonCards');
+    if (!tableBody || !cardsBody) return;
+
+    const list = [...addons].sort((a, b) => (Number(a.order) || 0) - (Number(b.order) || 0));
+
+    tableBody.innerHTML = list.map(a => `
+        <tr>
+            <td>
+                <div class="prod-name-cell">
+                    <div>
+                        <div class="prod-name">${a.title}</div>
+                        ${a.highlighted ? `<div class="prod-id" style="color:var(--accent)">${a.subtitle || ''}</div>` : ''}
+                    </div>
+                </div>
+            </td>
+            <td>₹${Number(a.price).toLocaleString('en-IN')}</td>
+            <td><span class="${a.highlighted ? 'in-stock' : ''}" style="${a.highlighted ? 'background:rgba(164,249,63,0.1);color:var(--accent)' : ''}">${a.highlighted ? 'Yes' : 'No'}</span></td>
+            <td style="text-align:right">
+                <div style="display:flex;gap:6px;justify-content:flex-end">
+                    <button class="btn btn-ghost btn-sm btn-icon" onclick="openAddonModal('${a.id}')">
+                        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M11 2l3 3-8 8H3v-3L11 2z"/></svg>
+                    </button>
+                    <button class="btn btn-danger btn-sm btn-icon" onclick="confirmDeleteAddon('${a.id}')">
+                        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 4h12M5 4V2h6v2M6 7v5M10 7v5M3 4l1 10h8l1-10"/></svg>
+                    </button>
+                </div>
+            </td>
+        </tr>
+    `).join('') || `<tr><td colspan="4"><div class="empty-state"><p>No add-ons found.</p></div></td></tr>`;
+
+    cardsBody.innerHTML = list.map(a => `
+        <div class="product-card-item">
+            <div class="product-card-info">
+                <div class="product-card-name">${a.title}</div>
+                ${a.highlighted ? `<div class="product-card-meta"><span style="color:var(--accent);font-size:10px;font-weight:600">★ Highlighted: ${a.subtitle}</span></div>` : ''}
+            </div>
+            <div class="product-card-price">₹${Number(a.price).toLocaleString('en-IN')}</div>
+            <div class="product-card-actions">
+                <button class="btn btn-ghost btn-sm btn-icon" onclick="openAddonModal('${a.id}')">
+                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M11 2l3 3-8 8H3v-3L11 2z"/></svg>
+                </button>
+                <button class="btn btn-danger btn-sm btn-icon" onclick="confirmDeleteAddon('${a.id}')">
+                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 4h12M5 4V2h6v2M6 7v5M10 7v5M3 4l1 10h8l1-10"/></svg>
+                </button>
+            </div>
+        </div>
+    `).join('') || `<div class="empty-state"><p>No add-ons found.</p></div>`;
+}
+
+let editingAddonId = null;
+
+function openAddonModal(id = null) {
+    editingAddonId = id;
+    document.getElementById('addonModalTitle').textContent = id ? 'Edit Add-on' : 'Create Add-on';
+    
+    // Clear form
+    ['ad-title', 'ad-price', 'ad-order', 'ad-subtitle', 'ad-desc'].forEach(f => {
+        const el = document.getElementById(f);
+        if (el) el.value = '';
+    });
+    const highCheck = document.getElementById('ad-highlighted');
+    if (highCheck) highCheck.checked = false;
+
+    if (id) {
+        const a = addons.find(x => x.id === id);
+        if (a) {
+            set('ad-title', a.title || '');
+            set('ad-price', a.price || '');
+            set('ad-order', a.order || '');
+            set('ad-subtitle', a.subtitle || '');
+            set('ad-desc', a.desc || '');
+            if (highCheck) highCheck.checked = !!a.highlighted;
+        }
+    }
+
+    document.getElementById('addonModal').classList.add('open');
+}
+
+function closeAddonModal() {
+    document.getElementById('addonModal').classList.remove('open');
+}
+
+document.getElementById('addonModal').addEventListener('click', e => {
+    if (e.target === document.getElementById('addonModal')) closeAddonModal();
+});
+
+async function saveAddon() {
+    const title = get('ad-title').trim();
+    if (!title) { toast('error', 'Title is required'); return; }
+
+    const ad = {
+        title,
+        price: Number(get('ad-price')) || 0,
+        order: Number(get('ad-order')) || 99,
+        highlighted: document.getElementById('ad-highlighted').checked,
+        subtitle: get('ad-subtitle'),
+        desc: get('ad-desc')
+    };
+
+    if (!adminAuthorized) { toast('error', 'Please sign in as admin.'); return; }
+    if (!window.fb || !window.fb.db) { toast('error', 'Firebase not initialized.'); return; }
+
+    try {
+        let docRef;
+        if (editingAddonId) {
+            docRef = window.fb.db.collection('addons').doc(editingAddonId);
+            await docRef.update(ad);
+            const idx = addons.findIndex(x => x.id === editingAddonId);
+            if (idx >= 0) addons[idx] = { id: editingAddonId, ...ad };
+            toast('success', `Add-on updated`);
+        } else {
+            docRef = await window.fb.db.collection('addons').add(ad);
+            addons.push({ id: docRef.id, ...ad });
+            toast('success', `Add-on created`);
+        }
+    } catch (e) {
+        console.error('Failed to save add-on:', e);
+        toast('error', 'Could not save add-on.');
+        return;
+    }
+
+    closeAddonModal();
+    renderAddonTable();
+}
+
+function confirmDeleteAddon(id) {
+    const a = addons.find(x => x.id === id);
+    if (!a) return;
+    deleteTargetId = id;
+    document.getElementById('confirmTitle').textContent = `Delete Add-on?`;
+    document.getElementById('confirmMsg').textContent = `"${a.title}" will be permanently removed.`;
+    document.getElementById('confirmOkBtn').onclick = doDeleteAddon;
+    document.getElementById('confirmModal').classList.add('open');
+}
+
+async function doDeleteAddon() {
+    const id = deleteTargetId;
+    if (!id) return;
+    if (!adminAuthorized || !window.fb || !window.fb.db) return;
+
+    try {
+        await window.fb.db.collection('addons').doc(id).delete();
+        addons = addons.filter(x => x.id !== id);
+        toast('success', 'Add-on deleted');
+    } catch (e) {
+        console.error('Failed to delete add-on:', e);
+        toast('error', 'Could not delete add-on.');
+    }
+    closeConfirm();
+    renderAddonTable();
 }
 
 
