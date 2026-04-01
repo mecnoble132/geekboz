@@ -424,12 +424,17 @@
 .slide-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to right,
-      rgba(5, 8, 13, 0.96) 0%,
-      rgba(5, 8, 13, 0.85) 25%,
-      rgba(5, 8, 13, 0.4) 46%,
-      rgba(5, 8, 13, 0.08) 62%,
-      transparent 75%);
+  background: 
+    linear-gradient(to right,
+      rgba(5, 8, 13, 0.98) 0%,
+      rgba(5, 8, 13, 0.9) 25%,
+      rgba(5, 8, 13, 0.6) 46%,
+      rgba(5, 8, 13, 0.2) 62%,
+      transparent 85%),
+    linear-gradient(to top,
+      rgba(5, 8, 13, 0.7) 0%,
+      rgba(5, 8, 13, 0.3) 15%,
+      transparent 40%);
 }
 
 .slide-content {
@@ -467,6 +472,7 @@
   color: var(--text);
   letter-spacing: 0.03em;
   margin-bottom: 0.55rem;
+  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
 }
 
 .slide-name span {
@@ -474,12 +480,14 @@
 }
 
 .slide-desc {
-  font-size: 0.85rem;
-  color: var(--muted);
+  font-size: 0.88rem;
+  color: var(--text);
+  opacity: 0.9;
   line-height: 1.6;
-  margin-bottom: 1rem;
-  max-width: 340px;
+  margin-bottom: 1.25rem;
+  max-width: 380px;
   font-weight: 400;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .slide-specs {
@@ -496,17 +504,19 @@
 }
 
 .spec-label {
-  font-size: 0.65rem;
+  font-size: 0.68rem;
   font-weight: 700;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--muted);
+  color: var(--accent);
+  opacity: 0.8;
 }
 
 .spec-val {
-  font-size: 0.875rem;
+  font-size: 0.9rem;
   font-weight: 600;
   color: var(--text);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
 }
 
 .slide-cta {
@@ -593,9 +603,9 @@
 }
 
 .page-dot {
-  height: 2px;
+  height: 4px;
   border-radius: 2px;
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.25);
   border: none;
   cursor: pointer;
   transition: background 0.3s, width 0.4s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s;
@@ -657,12 +667,17 @@
   }
 
   .slide-overlay {
-    background: linear-gradient(to top,
-        rgba(5, 8, 13, 0.98) 0%,
-        rgba(5, 8, 13, 0.88) 35%,
-        rgba(5, 8, 13, 0.5) 58%,
-        rgba(5, 8, 13, 0.08) 80%,
-        transparent 100%);
+    background: 
+      linear-gradient(to top,
+        rgba(5, 8, 13, 1) 0%,
+        rgba(5, 8, 13, 0.95) 20%,
+        rgba(5, 8, 13, 0.85) 45%,
+        rgba(5, 8, 13, 0.4) 70%,
+        transparent 100%),
+      linear-gradient(to right,
+        rgba(5, 8, 13, 0.8) 0%,
+        rgba(5, 8, 13, 0.4) 30%,
+        transparent 60%);
   }
 
   .slide-content {
@@ -687,11 +702,13 @@
 
   .slide-desc {
     display: block;
-    font-size: 0.8rem;
+    font-size: 0.85rem;
     max-width: 100%;
-    margin-bottom: 0.85rem;
-    color: rgba(122, 138, 160, 0.9);
-    line-height: 1.55;
+    margin-bottom: 1rem;
+    color: var(--text);
+    opacity: 0.95;
+    line-height: 1.6;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
   }
 
   .slide-specs {

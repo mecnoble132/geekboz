@@ -57,7 +57,7 @@ if (track && paginationEl && progressBar) {
     const existing = track.querySelector('.carousel-slide .slide-bg')?.style?.backgroundImage;
     if (existing) return existing; // usually already contains url(...)
     // Absolute fallback (only used if Firestore has no bgImage + DOM has no slides).
-    return "url('https://hips.hearstapps.com/hmg-prod/images/pop-gaming-desktops-social-697a79b13a6ff.jpg')";
+    return "url('assets/images/custom_pc_showcase.png')";
   })();
 
   function createSlideMarkup(product, slide) {
