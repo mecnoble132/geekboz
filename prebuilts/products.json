@@ -6,7 +6,7 @@
         "tag": "Gaming",
         "price": 45399,
         "originalPrice": 48899,
-        "image": "../assets/images/prebuiltph3.webp",
+        "image": "../assets/images/starlight.jpg",
         "badge": "Entry",
         "featured": true,
         "inStock": true,
@@ -35,7 +35,7 @@
             "cooling": "Reliable air cooling for sustained usage.",
             "features": "Wired connectivity with upgrade paths for future components."
         },
-        "gallery": [ "../assets/images/prebuiltph3.webp", "../assets/images/prebuiltph3.webp", "../assets/images/prebuiltph3.webp" ]
+        "gallery": [ "../assets/images/starlight.jpg", "../assets/images/starlight.jpg" ]
     },
     {
         "id": "gbz-m3",
@@ -44,7 +44,7 @@
         "tag": "Gaming",
         "price": 72499,
         "originalPrice": 75689,
-        "image": "../assets/images/prebuiltph3.webp",
+        "image": "../assets/images/starlight.jpg",
         "badge": "Value Pick",
         "featured": true,
         "inStock": true,
@@ -77,7 +77,7 @@
             "cooling": "Advanced thermals to keep components cool under heavy usage.",
             "features": "High-fidelity audio jacks and improved VRM cooling."
         },
-        "gallery": [ "../assets/images/prebuiltph3.webp", "../assets/images/prebuiltph3.webp", "../assets/images/prebuiltph3.webp" ]
+        "gallery": [ "../assets/images/starlight.jpg", "../assets/images/starlight.jpg" ]
     },
     {
         "id": "gbz-m5",
@@ -86,7 +86,7 @@
         "tag": "Gaming",
         "price": 98599,
         "originalPrice": 103489,
-        "image": "../assets/images/prebuiltph3.webp",
+        "image": "../assets/images/starlight.jpg",
         "badge": "Best Seller",
         "featured": true,
         "inStock": true,
@@ -119,7 +119,7 @@
             "cooling": "Air setups for near-silent operation under pressure.",
             "features": "Wi-Fi 6 readiness and vast USB I/O selection."
         },
-        "gallery": [ "../assets/images/prebuiltph3.webp", "../assets/images/prebuiltph3.webp" ]
+        "gallery": [ "../assets/images/starlight.jpg", "../assets/images/prebuiltph2.jpg" ]
     },
     {
         "id": "gbz-z1",
@@ -128,7 +128,7 @@
         "tag": "Gaming",
         "price": 107999,
         "originalPrice": 117899,
-        "image": "../assets/images/prebuiltph3.webp",
+        "image": "../assets/images/auroro.jpg",
         "badge": null,
         "featured": true,
         "inStock": true,
@@ -161,7 +161,7 @@
             "cooling": "Optimized airflow focused on hard drive and CPU temperatures.",
             "features": "Excellent connectivity for creative peripherals and external drives."
         },
-        "gallery": [ "../assets/images/prebuiltph3.webp", "../assets/images/prebuiltph3.webp", "../assets/images/prebuiltph3.webp" ]
+        "gallery": [ "../assets/images/auroro.jpg", "../assets/images/prebuiltph.png" ]
     },
     {
         "id": "gbz-z3",
@@ -170,7 +170,7 @@
         "tag": "Gaming",
         "price": 143969,
         "originalPrice": 151999,
-        "image": "../assets/images/prebuiltph3.webp",
+        "image": "../assets/images/auroro.jpg",
         "badge": "Pro",
         "featured": false,
         "inStock": true,
@@ -199,7 +199,7 @@
             "cooling": "Massive radiator setup to quickly exhaust heavy workload heat.",
             "features": "Expansion slots aplenty and cutting-edge networking hardware."
         },
-        "gallery": [ "../assets/images/prebuiltph3.webp" ]
+        "gallery": [ "../assets/images/auroro.jpg" ]
     },
     {
         "id": "gbz-z5",
@@ -208,7 +208,7 @@
         "tag": "CreatorX",
         "price": 148999,
         "originalPrice": 154999,
-        "image": "../assets/images/prebuiltph3.webp",
+        "image": "../assets/images/auroro.jpg",
         "badge": "Studio",
         "featured": true,
         "inStock": true,
@@ -241,7 +241,7 @@
             "cooling": "Top to bottom active cooling ensuring stability through hours of export.",
             "features": "Premium components designed for immense longevity."
         },
-        "gallery": [ "../assets/images/prebuiltph3.webp", "../assets/images/prebuiltph3.webp", "../assets/images/prebuiltph3.webp" ]
+        "gallery": [ "../assets/images/auroro.jpg", "../assets/images/prebuiltph.png" ]
     },
     {
         "id": "gbz-z7",
@@ -250,7 +250,7 @@
         "tag": "Workstation AI",
         "price": 199999,
         "originalPrice": 214899,
-        "image": "../assets/images/prebuiltph3.webp",
+        "image": "../assets/images/stellar.webp",
         "badge": "Flagship",
         "featured": true,
         "inStock": true,
@@ -279,6 +279,6 @@
             "cooling": "Customized cooling solutions designed for completely unrestrained thermal envelopes.",
             "features": "Limitless connectivity, professional GPU support, and vast storage expandability."
         },
-        "gallery": [ "../assets/images/prebuiltph3.webp", "../assets/images/prebuiltph3.webp", "../assets/images/prebuiltph3.webp" ]
+        "gallery": [ "../assets/images/stellar.webp", "../assets/images/prebuiltph.png" ]
     }
 ]
