@@ -339,14 +339,14 @@ if (teaserTrack) {
           };
         })
         .sort((a, b) => a.order - b.order)
-        .slice(0, 5);
+        .slice(0, 20);
     }
 
     // Fallback to local JSON (dev mode).
     const r = await fetch('./prebuilts/products.json');
     const data = await r.json();
     const featured = data.filter(p => p.featured === true);
-    return featured.slice(0, 5);
+    return featured.slice(0, 20);
   }
 
   loadTeaserItems()

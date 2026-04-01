@@ -716,7 +716,7 @@ function renderTeaserList() {
       <div class="mgmt-drag">
         <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 4h1M10 4h1M5 8h1M10 8h1M5 12h1M10 12h1"/></svg>
       </div>
-      <div class="order-num">${active && featCount <= 5 ? n : '—'}</div>
+      <div class="order-num">${active && featCount <= 20 ? n : '—'}</div>
       <div class="mgmt-info">
         <div class="prod-name">${p.name}</div>
         <div class="prod-spec">${p.gpu} · ₹${p.price.toLocaleString('en-IN')}</div>
