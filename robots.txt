@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /admin/
+Disallow: /cart/
+Allow: /
+Sitemap: https://www.geekboz.in/sitemap.xml
