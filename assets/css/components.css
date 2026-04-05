@@ -781,28 +781,32 @@
   overflow: hidden;
 }
 
-/* Subtle grid background texture */
-.custom-build-section::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(rgba(164, 249, 63, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(164, 249, 63, 0.03) 1px, transparent 1px);
-  background-size: 48px 48px;
-  pointer-events: none;
+/* Subtle grid background texture - Disabled on mobile for GPU performance */
+@media (min-width: 901px) {
+  .custom-build-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(164, 249, 63, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(164, 249, 63, 0.03) 1px, transparent 1px);
+    background-size: 48px 48px;
+    pointer-events: none;
+  }
 }
 
-/* Glowing orb top-right */
-.custom-build-section::after {
-  content: '';
-  position: absolute;
-  top: -120px;
-  right: -120px;
-  width: 380px;
-  height: 380px;
-  background: radial-gradient(circle, rgba(164, 249, 63, 0.06) 0%, transparent 70%);
-  pointer-events: none;
+/* Glowing orb top-right - Disabled on mobile to reduce repaint costs */
+@media (min-width: 901px) {
+  .custom-build-section::after {
+    content: '';
+    position: absolute;
+    top: -120px;
+    right: -120px;
+    width: 380px;
+    height: 380px;
+    background: radial-gradient(circle, rgba(164, 249, 63, 0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
 }
 
 .cb-inner {
@@ -1019,6 +1023,9 @@
 @media (max-width: 900px) {
   .custom-build-section {
     padding: 3rem 0;
+    transform: translateZ(0); /* Hardware acceleration hint */
+    backface-visibility: hidden;
+    will-change: transform;
   }
 
   .cb-steps {
@@ -1081,16 +1088,18 @@
   overflow: hidden;
 }
 
-/* Faint bottom-left glow for contrast with custom build */
-.prebuilts-section::before {
-  content: '';
-  position: absolute;
-  bottom: -80px;
-  left: -80px;
-  width: 360px;
-  height: 360px;
-  background: radial-gradient(circle, rgba(164, 249, 63, 0.05) 0%, transparent 70%);
-  pointer-events: none;
+/* Faint bottom-left glow - Disabled on mobile for performance */
+@media (min-width: 901px) {
+  .prebuilts-section::before {
+    content: '';
+    position: absolute;
+    bottom: -80px;
+    left: -80px;
+    width: 360px;
+    height: 360px;
+    background: radial-gradient(circle, rgba(164, 249, 63, 0.05) 0%, transparent 70%);
+    pointer-events: none;
+  }
 }
 
 .pb-inner {
@@ -1398,6 +1407,8 @@
 @media (max-width: 900px) {
   .prebuilts-section {
     padding: 3rem 0;
+    transform: translateZ(0);
+    backface-visibility: hidden;
   }
 
   .pb-header-row {
@@ -1595,7 +1606,7 @@
   opacity: 0.55;
 }
 
-@media (hover: hover) {
+@media (min-width: 901px) {
   .series-card:hover .series-card-bg {
     opacity: 0.85;
   }
@@ -1782,27 +1793,33 @@
   overflow: hidden;
 }
 
-.service-section::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(rgba(164, 249, 63, 0.025) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(164, 249, 63, 0.025) 1px, transparent 1px);
-  background-size: 48px 48px;
-  pointer-events: none;
+/* Subtle grid pattern - Disabled on mobile for performance */
+@media (min-width: 901px) {
+  .service-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(164, 249, 63, 0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(164, 249, 63, 0.025) 1px, transparent 1px);
+    background-size: 48px 48px;
+    pointer-events: none;
+  }
 }
 
-.service-section::after {
-  content: '';
-  position: absolute;
-  right: -100px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 400px;
-  height: 400px;
-  background: radial-gradient(circle, rgba(164, 249, 63, 0.05) 0%, transparent 70%);
-  pointer-events: none;
+/* Decorative glow - Disabled on mobile for performance */
+@media (min-width: 901px) {
+  .service-section::after {
+    content: '';
+    position: absolute;
+    right: -100px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(164, 249, 63, 0.05) 0%, transparent 70%);
+    pointer-events: none;
+  }
 }
 
 .service-inner {
