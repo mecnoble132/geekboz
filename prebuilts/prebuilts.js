@@ -107,6 +107,9 @@ function renderCards(products) {
         card.className = 'pb-card';
         card.style.animationDelay = `${i * 0.04}s`;
 
+        // Backwards-compatible: only explicit `false` means out of stock.
+        const inStock = p.inStock !== false;
+
         // Fallback image placeholder
         const imgSrc = p.image || `https://placehold.co/400x400/0e1420/A4F93F?text=${encodeURIComponent(p.name)}`;
 
@@ -126,6 +129,7 @@ function renderCards(products) {
           onerror="this.src='https://placehold.co/400x400/0e1420/A4F93F?text=${encodeURIComponent(p.name)}'"
         >
         <span class="pb-series-tag ${seriesClass}">${p.tag}</span>
+        ${!inStock ? `<span class="pb-stock-badge">Out of Stock</span>` : ''}
         ${p.badge ? `<span class="pb-badge-tag">${p.badge}</span>` : ''}
       </div>
       <div class="pb-card-body">
@@ -160,8 +164,8 @@ function renderCards(products) {
             ${p.originalPrice && p.originalPrice > p.price ? `<span class="pb-original-price">${formatPrice(p.originalPrice)}</span>` : ''}
             ${formatPrice(p.price)}
           </div>
-          <a href="product/?id=${p.id}" class="pb-card-btn">
-            View Build
+          <a href="product/?id=${p.id}" class="pb-card-btn ${!inStock ? 'is-disabled' : ''}">
+            ${!inStock ? 'Out of Stock' : 'View Build'}
             <svg width="12" height="12" viewBox="0 0 16 16" fill="none">
               <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2"
                 stroke-linecap="round" stroke-linejoin="round"/>

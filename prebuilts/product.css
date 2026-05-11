@@ -157,6 +157,21 @@
 .prod-btn-secondary { background: transparent; color: var(--text); border: 1px solid var(--border); }
 .prod-btn-secondary:hover { background: var(--surface2); }
 
+.prod-cta-group button:disabled,
+.prod-cta-group button.is-disabled {
+    cursor: not-allowed;
+    opacity: 0.65;
+    transform: none;
+    box-shadow: none;
+}
+
+.prod-btn-primary:disabled,
+.prod-btn-primary.is-disabled {
+    background: rgba(255, 80, 80, 0.14);
+    border: 1px solid rgba(255, 80, 80, 0.35);
+    color: rgba(255, 210, 210, 0.95);
+}
+
 /* 8. TRUST */
 .prod-trust { display: flex; flex-wrap: wrap; gap: 1rem; }
 .trust-item { display: flex; align-items: center; gap: 0.4rem; font-size: 0.75rem; color: var(--muted); font-family: 'DM Sans', sans-serif; }
