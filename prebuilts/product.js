@@ -39,6 +39,9 @@ document.addEventListener('DOMContentLoaded', async () => {
             return;
         }
 
+        // Backwards-compatible: only explicit `false` means out of stock.
+        const inStock = product.inStock !== false;
+
         // Helper to fix relative paths for subfolder
         const fixPath = (path) => path.startsWith('../') ? '../' + path : path;
         product.image = fixPath(product.image);
@@ -312,7 +315,18 @@ document.addEventListener('DOMContentLoaded', async () => {
             return `https://wa.me/919567776571?text=${encodeURIComponent(text)}`;
         }
 
-        document.getElementById('addCartBtn').addEventListener('click', () => { 
+        const addBtn = document.getElementById('addCartBtn');
+        const contactBtn = document.getElementById('contactBtn');
+
+        if (addBtn && !inStock) {
+            addBtn.disabled = true;
+            addBtn.classList.add('is-disabled');
+            addBtn.innerHTML = '<i data-lucide="x-circle"></i> Out of Stock';
+            lucide.createIcons();
+        }
+
+        addBtn?.addEventListener('click', () => { 
+            if (!inStock) return;
             const addons = Array.from(document.querySelectorAll('.addon-checkbox:checked')).map(cb => cb.nextElementSibling.textContent);
             // Normalize image path to root-relative so it works from any page
             const rawImg = product.image || '';
@@ -322,7 +336,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 : (rawImg.startsWith('/') ? rawImg : '/assets/images/' + rawImg.split('/').pop());
             window.addToCart(product.name, basePrice, currentTotal, addons, product.id, rootImg);
 
-            const btn = document.getElementById('addCartBtn');
+            const btn = addBtn;
             const originalHTML = btn.innerHTML;
             btn.innerHTML = '<i data-lucide="check"></i> Added!';
             btn.style.background = '#64b4ff'; // Blue highlight
@@ -335,7 +349,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             }, 2000);
         });
         
-        document.getElementById('contactBtn').addEventListener('click', () => { window.open(getWAUrl(), '_blank'); });
+        contactBtn?.addEventListener('click', () => { window.open(getWAUrl(), '_blank'); });
 
     } catch (e) {
         console.error(e);
