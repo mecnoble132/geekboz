@@ -140,6 +140,15 @@
                             </div>
                         </div>
 
+                        <!-- Email -->
+                        <div class="form-group">
+                            <label class="form-label" for="userEmail">Email Address</label>
+                            <div class="input-wrapper">
+                                <div class="input-icon-box"><i data-lucide="mail"></i></div>
+                                <input type="email" id="userEmail" placeholder="Enter your email address" required autocomplete="email">
+                            </div>
+                        </div>
+
                         <!-- Budget -->
                         <div class="form-group">
                             <label class="form-label">Target Budget (Select or Type)</label>
@@ -381,6 +390,7 @@
 
             const name = document.getElementById('userName').value.trim();
             const phone = document.getElementById('userPhone').value.trim();
+            const email = document.getElementById('userEmail').value.trim();
             const bVal = document.getElementById('userBudget').value.replace(/,/g, '').replace('₹', '').trim();
             const budget = isNaN(bVal) || bVal === '' ? bVal : `₹${parseInt(bVal).toLocaleString('en-IN')}`;
 
@@ -396,6 +406,7 @@
             const text = `*New Custom Build Inquiry* 🖥️\n\n` +
                 `*Name:* ${name}\n` +
                 `*Phone:* ${phone}\n` +
+                `*Email:* ${email}\n` +
                 `*Target Budget:* ${budget}\n` +
                 `*Use Cases:* ${usecases}\n` +
                 (requirements ? `*Additional Notes:* ${requirements}\n` : '') +
