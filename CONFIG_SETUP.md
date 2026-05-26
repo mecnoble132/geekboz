@@ -8,7 +8,7 @@ This project is a vanilla static site. Admin authentication, catalog reads/write
 3. Enable **Firestore Database**.
 4. Register your web app and copy the Firebase “Web app config”.
 5. Paste the values into:
-   - `assets/js/firebase-config.js`
+   - `assets/js/system-config.js`
 
 ## 2) Firestore security rules
 The repo includes:

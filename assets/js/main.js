@@ -106,9 +106,9 @@ if (track && paginationEl && progressBar) {
   }
 
   async function maybeRenderHomepageCarouselFromFirestore() {
-    if (!window.fb || !window.fb.db) return false;
+    if (!window.sysApi || !window.sysApi.db) return false;
     try {
-      const settingsSnap = await window.fb.db.collection('settings').doc('homepageCarousel').get();
+      const settingsSnap = await window.sysApi.db.collection('settings').doc('homepageCarousel').get();
       if (!settingsSnap.exists) return false;
 
       const data = settingsSnap.data() || {};
@@ -121,7 +121,7 @@ if (track && paginationEl && progressBar) {
 
       const uniqueProductIds = [...new Set(enabledSlides.map(s => s.productId).filter(Boolean))];
       const productSnaps = await Promise.all(
-        uniqueProductIds.map(pid => window.fb.db.collection('prebuilts').doc(pid).get())
+        uniqueProductIds.map(pid => window.sysApi.db.collection('prebuilts').doc(pid).get())
       );
 
       const productById = {};
@@ -146,7 +146,7 @@ if (track && paginationEl && progressBar) {
       track.innerHTML = slidesToRender.map(x => createSlideMarkup(x.product, x.slide)).join('');
       return true;
     } catch (err) {
-      console.error('Failed to load homepage carousel from Firestore:', err);
+      console.error('System error (C-101)');
       return false;
     }
   }
@@ -326,8 +326,8 @@ if (teaserTrack) {
   `).join('');
 
   async function loadTeaserItems() {
-    if (window.fb && window.fb.db) {
-      const snap = await window.fb.db.collection('prebuilts').where('featured', '==', true).get();
+    if (window.sysApi && window.sysApi.db) {
+      const snap = await window.sysApi.db.collection('prebuilts').where('featured', '==', true).get();
       return snap.docs
         .map(doc => {
           const d = doc.data() || {};
@@ -400,7 +400,7 @@ if (teaserTrack) {
       if (window.lucide) lucide.createIcons();
     })
     .catch(err => {
-      console.error('Error loading teaser prebuilts:', err);
+      console.error('System error (T-102)');
       teaserTrack.innerHTML = '<p class="pb-teaser-empty">Could not load builds. Please try again later.</p>';
     });
 }
@@ -636,10 +636,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // ── Event Popup Injection ─────────────────────────────
   async function checkEventPopup() {
-    if (!window.fb || !window.fb.db) return;
+    if (!window.sysApi || !window.sysApi.db) return;
     try {
       // Get the most recent enabled event
-      const snap = await window.fb.db.collection('events')
+      const snap = await window.sysApi.db.collection('events')
         .where('enabled', '==', true)
         .orderBy('updatedAt', 'desc')
         .limit(1)
@@ -690,7 +690,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.target === backdrop) closeBtn.onclick();
       };
     } catch (err) {
-      console.error('Event popup failed:', err);
+      console.error('System error (E-103)');
     }
   }
 

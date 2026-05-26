@@ -593,7 +593,7 @@ function readURLParams() {
 updateFill(minRange, maxRange, priceFill);
 updateFill(minRangeMob, maxRangeMob, priceFillMob);
 
-// ── Load products (Firestore) ───────────────────────────────
+// ── Load products (from database) ───────────────────────────────
 // Show skeleton cards while loading
 const SKELETON_COUNT = 6;
 grid.innerHTML = Array.from({ length: SKELETON_COUNT }).map(() => `
@@ -613,9 +613,9 @@ grid.innerHTML = Array.from({ length: SKELETON_COUNT }).map(() => `
 resultCount.innerHTML = '<span>—</span> builds found';
 
 async function loadProducts() {
-    // Prefer Firestore if initialized.
-    if (window.fb && window.fb.db) {
-        const snap = await window.fb.db.collection('prebuilts').orderBy('order').get();
+    // Prefer DB if initialized.
+    if (window.sysApi && window.sysApi.db) {
+        const snap = await window.sysApi.db.collection('prebuilts').orderBy('order').get();
         state.products = snap.docs.map(doc => {
             const d = doc.data() || {};
             return {
@@ -639,8 +639,8 @@ async function loadProducts() {
 }
 
 loadProducts().catch(err => {
-    console.error('Failed to load products:', err);
+    console.error('System error (P-104)');
     grid.innerHTML = '';
-    resultCount.textContent = 'Failed to load products.';
+    resultCount.textContent = 'Service temporarily unavailable.';
 });
 
