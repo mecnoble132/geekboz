@@ -1,5 +1,11 @@
 RewriteEngine On
 
+# Force trailing slash on directory requests so relative paths resolve correctly
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteCond %{REQUEST_URI} !(.*)/$
+RewriteRule ^(.*)$ %{REQUEST_URI}/ [R=301,L]
+
+
 # Redirect .html requests to extension-less URLs
 RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /.*\.html\ HTTP/
 RewriteRule ^(.*)\.html$ /$1 [R=301,L]
