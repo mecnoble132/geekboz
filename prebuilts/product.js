@@ -14,8 +14,8 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     try {
         let products = [];
-        if (window.fb && window.fb.db) {
-            const snap = await window.fb.db.collection('prebuilts').get();
+        if (window.sysApi && window.sysApi.db) {
+            const snap = await window.sysApi.db.collection('prebuilts').get();
             products = snap.docs.map(doc => {
                 const d = doc.data() || {};
                 return {
@@ -82,12 +82,12 @@ document.addEventListener('DOMContentLoaded', async () => {
         
         // Fetch and Render Addons
         let addons = [];
-        if (window.fb && window.fb.db) {
+        if (window.sysApi && window.sysApi.db) {
             try {
-                const addonsSnap = await window.fb.db.collection('addons').orderBy('order', 'asc').get();
+                const addonsSnap = await window.sysApi.db.collection('addons').orderBy('order', 'asc').get();
                 addons = addonsSnap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
             } catch (err) {
-                console.warn('Failed to fetch addons from Firestore:', err);
+                console.warn('System warning (W-105)');
             }
         }
         
