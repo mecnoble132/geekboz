@@ -115,6 +115,8 @@ body {
   }
   .whatsapp-label {
     display: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
   }
 }
 

@@ -111,7 +111,10 @@ function renderCards(products) {
         const inStock = p.inStock !== false;
 
         // Fallback image placeholder
-        const imgSrc = p.image || `https://placehold.co/400x400/0e1420/A4F93F?text=${encodeURIComponent(p.name)}`;
+        let imgSrc = p.image || `https://placehold.co/400x400/0e1420/A4F93F?text=${encodeURIComponent(p.name)}`;
+        if (imgSrc.startsWith('../assets/')) {
+            imgSrc = imgSrc.replace('../assets/', '/assets/');
+        }
 
         // Series tag class map
         const seriesClass = {
@@ -613,8 +616,39 @@ grid.innerHTML = Array.from({ length: SKELETON_COUNT }).map(() => `
 resultCount.innerHTML = '<span>—</span> builds found';
 
 async function loadProducts() {
-    // Prefer DB if initialized.
-    if (window.sysApi && window.sysApi.db) {
+    // STEP 1: Wait for Firestore to be ready
+    let firebaseReady = false;
+    let retries = 0;
+    const maxRetries = 10;
+    
+    console.log('⏳ Waiting for Firestore initialization...');
+    while (!firebaseReady && retries < maxRetries) {
+        if (window.sysApi && window.sysApi.db) {
+            firebaseReady = true;
+            console.log('✓ Firestore is ready');
+        } else {
+            console.log(`⏳ Waiting for Firestore... (${retries + 1}/${maxRetries})`);
+            await new Promise(resolve => setTimeout(resolve, 300));
+            retries++;
+        }
+    }
+    
+    if (!firebaseReady) {
+        console.error('✗ CRITICAL: Firestore failed to initialize after waiting');
+        grid.innerHTML = '';
+        resultCount.innerHTML = '<span>Initialization Error</span> — System failed to initialize. Please refresh.';
+        return;
+    }
+
+    // STEP 2: ALWAYS use Firestore - no JSON fallback
+    if (!window.sysApi || !window.sysApi.db) {
+        console.error('✗ CRITICAL: Firestore not initialized - window.sysApi.db is missing');
+        grid.innerHTML = '';
+        resultCount.innerHTML = '<span>Configuration Error</span> — System not properly initialized. Please refresh.';
+        return;
+    }
+
+    try {
         const snap = await window.sysApi.db.collection('prebuilts').orderBy('order').get();
         state.products = snap.docs.map(doc => {
             const d = doc.data() || {};
@@ -622,20 +656,39 @@ async function loadProducts() {
                 id: d.id || doc.id,
                 ...d,
                 price: Number(d.price || 0),
+                originalPrice: Number(d.originalPrice || 0),
                 order: Number(d.order || 0)
             };
         });
+        
+        if (!state.products || state.products.length === 0) {
+            throw new Error('Firestore returned empty collection');
+        }
+        
+        console.log(`✓ Loaded ${state.products.length} products from Firestore (LIVE DATABASE) - THIS IS THE CORRECT SOURCE`, state.products);
         readURLParams();
         applyFilters();
-        return;
+    } catch (err) {
+        console.warn('Firestore failed, attempting JSON fallback', err);
+        try {
+            const r = await fetch(`./products.json?t=${Date.now()}`);
+            if (!r.ok) throw new Error('HTTP ' + r.status);
+            const data = await r.json();
+            // Ensure consistent pricing data types from JSON
+            state.products = data.map(p => ({
+                ...p,
+                price: Number(p.price || 0),
+                originalPrice: Number(p.originalPrice || 0)
+            }));
+            console.log(`✓ Loaded ${state.products.length} products from JSON (fallback)`, state.products);
+            readURLParams();
+            applyFilters();
+        } catch (e) {
+            console.error('✗ Failed to load products from both Firestore and JSON fallback:', e);
+            grid.innerHTML = '';
+            resultCount.innerHTML = '<span>Database Error</span> — Could not load product data. Please disable adblocker or try again.';
+        }
     }
-
-    // Fallback to local JSON (dev mode).
-    const r = await fetch('./products.json');
-    const data = await r.json();
-    state.products = data;
-    readURLParams();
-    applyFilters();
 }
 
 loadProducts().catch(err => {

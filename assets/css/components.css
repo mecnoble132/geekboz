@@ -401,7 +401,6 @@
 .carousel-track {
   display: flex;
   transition: transform 0.65s cubic-bezier(0.77, 0, 0.175, 1);
-  will-change: transform;
 }
 
 .carousel-slide {
@@ -1025,7 +1024,6 @@
     padding: 3rem 0;
     transform: translateZ(0); /* Hardware acceleration hint */
     backface-visibility: hidden;
-    will-change: transform;
   }
 
   .cb-steps {
@@ -2876,4 +2874,64 @@
     0% { opacity: 1; transform: scale(1); }
     50% { opacity: 0.5; transform: scale(1.2); }
     100% { opacity: 1; transform: scale(1); }
+}
+
+/* ─── MOBILE GPU PERFORMANCE FIX ────────────────────────
+   backdrop-filter: blur() is extremely GPU-intensive and
+   causes glitches / flickering on most Android phones.
+   On mobile we replace it with a solid opaque background.
+──────────────────────────────────────────────────────── */
+@media (max-width: 900px) {
+
+  /* Navbar: replace blur with solid dark bg */
+  .navbar {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: rgba(8, 12, 16, 0.97);
+  }
+
+  /* Dropdown: replace blur with solid surface */
+  .dropdown {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: #0e1420;
+  }
+
+  /* Mobile menu: replace blur with solid dark bg */
+  .mobile-menu {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: rgba(8, 12, 16, 0.99);
+  }
+
+  /* Carousel arrows: replace blur with solid bg */
+  .carousel-arrow {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: rgba(14, 20, 32, 0.95);
+  }
+
+  /* Event popup backdrop: replace blur with solid dark overlay */
+  .event-backdrop {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: rgba(0, 0, 0, 0.92);
+  }
+
+  /* Carousel track: disable will-change to avoid layer explosions */
+  .carousel-track {
+    will-change: auto;
+  }
+
+  /* Disable image zoom-on-hover transitions that trigger repaints */
+  .pb-card-img img,
+  .service-img img {
+    transition: none;
+  }
+
+  /* Disable card lift animations that trigger repaints */
+  .pb-card,
+  .series-card {
+    transition: border-color 0.2s;
+  }
 }
