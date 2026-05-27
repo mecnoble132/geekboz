@@ -326,27 +326,32 @@ if (teaserTrack) {
   `).join('');
 
   async function loadTeaserItems() {
-    if (window.sysApi && window.sysApi.db) {
-      const snap = await window.sysApi.db.collection('prebuilts').where('featured', '==', true).get();
-      return snap.docs
-        .map(doc => {
-          const d = doc.data() || {};
-          return {
-            id: d.id || doc.id,
-            ...d,
-            price: Number(d.price || 0),
-            order: Number(d.order || 0)
-          };
-        })
-        .sort((a, b) => a.order - b.order)
-        .slice(0, 20);
+    // Wait for Firestore to be ready (important on mobile where JS can be slower)
+    let retries = 0;
+    const maxRetries = 10;
+    while (!(window.sysApi && window.sysApi.db) && retries < maxRetries) {
+      await new Promise(resolve => setTimeout(resolve, 300));
+      retries++;
     }
 
-    // Fallback to local JSON (dev mode).
-    const r = await fetch('./prebuilts/products.json');
-    const data = await r.json();
-    const featured = data.filter(p => p.featured === true);
-    return featured.slice(0, 20);
+    if (!window.sysApi || !window.sysApi.db) {
+      throw new Error('Firestore not initialized after waiting');
+    }
+
+    // Always use Firestore - never fall back to products.json (stale prices)
+    const snap = await window.sysApi.db.collection('prebuilts').where('featured', '==', true).get();
+    return snap.docs
+      .map(doc => {
+        const d = doc.data() || {};
+        return {
+          id: d.id || doc.id,
+          ...d,
+          price: Number(d.price || 0),
+          order: Number(d.order || 0)
+        };
+      })
+      .sort((a, b) => a.order - b.order)
+      .slice(0, 20);
   }
 
   loadTeaserItems()
@@ -701,5 +706,3 @@ document.addEventListener('DOMContentLoaded', () => {
 
   updateCartUI();
 });
-
-
