@@ -283,39 +283,7 @@
         }).join('');
     }
 
-    function _syncDefaultProducts() {
-        if (!_requireAuth()) return;
-        if (!_db()) { _toast('error', 'Backend not initialized.'); return; }
 
-        var btn = document.querySelector('.btn-secondary[onclick="syncDefaultProductsToFirestore()"]');
-        if (btn) btn.disabled = true;
-        _toast('success', 'Syncing products to DB...');
-
-        fetch('../prebuilts/products.json')
-            .then(function (r) { return r.json(); })
-            .then(function (defaultProducts) {
-                var batch = _db().batch();
-                var count = 0;
-                defaultProducts.forEach(function (dp) {
-                    var docRef = _db().collection('prebuilts').doc(dp.id);
-                    batch.set(docRef, dp, { merge: true });
-                    count++;
-                });
-                return batch.commit().then(function () { return count; });
-            })
-            .then(function (count) {
-                _toast('success', 'Synced ' + count + ' default specs to DB!');
-                return _loadDataFromDB();
-            })
-            .then(function () {
-                _renderDashboard();
-                _renderProductTable();
-            })
-            .catch(function () {
-                _toast('error', 'Sync failed.');
-            })
-            .finally(function () { if (btn) btn.disabled = false; });
-    }
 
     /* ══════════════════════════════════════════════════════
        PRODUCT TABLE
@@ -1251,7 +1219,7 @@
     window.openSidebar                    = _openSidebar;
     window.closeSidebar                   = _closeSidebar;
     window.renderProductTable             = _renderProductTable;
-    window.syncDefaultProductsToFirestore = _syncDefaultProducts;
+
 
     /* Products */
     window.openAddModal      = _openAddModal;
