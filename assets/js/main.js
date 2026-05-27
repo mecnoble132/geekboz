@@ -363,7 +363,10 @@ if (teaserTrack) {
         card.className = 'pb-card';
         card.style.animationDelay = `${i * 0.1}s`;
 
-        const imgSrc = p.image || `./assets/images/prebuiltph3.webp`;
+        let imgSrc = p.image || `./assets/images/prebuiltph3.webp`;
+        if (imgSrc.startsWith('../assets/')) {
+            imgSrc = imgSrc.replace('../assets/', '/assets/');
+        }
 
         const seriesClass = {
           gaming: 'gaming',

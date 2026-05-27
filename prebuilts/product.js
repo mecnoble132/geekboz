@@ -12,25 +12,114 @@ document.addEventListener('DOMContentLoaded', async () => {
         return;
     }
 
+    // STEP 1: Wait for Firestore to be ready
+    let firebaseReady = false;
+    let retries = 0;
+    const maxRetries = 10;
+    
+    while (!firebaseReady && retries < maxRetries) {
+        if (window.sysApi && window.sysApi.db) {
+            firebaseReady = true;
+            console.log('✓ Firestore is ready');
+        } else {
+            console.log(`⏳ Waiting for Firestore... (${retries + 1}/${maxRetries})`);
+            await new Promise(resolve => setTimeout(resolve, 300));
+            retries++;
+        }
+    }
+    
+    if (!firebaseReady) {
+        console.error('✗ CRITICAL: Firestore failed to initialize after waiting');
+        loadingState.style.display = 'none';
+        errorState.style.display = 'block';
+        errorState.innerHTML = '<div style="padding: 2rem; text-align: center;"><h2>Initialization Error</h2><p>System failed to initialize. Please refresh the page.</p></div>';
+        return;
+    }
+
     try {
         let products = [];
+        let dataSource = 'unknown';
+        
+        // PRIORITY 1: ALWAYS use Firestore if available
         if (window.sysApi && window.sysApi.db) {
-            const snap = await window.sysApi.db.collection('prebuilts').get();
-            products = snap.docs.map(doc => {
-                const d = doc.data() || {};
-                return {
-                    id: d.id || doc.id,
-                    ...d,
-                    price: Number(d.price || 0),
-                    order: Number(d.order || 0)
-                };
-            });
+            try {
+                dataSource = 'Firestore (LIVE DATABASE)';
+                const snap = await window.sysApi.db.collection('prebuilts').get();
+                console.log('🔍 RAW Firestore snapshot:', snap.docs.map(d => ({ id: d.id, data: d.data() })));
+                
+                products = snap.docs.map(doc => {
+                    const d = doc.data() || {};
+                    const converted = {
+                        id: d.id || doc.id,
+                        ...d,
+                        price: Number(d.price || 0),
+                        originalPrice: Number(d.originalPrice || 0),
+                        order: Number(d.order || 0)
+                    };
+                    return converted;
+                });
+                console.log(`✓ Loaded ${products.length} products from ${dataSource} - THIS IS THE CORRECT SOURCE`, products);
+                // Show a small data-source banner for production debugging
+                try {
+                    const bannerId = 'dataSourceBanner';
+                    let banner = document.getElementById(bannerId);
+                    if (!banner) {
+                        banner = document.createElement('div');
+                        banner.id = bannerId;
+                        banner.style.cssText = 'position:fixed;left:12px;top:12px;z-index:9999;padding:8px 12px;background:#222;color:#fff;border-radius:6px;font-size:13px;opacity:0.95';
+                        document.body.appendChild(banner);
+                    }
+                    banner.textContent = `Data source: ${dataSource}`;
+                    if (dataSource === 'Firestore (LIVE DATABASE)') banner.style.display = 'none';
+                } catch (e) {
+                    /* ignore banner errors */
+                }
+                
+                // Ensure we got data
+                if (!products || products.length === 0) {
+                    throw new Error('Firestore returned empty collection');
+                }
+            } catch (e) {
+                console.warn(`Firestore error: ${e.message} — attempting JSON fallback`);
+                // Try hosted JSON fallback when Firestore network is blocked (e.g., adblock)
+                try {
+                    const resp = await fetch(`../products.json?t=${Date.now()}`);
+                    if (!resp.ok) throw new Error('HTTP ' + resp.status);
+                    products = await resp.json();
+                    products = products.map(p => ({
+                        ...p,
+                        price: Number(p.price || 0),
+                        originalPrice: Number(p.originalPrice || 0)
+                    }));
+                    dataSource = 'JSON (fallback)';
+                    console.log(`✓ Loaded ${products.length} products from ${dataSource}`, products);
+                } catch (jsonErr) {
+                    console.error('✗ Failed to load products from both Firestore and JSON fallback', jsonErr);
+                    loadingState.style.display = 'none';
+                    errorState.style.display = 'block';
+                    errorState.innerHTML = '<div style="padding: 2rem; text-align: center;"><h2>Database Connection Error</h2><p>Could not load product data. Please disable adblocker or try again.</p></div>';
+                    return;
+                }
+            }
         } else {
-            const response = await fetch('../products.json');
-            products = await response.json();
+            console.error('✗ CRITICAL: Firestore not initialized - window.sysApi.db is missing');
+            loadingState.style.display = 'none';
+            errorState.style.display = 'block';
+            errorState.innerHTML = '<div style="padding: 2rem; text-align: center;"><h2>Configuration Error</h2><p>System not properly initialized. Please refresh the page.</p></div>';
+            return;
         }
 
         const product = products.find(p => p.id === productId);
+        
+        if (!product) {
+            console.error(`✗ Product not found. Looking for ID: ${productId}`);
+            console.log(`Available product IDs: ${products.map(p => p.id).join(', ')}`);
+            loadingState.style.display = 'none';
+            errorState.style.display = 'block';
+            return;
+        } else {
+            console.log(`✓ Found product:`, product);
+        }
 
         loadingState.style.display = 'none';
 
@@ -53,17 +142,29 @@ document.addEventListener('DOMContentLoaded', async () => {
         document.getElementById('prodName').textContent = product.name;
         document.getElementById('prodTagline').textContent = product.description;
         
-        let basePrice = product.price;
+        // Ensure price is a number first
+        let basePrice = Number(product.price || 0);
         let currentTotal = basePrice;
 
         const priceEl = document.getElementById('prodPrice');
+        console.log(`
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📊 PRICE DEBUG INFO
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Product Name: ${product.name}
+Raw price from DB: ${product.price} (type: ${typeof product.price})
+Converted to number: ${basePrice}
+Displaying: ₹${basePrice.toLocaleString('en-IN')}
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+        `);
         priceEl.textContent = `₹${basePrice.toLocaleString('en-IN')}`; // Keep base price static
 
         // Show strikethrough original price if available
-        if (product.originalPrice && product.originalPrice > basePrice) {
+        const origPrice = Number(product.originalPrice || 0);
+        if (origPrice && origPrice > basePrice) {
             const origEl = document.createElement('span');
             origEl.className = 'prod-original-price';
-            origEl.textContent = `₹${Number(product.originalPrice).toLocaleString('en-IN')}`;
+            origEl.textContent = `₹${origPrice.toLocaleString('en-IN')}`;
             priceEl.parentNode.insertBefore(origEl, priceEl);
         }
 
