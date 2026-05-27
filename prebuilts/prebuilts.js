@@ -669,25 +669,13 @@ async function loadProducts() {
         readURLParams();
         applyFilters();
     } catch (err) {
-        console.warn('Firestore failed, attempting JSON fallback', err);
-        try {
-            const r = await fetch(`./products.json?t=${Date.now()}`);
-            if (!r.ok) throw new Error('HTTP ' + r.status);
-            const data = await r.json();
-            // Ensure consistent pricing data types from JSON
-            state.products = data.map(p => ({
-                ...p,
-                price: Number(p.price || 0),
-                originalPrice: Number(p.originalPrice || 0)
-            }));
-            console.log(`✓ Loaded ${state.products.length} products from JSON (fallback)`, state.products);
-            readURLParams();
-            applyFilters();
-        } catch (e) {
-            console.error('✗ Failed to load products from both Firestore and JSON fallback:', e);
-            grid.innerHTML = '';
-            resultCount.innerHTML = '<span>Database Error</span> — Could not load product data. Please disable adblocker or try again.';
-        }
+        // Do NOT fall back to products.json — it may contain stale/old prices.
+        // Firestore has offline persistence enabled, so a cached version will
+        // load even without network. If this error fires, something is seriously
+        // wrong (e.g. adblocker blocking Firestore entirely before any cache).
+        console.error('✗ Failed to load products from Firestore:', err);
+        grid.innerHTML = '';
+        resultCount.innerHTML = '<span>Connection Error</span> — Could not load products. Please disable any adblocker and refresh.';
     }
 }
 
@@ -696,4 +684,3 @@ loadProducts().catch(err => {
     grid.innerHTML = '';
     resultCount.textContent = 'Service temporarily unavailable.';
 });
-

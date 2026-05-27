@@ -80,26 +80,15 @@ document.addEventListener('DOMContentLoaded', async () => {
                     throw new Error('Firestore returned empty collection');
                 }
             } catch (e) {
-                console.warn(`Firestore error: ${e.message} — attempting JSON fallback`);
-                // Try hosted JSON fallback when Firestore network is blocked (e.g., adblock)
-                try {
-                    const resp = await fetch(`../products.json?t=${Date.now()}`);
-                    if (!resp.ok) throw new Error('HTTP ' + resp.status);
-                    products = await resp.json();
-                    products = products.map(p => ({
-                        ...p,
-                        price: Number(p.price || 0),
-                        originalPrice: Number(p.originalPrice || 0)
-                    }));
-                    dataSource = 'JSON (fallback)';
-                    console.log(`✓ Loaded ${products.length} products from ${dataSource}`, products);
-                } catch (jsonErr) {
-                    console.error('✗ Failed to load products from both Firestore and JSON fallback', jsonErr);
-                    loadingState.style.display = 'none';
-                    errorState.style.display = 'block';
-                    errorState.innerHTML = '<div style="padding: 2rem; text-align: center;"><h2>Database Connection Error</h2><p>Could not load product data. Please disable adblocker or try again.</p></div>';
-                    return;
-                }
+                // Do NOT fall back to products.json — it may contain stale/old prices.
+                // Firestore has offline persistence enabled, so a cached version will
+                // load even without network. If this error fires, something is seriously
+                // wrong (e.g. adblocker blocking Firestore entirely before any cache).
+                console.error(`✗ Firestore error: ${e.message} — NOT falling back to JSON to avoid showing stale prices`);
+                loadingState.style.display = 'none';
+                errorState.style.display = 'block';
+                errorState.innerHTML = '<div style="padding: 2rem; text-align: center;"><h2>Connection Error</h2><p>Could not load product data. Please disable any adblocker and refresh the page.</p></div>';
+                return;
             }
         } else {
             console.error('✗ CRITICAL: Firestore not initialized - window.sysApi.db is missing');
@@ -458,9 +447,3 @@ Displaying: ₹${basePrice.toLocaleString('en-IN')}
         errorState.style.display = 'block';
     }
 });
-
-
-
-
-
-
