@@ -126,7 +126,53 @@
                 </div>
             </div>
 
-            <form class="service-form" id="serviceForm" action="#" method="POST">
+            <div class="service-cta-card">
+                <div class="cta-header">
+                    <div class="cta-icon-box">
+                        <i data-lucide="wrench"></i>
+                    </div>
+                    <h3>Book Your Service Session</h3>
+                    <p>Complete our official booking form to schedule technical support, custom hardware upgrades, troubleshooting, or deep cleaning.</p>
+                </div>
+
+                <ul class="cta-features">
+                    <li>
+                        <i data-lucide="check-circle-2"></i>
+                        <div>
+                            <strong>Expert Diagnosis & Repair</strong>
+                            <span>System diagnostics, thermal paste replacement, troubleshooting, and direct parts replacements.</span>
+                        </div>
+                    </li>
+                    <li>
+                        <i data-lucide="check-circle-2"></i>
+                        <div>
+                            <strong>Hardware Upgrades & Optimization</strong>
+                            <span>Install new GPUs, SSDs, RAM modules, CPU coolers, or design your next liquid-cooling loop.</span>
+                        </div>
+                    </li>
+                    <li>
+                        <i data-lucide="check-circle-2"></i>
+                        <div>
+                            <strong>Doorstep Pickup & Delivery</strong>
+                            <span>Convenient physical handling options available across key cities and PIN codes in Kerala.</span>
+                        </div>
+                    </li>
+                </ul>
+
+                <div class="form-actions">
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSd-yKh7HmC4dGLMAAQ4GJzCqsBn6iqjE019lqjLt9N1e2f0cQ/viewform" 
+                       target="_blank" 
+                       rel="noopener noreferrer" 
+                       class="submit-btn" 
+                       style="text-decoration: none;">
+                       Open Booking Form <i data-lucide="external-link"></i>
+                    </a>
+                    <p class="form-footer-note">Opens securely in a new tab. Our support team will review your form and contact you within 24 hours.</p>
+                </div>
+            </div>
+
+            <!-- ─── LEGACY WHATSAPP FORM DESIGN (COMMENTED OUT) ─────────────────
+            <form class="service-form" id="serviceForm" action="#" method="POST" style="margin-top: 3rem; opacity: 0.6;">
                 <div class="form-group">
                     <label for="fullName">Full Name</label>
                     <div class="input-wrapper">
@@ -176,6 +222,8 @@
                     <p class="form-footer-note">Our support team will contact you within 24 hours.</p>
                 </div>
             </form>
+            ────────────────────────────────────────────────────────────────── -->
+
         </div>
     </section>
 
@@ -253,6 +301,7 @@
     <script>
         lucide.createIcons();
 
+        /* ─── LEGACY WHATSAPP FORM LOGIC (COMMENTED OUT) ─────────────────
         // Custom Dropdown JS
         const addonWrapper = document.getElementById('addonWrapper');
         const trigger = document.getElementById('addonTrigger');
@@ -260,9 +309,11 @@
         const hiddenInput = document.getElementById('addOn');
         const selectedValue = document.querySelector('.selected-value');
 
-        trigger.addEventListener('click', () => {
-            addonWrapper.classList.toggle('open');
-        });
+        if (trigger) {
+            trigger.addEventListener('click', () => {
+                addonWrapper.classList.toggle('open');
+            });
+        }
 
         options.forEach(option => {
             option.addEventListener('click', function () {
@@ -283,7 +334,7 @@
 
         // Close when clicking outside
         document.addEventListener('click', function (e) {
-            if (!addonWrapper.contains(e.target)) {
+            if (addonWrapper && !addonWrapper.contains(e.target)) {
                 addonWrapper.classList.remove('open');
             }
         });
@@ -291,43 +342,46 @@
         // WhatsApp Form Submission Logic
         const serviceForm = document.getElementById('serviceForm');
 
-        serviceForm.addEventListener('submit', function (e) {
-            e.preventDefault();
+        if (serviceForm) {
+            serviceForm.addEventListener('submit', function (e) {
+                e.preventDefault();
 
-            // Check if Add-on is selected
-            if (!hiddenInput.value) {
-                alert("Please select your PC Service Add-on status.");
-                addonWrapper.classList.add('open');
-                trigger.focus();
-                return;
-            }
+                // Check if Add-on is selected
+                if (!hiddenInput.value) {
+                    alert("Please select your PC Service Add-on status.");
+                    addonWrapper.classList.add('open');
+                    trigger.focus();
+                    return;
+                }
 
-            const name = document.getElementById('fullName').value.trim();
-            const phone = document.getElementById('phone').value.trim();
-            const location = document.getElementById('location').value.trim();
-            const addOn = hiddenInput.value;
+                const name = document.getElementById('fullName').value.trim();
+                const phone = document.getElementById('phone').value.trim();
+                const location = document.getElementById('location').value.trim();
+                const addOn = hiddenInput.value;
 
-            // Format Add-on text
-            let addOnText = "I'm not sure";
-            if (addOn === "yes") addOnText = "Yes, I purchased the Add-on";
-            else if (addOn === "no") addOnText = "No, standard service only";
+                // Format Add-on text
+                let addOnText = "I'm not sure";
+                if (addOn === "yes") addOnText = "Yes, I purchased the Add-on";
+                else if (addOn === "no") addOnText = "No, standard service only";
 
-            // Build Message
-            let message = "Hello GeekBoZ Team! 👋\nI would like to request a PC Service. Here are my details:\n\n";
-            message += `*Name:* ${name}\n`;
-            message += `*Phone:* ${phone}\n`;
-            message += `*Location:* ${location}\n`;
-            message += `*PC Service Add-on:* ${addOnText}\n\n`;
-            message += "Please let me know the next steps.";
+                // Build Message
+                let message = "Hello GeekBoZ Team! 👋\nI would like to request a PC Service. Here are my details:\n\n";
+                message += `*Name:* ${name}\n`;
+                message += `*Phone:* ${phone}\n`;
+                message += `*Location:* ${location}\n`;
+                message += `*PC Service Add-on:* ${addOnText}\n\n`;
+                message += "Please let me know the next steps.";
 
-            // Encode for URL
-            const encodedMessage = encodeURIComponent(message);
-            const waNumber = "918137886571";
-            const waURL = `https://wa.me/${waNumber}?text=${encodedMessage}`;
+                // Encode for URL
+                const encodedMessage = encodeURIComponent(message);
+                const waNumber = "918137886571";
+                const waURL = `https://wa.me/${waNumber}?text=${encodedMessage}`;
 
-            // Trigger redirect
-            window.open(waURL, '_blank');
-        });
+                // Trigger redirect
+                window.open(waURL, '_blank');
+            });
+        }
+        ────────────────────────────────────────────────────────────────── */
     </script>
 </body>
 
