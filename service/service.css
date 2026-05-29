@@ -224,10 +224,12 @@
     gap: 0.5rem;
 }
 
-.submit-btn i {
+.submit-btn i,
+.submit-btn svg {
     width: 18px;
     height: 18px;
     transition: transform 0.3s ease;
+    stroke: currentColor !important;
 }
 
 .submit-btn:hover {
@@ -236,7 +238,8 @@
     box-shadow: 0 10px 20px rgba(164, 249, 63, 0.2);
 }
 
-.submit-btn:hover i {
+.submit-btn:hover i,
+.submit-btn:hover svg {
     transform: translateX(4px);
 }
 
@@ -256,5 +259,123 @@
     
     .service-section {
         padding: 0 5vw 4rem 5vw;
+    }
+}
+
+/* ─── Service CTA Card Styling ─────────────────────────── */
+.service-cta-card {
+    display: flex;
+    flex-direction: column;
+    gap: 2.25rem;
+    margin-top: 1rem;
+}
+
+.cta-header {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.cta-icon-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 64px;
+    height: 64px;
+    background: rgba(164, 249, 63, 0.05);
+    border: 1.5px dashed var(--accent);
+    border-radius: 50%;
+    margin-bottom: 0.5rem;
+    color: var(--accent);
+    animation: pulse-glow 2.5s infinite alternate;
+}
+
+.cta-icon-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 64px;
+    height: 64px;
+    background: rgba(164, 249, 63, 0.05);
+    border: 1.5px dashed var(--accent);
+    border-radius: 50%;
+    margin-bottom: 0.5rem;
+    color: var(--accent);
+    animation: pulse-glow 2.5s infinite alternate;
+}
+
+.cta-icon-box svg,
+.cta-icon-box i {
+    width: 28px;
+    height: 28px;
+    color: var(--accent);
+    stroke: var(--accent) !important;
+}
+
+.cta-header h3 {
+    font-family: 'Oxanium', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text);
+    margin: 0;
+}
+
+.cta-header p {
+    font-size: 0.95rem;
+    color: var(--muted);
+    line-height: 1.6;
+    max-width: 480px;
+    margin: 0;
+}
+
+.cta-features {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.cta-features li {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+}
+
+.cta-features li svg,
+.cta-features li i {
+    width: 22px;
+    height: 22px;
+    color: var(--accent);
+    stroke: var(--accent) !important;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.cta-features li strong {
+    display: block;
+    font-size: 1rem;
+    color: var(--text);
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+}
+
+.cta-features li span {
+    font-size: 0.88rem;
+    color: var(--muted);
+    line-height: 1.4;
+}
+
+@keyframes pulse-glow {
+    0% {
+        box-shadow: 0 0 0 0 rgba(164, 249, 63, 0.2);
+        transform: scale(1);
+    }
+    100% {
+        box-shadow: 0 0 15px 4px rgba(164, 249, 63, 0.35);
+        transform: scale(1.05);
     }
 }
