@@ -590,6 +590,13 @@ function readURLParams() {
             pill.click();
         }
     }
+
+    const q = params.get('search');
+    if (q) {
+        state.search = q;
+        if (searchInput) searchInput.value = q;
+        if (searchMobile) searchMobile.value = q;
+    }
 }
 
 // ── Init fill ─────────────────────────────────────────────

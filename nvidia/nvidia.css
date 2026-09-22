@@ -1,0 +1,530 @@
+/* ─── NVIDIA GEFORCE RTX 50 SERIES PAGE ──────────────────
+   Palette follows NVIDIA's own brand green (#76B900) rather
+   than the site's lime accent, since this page reproduces
+   NVIDIA's official partner co-marketing layout.
+─────────────────────────────────────────────────────────── */
+
+:root {
+  --nv-green: #76b900;
+  --nv-green-hover: #8ed600;
+  --nv-body: rgba(255, 255, 255, 0.72);
+  --nv-muted: rgba(255, 255, 255, 0.45);
+}
+
+.nv-h2,
+.nv-h3,
+.nv-h4 {
+  font-family: 'Oxanium', sans-serif;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+.nv-h2 {
+  font-size: 36px;
+  line-height: 46px;
+}
+
+.nv-h3 {
+  font-size: 28px;
+  line-height: 36px;
+  text-align: center;
+  margin-bottom: 0.75rem;
+}
+
+.nv-h3-left {
+  text-align: left;
+}
+
+.nv-h4 {
+  font-size: 24px;
+  line-height: 30px;
+  font-weight: 600;
+  margin-top: 0.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.nv-body {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--nv-body);
+  margin-bottom: 1rem;
+}
+
+.nv-body em {
+  font-style: italic;
+  color: #fff;
+}
+
+.nv-caption {
+  font-size: 0.78rem;
+  color: var(--nv-muted);
+  margin: 0;
+}
+
+.nv-btn,
+.nv-buy-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--nv-green);
+  color: #000;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 700;
+  font-size: 0.9rem;
+  padding: 0.7rem 1.75rem;
+  border-radius: 4px;
+  border: none;
+  text-decoration: none;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+}
+
+@media (hover: hover) {
+
+  .nv-btn:hover,
+  .nv-buy-btn:hover {
+    background: var(--nv-green-hover);
+    transform: translateY(-1px);
+  }
+}
+
+/* ─── HERO ────────────────────────────────────────────── */
+.nv-hero {
+  margin-top: var(--nav-h);
+  background-color: #05070a;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+  overflow: hidden;
+  padding: 4rem 0;
+}
+
+.nv-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right,
+      rgba(2, 4, 6, 0.94) 0%,
+      rgba(2, 4, 6, 0.82) 32%,
+      rgba(2, 4, 6, 0.35) 56%,
+      transparent 78%);
+  pointer-events: none;
+}
+
+.nv-hero-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 5vw;
+}
+
+.nv-hero-text {
+  max-width: 480px;
+}
+
+.nv-brand-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1.75rem;
+}
+
+.nv-brand-row-center {
+  justify-content: center;
+  margin-top: 0;
+  margin-bottom: 1.25rem;
+}
+
+.nv-partner-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.4rem 0.9rem;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.nv-partner-logo img {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+  display: block;
+}
+
+.nv-partner-logo span {
+  font-family: 'Oxanium', sans-serif;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: #fff;
+  letter-spacing: -0.01em;
+}
+
+.nv-partner-logo-accent {
+  color: var(--nv-green);
+}
+
+.nv-geforce-badge {
+  height: 38px;
+  width: auto;
+  display: block;
+}
+
+/* ─── DLSS FEATURE SECTIONS ───────────────────────────── */
+.nv-feature {
+  background-color: #0d1216;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 3.5rem 0;
+  border-top: 1px solid var(--border);
+  position: relative;
+}
+
+.nv-feature::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(4, 6, 8, 0.72);
+  pointer-events: none;
+}
+
+.nv-feature-alt {
+  background-color: #17191b;
+}
+
+.nv-feature-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 5vw;
+  text-align: center;
+}
+
+.nv-feature-body {
+  font-size: 0.92rem;
+  line-height: 1.75;
+  color: var(--nv-body);
+  max-width: 760px;
+  margin: 0 auto 1rem;
+}
+
+.nv-compare {
+  margin-top: 2rem;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.nv-compare img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.nv-compare-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 0.85rem;
+  flex-wrap: wrap;
+}
+
+.nv-caption {
+  text-align: left;
+}
+
+.nv-game-logo {
+  height: 34px;
+  width: auto;
+  display: block;
+  margin-left: auto;
+}
+
+/* ─── REVOLUTIONIZING YOUR FAVORITE GAMES ────────────────── */
+.nv-games {
+  background-color: #000;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 4.5rem 0;
+  position: relative;
+  min-height: 480px;
+  display: flex;
+  align-items: center;
+}
+
+.nv-games::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right,
+      rgba(0, 0, 0, 0.9) 0%,
+      rgba(0, 0, 0, 0.75) 30%,
+      rgba(0, 0, 0, 0.25) 52%,
+      transparent 72%);
+  pointer-events: none;
+}
+
+.nv-games-inner {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 5vw;
+}
+
+.nv-games-text {
+  max-width: 420px;
+}
+
+/* ─── DLSS SUPPORTED HARDWARE ─────────────────────────── */
+.nv-hardware {
+  background: #000;
+  padding: 3.5rem 0;
+}
+
+.nv-hardware-inner {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 5vw;
+  text-align: center;
+}
+
+.nv-hardware-subtitle {
+  font-size: 0.88rem;
+  color: var(--nv-body);
+  margin-bottom: 2.25rem;
+}
+
+.nv-table-wrap {
+  overflow-x: auto;
+}
+
+.nv-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 640px;
+}
+
+.nv-table th,
+.nv-table td {
+  padding: 0.9rem 0.75rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.nv-table thead th {
+  font-family: 'Oxanium', sans-serif;
+  font-weight: 700;
+  font-size: 0.82rem;
+  color: #fff;
+  text-align: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  line-height: 1.4;
+}
+
+.nv-table thead th:first-child {
+  border-bottom: none;
+}
+
+.nv-table tbody th {
+  text-align: left;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: #fff;
+  white-space: nowrap;
+}
+
+.nv-table td {
+  text-align: center;
+  font-size: 1rem;
+}
+
+.nv-table .nv-yes {
+  color: var(--nv-green);
+  font-weight: 700;
+}
+
+.nv-table .nv-no {
+  color: var(--nv-muted);
+}
+
+/* ─── BUY GEFORCE RTX ─────────────────────────────────── */
+.nv-buy {
+  background: #000;
+  padding: 3.5rem 0;
+  border-top: 1px solid var(--border);
+}
+
+.nv-buy-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 5vw;
+  text-align: center;
+}
+
+.nv-buy-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.nv-buy-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.nv-buy-img {
+  width: 100%;
+  aspect-ratio: 298 / 180;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px dashed var(--border);
+  border-radius: 6px;
+  color: var(--nv-muted);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.nv-buy-img i,
+.nv-buy-img svg {
+  width: 30px;
+  height: 30px;
+}
+
+.nv-buy-name {
+  font-family: 'Oxanium', sans-serif;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: #fff;
+  margin-top: 1rem;
+}
+
+.nv-buy-sub {
+  font-family: 'Oxanium', sans-serif;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: #fff;
+  margin-bottom: 1rem;
+}
+
+/* ─── NVIDIA STRIP + TRADEMARK ────────────────────────── */
+.nv-legal {
+  background: #000;
+  padding: 3rem 0;
+  border-top: 1px solid var(--border);
+}
+
+.nv-legal-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 5vw;
+  text-align: center;
+}
+
+.nv-trademark {
+  font-size: 0.7rem;
+  line-height: 1.6;
+  color: var(--nv-muted);
+  margin: 0;
+}
+
+/* ─── RESPONSIVE ─────────────────────────────────────── */
+@media (max-width: 900px) {
+  .nv-hero,
+  .nv-games {
+    background-position: 65% center;
+  }
+
+  .nv-hero::before {
+    background: linear-gradient(180deg,
+        rgba(2, 4, 6, 0.55) 0%,
+        rgba(2, 4, 6, 0.88) 45%,
+        rgba(2, 4, 6, 0.97) 100%);
+  }
+
+  .nv-games::before {
+    background: linear-gradient(180deg,
+        rgba(0, 0, 0, 0.35) 0%,
+        rgba(0, 0, 0, 0.85) 50%,
+        rgba(0, 0, 0, 0.96) 100%);
+  }
+
+  .nv-hero-text,
+  .nv-games-text {
+    max-width: 100%;
+  }
+
+  .nv-games {
+    align-items: flex-end;
+    min-height: 420px;
+  }
+
+  .nv-h3-left {
+    text-align: center;
+  }
+
+  .nv-games-text .nv-body {
+    text-align: center;
+  }
+
+  .nv-h2 {
+    font-size: 30px;
+    line-height: 38px;
+  }
+
+  .nv-h4 {
+    font-size: 20px;
+    line-height: 26px;
+  }
+
+  .nv-buy-grid {
+    grid-template-columns: 1fr;
+    max-width: 360px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .nv-compare-footer {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .nv-game-logo {
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .nv-hero {
+    padding: 2.5rem 0;
+  }
+
+  .nv-feature,
+  .nv-games,
+  .nv-hardware,
+  .nv-buy {
+    padding: 2.75rem 0;
+  }
+
+  .nv-h2 {
+    font-size: 26px;
+    line-height: 33px;
+  }
+
+  .nv-h3 {
+    font-size: 22px;
+    line-height: 29px;
+  }
+}
