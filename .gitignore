@@ -1,0 +1,8 @@
+# Photoshop files (too large for version control)
+*.psb
+*.psd
+
+# Dependencies
+node_modules/
+.env
+.env.local
