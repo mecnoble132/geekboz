@@ -135,36 +135,12 @@
     </section>
 
     <!-- ─── BUY GEFORCE RTX ─────────────────────────────────────
-         Placeholder product cards — swap image/name/link with real GeekBoZ RTX 50-series prebuilts. -->
-    <section class="nv-buy">
+         Cards are rendered live from Firestore `prebuilts` docs flagged `nvidiaFeatured: true`
+         (managed from the admin panel). See script at the bottom of this file. -->
+    <section class="nv-buy" id="nvBuySection" style="display:none;">
         <div class="nv-buy-inner">
             <h2 class="nv-h3">Buy GeForce RTX</h2>
-            <div class="nv-buy-grid">
-                <div class="nv-buy-card" data-slot="buy-1">
-                    <div class="nv-buy-img">
-                        <i data-lucide="image"></i>
-                    </div>
-                    <div class="nv-buy-name">Partner Name</div>
-                    <div class="nv-buy-sub">GeForce RTX 50 Series</div>
-                    <a href="../prebuilts/?search=RTX%2050" class="nv-buy-btn">Learn More</a>
-                </div>
-                <div class="nv-buy-card" data-slot="buy-2">
-                    <div class="nv-buy-img">
-                        <i data-lucide="image"></i>
-                    </div>
-                    <div class="nv-buy-name">Partner Name</div>
-                    <div class="nv-buy-sub">GeForce RTX 50 Series</div>
-                    <a href="../prebuilts/?search=RTX%2050" class="nv-buy-btn">Learn More</a>
-                </div>
-                <div class="nv-buy-card" data-slot="buy-3">
-                    <div class="nv-buy-img">
-                        <i data-lucide="image"></i>
-                    </div>
-                    <div class="nv-buy-name">Partner Name</div>
-                    <div class="nv-buy-sub">GeForce RTX 50 Series</div>
-                    <a href="../prebuilts/?search=RTX%2050" class="nv-buy-btn">Learn More</a>
-                </div>
-            </div>
+            <div class="nv-buy-grid" id="nvBuyGrid"></div>
         </div>
     </section>
 
@@ -408,12 +384,71 @@
         </div>
     </footer>
 
+    <!-- Data Infrastructure -->
+    <script src="https://www.gstatic.com/firebasejs/10.12.3/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.3/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.3/firebase-firestore-compat.js"></script>
+    <script src="../assets/js/system-config.js?v=2"></script>
+    <script src="../assets/js/system-init.js?v=2"></script>
+
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
     <script src="../assets/js/main.js?v=2"></script>
     <script>
         lucide.createIcons();
         var yNv = document.getElementById('currentYearNvidia');
         if (yNv) yNv.textContent = new Date().getFullYear();
+    </script>
+
+    <!-- Nvidia "Buy GeForce RTX" cards — live from Firestore `prebuilts` where nvidiaFeatured == true -->
+    <script>
+        (async function () {
+            var section = document.getElementById('nvBuySection');
+            var grid = document.getElementById('nvBuyGrid');
+            if (!section || !grid) return;
+
+            var retries = 0;
+            while (!(window.sysApi && window.sysApi.db) && retries < 10) {
+                await new Promise(function (r) { setTimeout(r, 300); });
+                retries++;
+            }
+            if (!window.sysApi || !window.sysApi.db) return;
+
+            try {
+                var snap = await window.sysApi.db.collection('prebuilts')
+                    .where('nvidiaFeatured', '==', true).get();
+
+                var items = snap.docs.map(function (doc) {
+                    var d = doc.data() || {};
+                    return { id: d.id || doc.id, name: d.name || '', image: d.image || '', gpu: d.gpu || '', order: Number(d.order || 0) };
+                }).sort(function (a, b) { return a.order - b.order; }).slice(0, 3);
+
+                if (items.length === 0) return;
+
+                function gpuLabel(gpu) {
+                    var m = /RTX\s?(\d{4})/i.exec(gpu || '');
+                    return m ? 'GeForce RTX ' + m[1] : 'GeForce RTX 50 Series';
+                }
+
+                grid.innerHTML = items.map(function (p) {
+                    var imgHtml = p.image
+                        ? '<img src="' + p.image + '" alt="' + p.name + '" loading="lazy">'
+                        : '<i data-lucide="image"></i>';
+                    return (
+                        '<div class="nv-buy-card">' +
+                            '<div class="nv-buy-img">' + imgHtml + '</div>' +
+                            '<div class="nv-buy-name">' + p.name + '</div>' +
+                            '<div class="nv-buy-sub">' + gpuLabel(p.gpu) + '</div>' +
+                            '<a href="../prebuilts/product/?id=' + encodeURIComponent(p.id) + '" class="nv-buy-btn">Learn More</a>' +
+                        '</div>'
+                    );
+                }).join('');
+
+                section.style.display = '';
+                if (window.lucide) lucide.createIcons();
+            } catch (e) {
+                console.error('System error (NV-1)');
+            }
+        })();
     </script>
 
 </body>

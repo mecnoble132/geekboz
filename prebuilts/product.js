@@ -176,6 +176,11 @@ Displaying: ₹${basePrice.toLocaleString('en-IN')}
             try {
                 const addonsSnap = await window.sysApi.db.collection('addons').orderBy('order', 'asc').get();
                 addons = addonsSnap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                // Skip add-ons this build already includes (set per-product in Firestore).
+                const excluded = Array.isArray(product.excludedAddons) ? product.excludedAddons : [];
+                if (excluded.length > 0) {
+                    addons = addons.filter(ad => !excluded.includes(ad.id));
+                }
             } catch (err) {
                 console.warn('System warning (W-105)');
             }
@@ -294,7 +299,19 @@ Displaying: ₹${basePrice.toLocaleString('en-IN')}
 
         // 2. Populate Specs Table
         const specsTable = document.getElementById('specsTable');
-        const specsData = [
+        // Diwali PCs lead with GPU (Nvidia campaign focus); everything else keeps CPU first.
+        const specsData = product.badge === 'Diwali' ? [
+            { icon: 'monitor', label: 'Graphics', val: product.gpu },
+            { icon: 'cpu', label: 'Processor', val: product.cpu },
+            { icon: 'memory-stick', label: 'Memory', val: product.ram },
+            { icon: 'hard-drive', label: 'Storage', val: product.storage },
+            { icon: 'circuit-board', label: 'Motherboard', val: product.motherboard || '—' },
+            { icon: 'snowflake', label: 'Cooling', val: product.cooling || 'Advanced Cooling' },
+            { icon: 'plug-zap', label: 'PSU', val: product.psu || '—' },
+            { icon: 'box', label: 'Case', val: product.case || '—' },
+            { icon: 'tv', label: 'Display Opt', val: product.display || 'N/A', hidden: true },
+            { icon: 'weight', label: 'Weight', val: product.weight || '—', hidden: true }
+        ] : [
             { icon: 'cpu', label: 'Processor', val: product.cpu },
             { icon: 'monitor', label: 'Graphics', val: product.gpu },
             { icon: 'memory-stick', label: 'Memory', val: product.ram },

@@ -170,7 +170,7 @@
                         id: d.id || doc.id,
                         name: d.name || '', series: d.series || '', tag: d.tag || '',
                         price: Number(d.price || 0), originalPrice: Number(d.originalPrice || 0),
-                        order: Number(d.order || 0), featured: !!d.featured, inStock: !!d.inStock,
+                        order: Number(d.order || 0), featured: !!d.featured, nvidiaFeatured: !!d.nvidiaFeatured, inStock: !!d.inStock,
                         badge: d.badge || null, description: d.description || '',
                         cpu: d.cpu || '', gpu: d.gpu || '', ram: d.ram || '',
                         storage: d.storage || '', motherboard: d.motherboard || '',
@@ -420,6 +420,7 @@
         ].forEach(function (id) { var el = document.getElementById(id); if (el) el.value = ''; });
         document.getElementById('f-featured').checked = false;
         document.getElementById('f-instock').checked = true;
+        document.getElementById('f-nvidiaFeatured').checked = false;
         ['fpsList', 'highlightsList'].forEach(function (id) {
             var el = document.getElementById(id); if (el) el.innerHTML = '';
         });
@@ -455,6 +456,7 @@
         _set('f-image', p.image || ''); _set('f-description', p.description || '');
         document.getElementById('f-featured').checked = !!p.featured;
         document.getElementById('f-instock').checked  = !!p.inStock;
+        document.getElementById('f-nvidiaFeatured').checked = !!p.nvidiaFeatured;
         _set('f-cpu', p.cpu || ''); _set('f-gpu', p.gpu || '');
         _set('f-ram', p.ram || ''); _set('f-storage', p.storage || '');
         _set('f-motherboard', p.motherboard || ''); _set('f-cooling', p.cooling || '');
@@ -505,6 +507,7 @@
             badge: _get('f-badge') || null,
             order: Number(_get('f-order')) || 99,
             featured: document.getElementById('f-featured').checked,
+            nvidiaFeatured: document.getElementById('f-nvidiaFeatured').checked,
             inStock: document.getElementById('f-instock').checked,
             description: _get('f-description'),
             cpu: _get('f-cpu'), gpu: _get('f-gpu'), ram: _get('f-ram'),
