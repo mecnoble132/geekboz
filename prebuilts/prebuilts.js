@@ -13,7 +13,8 @@ const state = {
     minPrice: 0,
     maxPrice: 500000,
     search: '',
-    sort: 'default'
+    sort: 'default',
+    badge: ''           // optional badge pre-filter (e.g. "Diwali") from URL param
 };
 
 const PRICE_MAX = 500000;
@@ -213,6 +214,11 @@ function applyFilters() {
         filtered = filtered.filter(p => state.series.includes(p.series));
     }
 
+    // Badge filtering (e.g. Diwali campaign pre-filter from URL)
+    if (state.badge) {
+        filtered = filtered.filter(p => p.badge === state.badge);
+    }
+
     // Price
     filtered = filtered.filter(p => p.price >= state.minPrice && p.price <= state.maxPrice);
 
@@ -285,6 +291,13 @@ function updateActiveTags() {
             applyFilters();
         });
     }
+
+    if (state.badge) {
+        addTag(state.badge, () => {
+            state.badge = '';
+            applyFilters();
+        });
+    }
 }
 
 function addTag(label, onRemove) {
@@ -310,6 +323,7 @@ function updateFabBadge() {
     if (state.minPrice > 0) count++;
     if (state.maxPrice < PRICE_MAX) count++;
     if (state.search.trim()) count++;
+    if (state.badge) count++;
 
     if (count > 0) {
         fabBadge.style.display = 'grid';
@@ -348,6 +362,7 @@ function resetAllFilters() {
     state.maxPrice = PRICE_MAX;
     state.search = '';
     state.sort = 'default';
+    state.badge = '';
 
     // Uncheck all checkboxes
     document.querySelectorAll('#seriesFilters input, #seriesFiltersMobile input')
@@ -615,6 +630,11 @@ function readURLParams() {
         state.search = q;
         if (searchInput) searchInput.value = q;
         if (searchMobile) searchMobile.value = q;
+    }
+
+    const badge = params.get('badge');
+    if (badge) {
+        state.badge = badge;
     }
 }
 
