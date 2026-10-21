@@ -96,7 +96,7 @@
   margin-top: var(--nav-h);
   background-color: #05070a;
   background-size: cover;
-  background-position: center;
+  background-position: center 85%;
   background-repeat: no-repeat;
   position: relative;
   overflow: hidden;
@@ -107,7 +107,9 @@
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(to right,
+  background:
+    linear-gradient(to bottom, rgba(2, 4, 6, 0.55) 0%, transparent 28%),
+    linear-gradient(to right,
       rgba(2, 4, 6, 0.94) 0%,
       rgba(2, 4, 6, 0.82) 32%,
       rgba(2, 4, 6, 0.35) 56%,
@@ -454,6 +456,10 @@
   .nv-hero,
   .nv-games {
     background-position: 65% center;
+  }
+
+  .nv-hero {
+    background-position: 65% 85%;
   }
 
   .nv-hero::before {
