@@ -251,7 +251,8 @@ Displaying: ₹${basePrice.toLocaleString('en-IN')}
         const mainImg = document.getElementById('prodMainImg');
         const imgBox = document.querySelector('.prod-main-img-box');
         
-        mainImg.src = product.image;
+        const cld = (u, w) => window.cldOpt ? window.cldOpt(u, w) : u;
+        mainImg.src = cld(product.image, 1200);
         mainImg.alt = product.name;
 
         // Hover Zoom Logic
@@ -275,9 +276,9 @@ Displaying: ₹${basePrice.toLocaleString('en-IN')}
             product.gallery.forEach((src, idx) => {
                 const box = document.createElement('div');
                 box.className = `thumbnail-box ${idx===0 ? 'active' : ''}`;
-                box.innerHTML = `<img src="${src}" alt="Thumb">`;
+                box.innerHTML = `<img src="${cld(src, 200)}" alt="Thumb" loading="lazy">`;
                 box.onclick = () => {
-                    mainImg.src = src;
+                    mainImg.src = cld(src, 1200);
                     document.querySelectorAll('.thumbnail-box').forEach(b => b.classList.remove('active'));
                     box.classList.add('active');
                 };
@@ -385,7 +386,7 @@ Displaying: ₹${basePrice.toLocaleString('en-IN')}
             a.href = `?id=${r.id}`;
             a.style.textDecoration = 'none';
             a.style.display = 'block';
-            const rImage = fixPath(r.image);
+            const rImage = cld(fixPath(r.image), 600);
             a.innerHTML = `
                 <div class="pb-card">
                     <div class="pb-card-img">

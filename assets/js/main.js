@@ -65,7 +65,7 @@ if (track && paginationEl && progressBar) {
     const shortName = name.replace(/^GBZ\s+/i, '') || product?.id || '';
 
     const bgValue = slide?.bgImage
-      ? `url('${slide.bgImage}')`
+      ? `url('${window.cldOpt ? window.cldOpt(slide.bgImage, 1600) : slide.bgImage}')`
       : fallbackBgValue;
 
     const seriesTag = slide?.tag || '';
@@ -372,6 +372,7 @@ if (teaserTrack) {
         if (imgSrc.startsWith('../assets/')) {
             imgSrc = imgSrc.replace('../assets/', '/assets/');
         }
+        imgSrc = window.cldOpt ? window.cldOpt(imgSrc, 600) : imgSrc;
 
         const seriesClass = {
           gaming: 'gaming',
@@ -670,7 +671,7 @@ document.addEventListener('DOMContentLoaded', () => {
               <line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line>
             </svg>
           </button>
-          ${event.image ? `<img src="${event.image}" class="event-image" alt="${event.title}">` : ''}
+          ${event.image ? `<img src="${window.cldOpt ? window.cldOpt(event.image, 800) : event.image}" class="event-image" alt="${event.title}">` : ''}
           <div class="event-body">
             <div class="event-status">Live Event</div>
             <h2 class="event-title">${event.title}</h2>

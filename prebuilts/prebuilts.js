@@ -116,6 +116,7 @@ function renderCards(products) {
         if (imgSrc.startsWith('../assets/')) {
             imgSrc = imgSrc.replace('../assets/', '/assets/');
         }
+        imgSrc = window.cldOpt ? window.cldOpt(imgSrc, 600) : imgSrc;
 
         // Series tag class map
         const seriesClass = {

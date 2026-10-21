@@ -1,4 +1,19 @@
 /* global firebase, window */
+
+// Cloudinary delivery optimisation: inserts f_auto (WebP/AVIF), q_auto and a
+// max width into a res.cloudinary.com upload URL. Non-Cloudinary URLs, and URLs
+// that already carry a transformation, are returned unchanged.
+window.cldOpt = function (url, width) {
+  if (typeof url !== 'string') return url;
+  const marker = '/image/upload/';
+  if (url.indexOf('res.cloudinary.com/') === -1 || url.indexOf(marker) === -1) return url;
+  const i = url.indexOf(marker) + marker.length;
+  const next = url.slice(i).split('/')[0];
+  if (/^(v\d+|[a-z]{1,3}_[^/]*)$/.test(next) && !/^v\d+$/.test(next)) return url; // already transformed
+  const t = 'f_auto,q_auto' + (width ? ',c_limit,w_' + width : '');
+  return url.slice(0, i) + t + '/' + url.slice(i);
+};
+
 (function () {
   if (!window.sysConfig) {
     console.error("System error (C-201)");
